@@ -78,6 +78,7 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
               { path: '/', label: 'HOME' },
               { path: '/over-ons', label: 'OVER ONS' },
               { path: '/diensten', label: 'DIENSTEN' },
+              { path: '/voor-hoveniers', label: 'VOOR HOVENIERS' },
               { path: '/projecten', label: 'PROJECTEN' },
               { path: '/shop', label: 'SHOP' },
               { path: '/contact', label: 'CONTACT' }
@@ -151,6 +152,7 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
                 { path: '/', label: 'HOME' },
                 { path: '/over-ons', label: 'OVER ONS' },
                 { path: '/diensten', label: 'DIENSTEN' },
+                { path: '/voor-hoveniers', label: 'VOOR HOVENIERS' },
                 { path: '/projecten', label: 'PROJECTEN' },
                 { path: '/shop', label: 'SHOP' },
                 { path: '/contact', label: 'CONTACT' }
