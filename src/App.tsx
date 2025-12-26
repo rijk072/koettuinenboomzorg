@@ -18,6 +18,7 @@ import ProductDetail from './pages/ProductDetail';
 import Checkout from './pages/Checkout';
 import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
 import Contact from './pages/Contact';
+import VoorHoveniers from './pages/VoorHoveniers';
 
 interface CartItem {
   id: number;
@@ -84,6 +85,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/over-ons" element={<OverOns />} />
           <Route path="/diensten" element={<Diensten />} />
+          <Route path="/voor-hoveniers" element={<VoorHoveniers />} />
           <Route path="/projecten" element={
             <>
               {/* Hero Section */}
