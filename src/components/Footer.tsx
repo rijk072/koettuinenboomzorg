@@ -66,6 +66,8 @@ const Footer = () => {
                   <div>
                     <p>Heereweg 38 E</p>
                     <p>1901 ME Bakkum</p>
+                    <p className="text-stone-400 text-xs mt-1">Bakkum, Noord-Holland</p>
+                    <p className="text-stone-400 text-xs">Werkgebied: Bakkum en omgeving</p>
                   </div>
                 </div>
               </div>
