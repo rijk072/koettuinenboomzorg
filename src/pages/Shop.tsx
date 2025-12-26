@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ArrowRight, Phone, Mail } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
+import { Product } from '../lib/supabase';
 
 // PARTICULIERE PRODUCTEN (Eigen maatwerk)
 const particulierProducts = [
@@ -9,7 +10,7 @@ const particulierProducts = [
     id: 'p1',
     name: 'Handgemaakte Tuinbankstellen',
     description: 'Op maat gemaakte, duurzame tuinbankstellen van kwaliteitshout. Verschillende afmetingen en uitvoeringen beschikbaar.',
-    price: 0,
+    price: 449.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/795548/white?text=Tuinbankstellen',
   },
@@ -17,7 +18,7 @@ const particulierProducts = [
     id: 'p2',
     name: 'Handgemaakte Bloembakken',
     description: 'Stevige houten bloembakken, handgemaakt op maat. Perfect voor borders en terrassen.',
-    price: 0,
+    price: 159.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/6D4C41/white?text=Bloembakken',
   },
@@ -25,7 +26,7 @@ const particulierProducts = [
     id: 'p3',
     name: 'Tuintafels op Maat',
     description: 'Stevige houten tuintafels, handgemaakt volgens uw wensen. Duurzaam en weersbestendig.',
-    price: 0,
+    price: 649.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/8B7355/white?text=Tuintafels',
   },
@@ -33,7 +34,7 @@ const particulierProducts = [
     id: 'p4',
     name: 'Plantenbakken',
     description: 'Duurzame houten plantenbakken op maat gemaakt. Verschillende maten en uitvoeringen mogelijk.',
-    price: 0,
+    price: 129.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/6D5D4B/white?text=Plantenbakken',
   },
@@ -41,7 +42,7 @@ const particulierProducts = [
     id: 'p5',
     name: 'Overkappingen & Pergola\'s',
     description: 'Op maat gemaakte houten overkappingen en pergola\'s. Compleet geïnstalleerd in uw tuin.',
-    price: 0,
+    price: 2499.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/8B6F47/white?text=Overkappingen',
   },
@@ -49,7 +50,7 @@ const particulierProducts = [
     id: 'p6',
     name: 'Schuttingen op Maat',
     description: 'Houten schuttingen in elk gewenst model. Van klassiek tot modern, alles is mogelijk.',
-    price: 0,
+    price: 899.99,
     category: 'Eigen Maatwerk',
     image_url: 'https://placehold.co/600x400/7A5C42/white?text=Schuttingen',
   }
@@ -104,7 +105,11 @@ const zakelijkProducts = [
   }
 ];
 
-const Shop: React.FC = () => {
+interface ShopProps {
+  onAddToCart: (product: Product) => void;
+}
+
+const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
   const [activeTab, setActiveTab] = useState<'particulier' | 'zakelijk'>('particulier');
   const navigate = useNavigate();
 
@@ -133,7 +138,7 @@ const Shop: React.FC = () => {
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
               {activeTab === 'particulier'
-                ? 'Handgemaakt tuinmeubilair op maat - Vraag een vrijblijvende offerte aan'
+                ? 'Handgemaakt tuinmeubilair op maat - Direct online bestellen'
                 : 'Volledige ECOstyle productlijn - Handelsprijzen vanaf 10 stuks'
               }
             </p>
@@ -142,7 +147,7 @@ const Shop: React.FC = () => {
       </section>
 
       {/* Tab Switcher */}
-      <section className="py-8 bg-white border-b border-stone-200 sticky top-24 z-40">
+      <section className="py-8 bg-white border-b border-stone-200">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
           <div className="flex justify-center gap-4">
             <button
@@ -189,7 +194,7 @@ const Shop: React.FC = () => {
                 </h2>
                 <p className="text-stone-700">
                   {activeTab === 'particulier'
-                    ? 'Elk product wordt speciaal voor u op maat gemaakt. Neem contact op voor een vrijblijvende offerte.'
+                    ? 'Bestel direct online en wij maken elk product speciaal voor u op maat.'
                     : 'Handelsprijzen vanaf 10 stuks per product. Neem contact op voor prijzen en levering.'
                   }
                 </p>
@@ -232,8 +237,8 @@ const Shop: React.FC = () => {
                     {/* Price/Order Info */}
                     <div className="mb-4">
                       {activeTab === 'particulier' ? (
-                        <div className="text-lg font-bold text-primary-900">
-                          Prijs op aanvraag
+                        <div className="text-2xl font-bold text-primary-900">
+                          €{product.price.toFixed(2)}
                         </div>
                       ) : (
                         <div>
@@ -248,13 +253,29 @@ const Shop: React.FC = () => {
                     </div>
 
                     {/* CTA Button */}
-                    <Link
-                      to="/contact"
-                      className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
-                    >
-                      Offerte Aanvragen
-                      <ArrowRight className="w-5 h-5 ml-2" />
-                    </Link>
+                    {activeTab === 'particulier' ? (
+                      <button
+                        onClick={() => onAddToCart({
+                          ...product,
+                          in_stock: true,
+                          popular: false,
+                          created_at: new Date().toISOString(),
+                          updated_at: new Date().toISOString()
+                        } as Product)}
+                        className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
+                      >
+                        <ShoppingCart className="w-5 h-5 mr-2" />
+                        In Winkelwagen
+                      </button>
+                    ) : (
+                      <Link
+                        to="/contact"
+                        className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
+                      >
+                        Offerte Aanvragen
+                        <ArrowRight className="w-5 h-5 ml-2" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </AnimationObserver>
@@ -266,13 +287,13 @@ const Shop: React.FC = () => {
             <div className="mt-16 text-center bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 text-white">
               <h3 className="text-3xl font-bold mb-4">
                 {activeTab === 'particulier'
-                  ? 'Vraag een Vrijblijvende Offerte Aan'
+                  ? 'Vragen over Uw Bestelling?'
                   : 'Interesse in Groothandel Prijzen?'
                 }
               </h3>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
                 {activeTab === 'particulier'
-                  ? 'Neem contact op en bespreek uw wensen. Wij maken een offerte op maat voor u.'
+                  ? 'Neem contact op voor advies over uw maatwerk tuinmeubelen.'
                   : 'Bel of mail direct voor handelsprijzen en leveringsvoorwaarden.'
                 }
               </p>
