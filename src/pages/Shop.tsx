@@ -165,11 +165,11 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20 text-left text-white">
           <AnimationObserver>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white text-center">
-              Premium
+              ECOstyle Premium
               <span className="block text-white mt-2">Tuinproducten</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto text-center">
-              Hoogwaardige tuinproducten geselecteerd door onze experts. Van premium potgrond tot complete tuinsets.
+              Biologische ECOstyle producten direct op voorraad. Koop per stuk of vraag om bulkkorting vanaf 10 stuks.
             </p>
           </AnimationObserver>
         </div>
