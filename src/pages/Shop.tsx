@@ -103,6 +103,62 @@ const fallbackProducts: Product[] = [
     image_url: 'https://placehold.co/600x400/6D4C41/white?text=Bloembakken',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
+  },
+  {
+    id: '8',
+    name: 'Handgemaakte Plantenbakken',
+    description: 'Duurzame houten plantenbakken op maat gemaakt. Verschillende maten en uitvoeringen mogelijk.',
+    price: 0,
+    category: 'Eigen Maatwerk',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/8B7355/white?text=Plantenbakken',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: '9',
+    name: 'Tuintafels op Maat',
+    description: 'Stevige houten tuintafels, handgemaakt volgens uw wensen. Duurzaam en weersbestendig.',
+    price: 0,
+    category: 'Eigen Maatwerk',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/6D5D4B/white?text=Tuintafels',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: '10',
+    name: 'Overkappingen & Pergola\'s',
+    description: 'Op maat gemaakte houten overkappingen en pergola\'s. Compleet geïnstalleerd in uw tuin.',
+    price: 0,
+    category: 'Eigen Maatwerk',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/8B6F47/white?text=Overkappingen',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: '11',
+    name: 'Schuttingen op Maat',
+    description: 'Houten schuttingen in elk gewenst model. Van klassiek tot modern, alles is mogelijk.',
+    price: 0,
+    category: 'Eigen Maatwerk',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/7A5C42/white?text=Schuttingen',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   }
 ];
 
