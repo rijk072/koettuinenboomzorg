@@ -54,7 +54,7 @@ const VoorHoveniers = () => {
                 </div>
                 <h3 className="text-xl font-heading font-semibold mb-4 text-stone-900 group-hover:text-primary-900 transition-colors duration-300">Professionele Bulkprijzen</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  Scherpe prijzen vanaf 10 stuks per product. Speciaal tarief voor zakelijke afnemers en vaste relaties.
+                  Scherpe handelsprijzen op het volledige ECOstyle assortiment. Vanaf 10 stuks per product krijgt u onze professionele tarieven.
                 </p>
               </div>
             </AnimationObserver>
