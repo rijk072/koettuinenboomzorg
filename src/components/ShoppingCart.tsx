@@ -22,16 +22,20 @@ interface ShoppingCartProps {
   onAddBestSeller?: (product: any) => void;
 }
 
-// Best Sellers data - From actual products
-const bestSellers = particulierProducts.filter(p => p.popular).slice(0, 3).map(product => ({
-  id: parseInt(product.id),
-  name: product.name,
-  price: product.price,
-  image: product.image_url,
-  popular: product.popular,
-  volume: product.volume,
-  weight: product.weight
-}));
+// Best Sellers data - Smaller impulse buy products
+const bestSellers = particulierProducts
+  .filter(p => p.price > 0 && p.price < 20) // Only affordable quick-add products
+  .sort((a, b) => a.price - b.price) // Sort by price ascending
+  .slice(0, 3)
+  .map(product => ({
+    id: parseInt(product.id),
+    name: product.name,
+    price: product.price,
+    image: product.image_url,
+    popular: product.popular,
+    volume: product.volume,
+    weight: product.weight
+  }));
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({
   isOpen,
@@ -153,9 +157,9 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
           <div className="p-6">
             <div className="flex items-center mb-4">
               <Star className="w-5 h-5 text-accent-500 mr-2" />
-              <h3 className="text-lg font-semibold text-stone-900">Onze Best Sellers</h3>
+              <h3 className="text-lg font-semibold text-stone-900">Snel erbij</h3>
             </div>
-            <p className="text-sm text-stone-600 mb-4">Voeg populaire producten toe aan je bestelling</p>
+            <p className="text-sm text-stone-600 mb-4">Handige producten voor in je tuin</p>
             
             <div className="space-y-3">
               {bestSellers.map((product) => (
