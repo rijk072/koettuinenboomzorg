@@ -228,6 +228,32 @@ const Contact = () => {
                   )}
                 </form>
               </div>
+
+              <div className="mt-8 p-6 bg-primary-50 rounded-xl border border-primary-100">
+                <h3 className="text-lg font-semibold text-primary-900 mb-3">
+                  Zakelijke levering (Hoveniers)
+                </h3>
+                <p className="text-stone-700 mb-4">
+                  Bent u hovenier en zoekt u een betrouwbare ECOstyle leverancier?
+                  Neem direct contact op voor handelsprijzen en leveringsvoorwaarden.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <a
+                    href="tel:0653747696"
+                    className="flex items-center justify-center bg-primary-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-800 transition-all"
+                  >
+                    <Phone className="w-5 h-5 mr-2" />
+                    Bel Direct: 0653747696
+                  </a>
+                  <a
+                    href="mailto:frans@koet.net?subject=Zakelijke levering ECOstyle"
+                    className="flex items-center justify-center border-2 border-primary-900 text-primary-900 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-all"
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    Email: frans@koet.net
+                  </a>
+                </div>
+              </div>
             </AnimationObserver>
 
             {/* Contact Info */}
