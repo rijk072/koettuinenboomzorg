@@ -75,6 +75,34 @@ const fallbackProducts: Product[] = [
     image_url: 'https://placehold.co/600x400/6D4C41/white?text=Terra-Fertiel',
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString()
+  },
+  {
+    id: '6',
+    name: 'Handgemaakte Tuinbankstellen',
+    description: 'Op maat gemaakte, duurzame tuinbankstellen van kwaliteitshout. Verschillende afmetingen beschikbaar.',
+    price: 0,
+    category: 'Tuinmeubelen',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/795548/white?text=Tuinbankstellen',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  },
+  {
+    id: '7',
+    name: 'Handgemaakte Bloembakken',
+    description: 'Stevige houten bloembakken, handgemaakt op maat. Perfect voor borders en terrassen.',
+    price: 0,
+    category: 'Tuinmeubelen',
+    weight: 'Maatwerk',
+    volume: 'Maatwerk',
+    in_stock: true,
+    popular: false,
+    image_url: 'https://placehold.co/600x400/6D4C41/white?text=Bloembakken',
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
   }
 ];
 
