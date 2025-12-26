@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Minus, Plus, ShoppingBag, Trash2, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { particulierProducts } from '../data/products';
 
 interface CartItem {
   id: number;
@@ -21,32 +22,16 @@ interface ShoppingCartProps {
   onAddBestSeller?: (product: any) => void;
 }
 
-// Best Sellers data
-const bestSellers = [
-  {
-    id: 101,
-    name: "Premium Universele Potgrond",
-    price: 12.95,
-    originalPrice: 15.95,
-    image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
-    popular: true
-  },
-  {
-    id: 102,
-    name: "Tuinmeubel Set Steigerhout",
-    price: 299.00,
-    originalPrice: 349.00,
-    image: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
-    popular: true
-  },
-  {
-    id: 103,
-    name: "Groente & Kruiden Potgrond",
-    price: 14.95,
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=200&h=200&fit=crop",
-    popular: false
-  }
-];
+// Best Sellers data - From actual products
+const bestSellers = particulierProducts.filter(p => p.popular).slice(0, 3).map(product => ({
+  id: parseInt(product.id),
+  name: product.name,
+  price: product.price,
+  image: product.image_url,
+  popular: product.popular,
+  volume: product.volume,
+  weight: product.weight
+}));
 
 const ShoppingCart: React.FC<ShoppingCartProps> = ({
   isOpen,
@@ -61,17 +46,23 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
 
   const handleAddBestSeller = (product: any) => {
     if (onAddBestSeller) {
-      onAddBestSeller({
-        id: product.id,
-        name: product.name,
-        description: `Best seller product - ${product.name}`,
-        price: product.price,
-        originalPrice: product.originalPrice,
-        image: product.image,
-        category: "Best Sellers",
-        inStock: true,
-        popular: product.popular
-      });
+      const fullProduct = particulierProducts.find(p => parseInt(p.id) === product.id);
+      if (fullProduct) {
+        onAddBestSeller({
+          id: fullProduct.id,
+          name: fullProduct.name,
+          description: fullProduct.description,
+          price: fullProduct.price,
+          image_url: fullProduct.image_url,
+          category: fullProduct.category,
+          in_stock: fullProduct.in_stock,
+          popular: fullProduct.popular,
+          volume: fullProduct.volume,
+          weight: fullProduct.weight,
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
+        });
+      }
     }
   };
 
@@ -86,9 +77,9 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
       />
       
       {/* Cart Panel */}
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-premium-xl z-50 transform transition-transform duration-300">
+      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-premium-xl z-50 transform transition-transform duration-300 flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-stone-200">
+        <div className="flex items-center justify-between p-6 border-b border-stone-200 flex-shrink-0">
           <div className="flex items-center">
             <ShoppingBag className="w-6 h-6 text-primary-900 mr-3" />
             <h2 className="text-xl font-semibold text-stone-900">Winkelwagen</h2>
@@ -106,7 +97,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
           </button>
         </div>
 
-        {/* Cart Items */}
+        {/* Cart Items - Scrollable */}
         <div className="flex-1 overflow-y-auto">
           <div className="p-6 border-b border-stone-200">
           {items.length === 0 ? (
@@ -169,8 +160,8 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
             <div className="space-y-3">
               {bestSellers.map((product) => (
                 <div key={product.id} className="flex items-center bg-stone-50 rounded-xl p-3 hover:bg-stone-100 transition-colors">
-                  <img 
-                    src={product.image} 
+                  <img
+                    src={product.image}
                     alt={product.name}
                     className="w-12 h-12 object-cover rounded-lg mr-3"
                   />
@@ -178,13 +169,13 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
                     <h4 className="font-medium text-stone-900 text-sm truncate">{product.name}</h4>
                     <div className="flex items-center space-x-2">
                       <span className="text-primary-900 font-semibold text-sm">€{product.price.toFixed(2)}</span>
-                      {product.originalPrice && (
-                        <span className="text-xs text-stone-500 line-through">€{product.originalPrice.toFixed(2)}</span>
-                      )}
                       {product.popular && (
                         <Star className="w-3 h-3 text-accent-500 fill-current" />
                       )}
                     </div>
+                    {(product.volume || product.weight) && (
+                      <p className="text-xs text-stone-500 mt-1">{product.volume || product.weight}</p>
+                    )}
                   </div>
                   <button
                     onClick={() => handleAddBestSeller(product)}
@@ -198,9 +189,9 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
           </div>
         </div>
 
-        {/* Footer */}
+        {/* Footer - Fixed at bottom */}
         {items.length > 0 && (
-          <div className="border-t border-stone-200 p-6">
+          <div className="border-t border-stone-200 p-6 flex-shrink-0 bg-white">
             <div className="flex justify-between items-center mb-4">
               <span className="text-lg font-semibold text-stone-900">Totaal:</span>
               <span className="text-2xl font-bold text-primary-900">€{totalPrice.toFixed(2)}</span>
