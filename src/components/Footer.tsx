@@ -24,7 +24,7 @@ const Footer = () => {
                 voor de hoogste kwaliteitsstandaarden.
               </p>
               <p className="text-stone-400 leading-relaxed mt-4">
-                Ook leverancier voor professionele hoveniers
+                Ook officiële ECOstyle dealer voor professionele hoveniers
               </p>
             </div>
 
