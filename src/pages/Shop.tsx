@@ -222,6 +222,11 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                           <div className="text-2xl font-bold text-primary-900">
                             {product.price === 0 ? 'Prijs op aanvraag' : `€${product.price.toFixed(2)}`}
                           </div>
+                          {product.price > 0 && (
+                            <div className="text-xs text-stone-500 mt-1">
+                              Vanaf 10 stuks: vraag offerte aan
+                            </div>
+                          )}
                           {product.original_price && product.price !== 0 && (
                             <div className="text-sm text-stone-500 line-through">€{product.original_price.toFixed(2)}</div>
                           )}
