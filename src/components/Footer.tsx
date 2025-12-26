@@ -20,8 +20,11 @@ const Footer = () => {
               />
               <h3 className="text-lg font-semibold text-white mb-4">Koet Tuin & Boomzorg</h3>
               <p className="text-stone-300 text-sm leading-relaxed">
-                Premium hovenierswerk sinds 1989. European Tree Worker gecertificeerd 
+                Premium hovenierswerk sinds 1989. European Tree Worker gecertificeerd
                 voor de hoogste kwaliteitsstandaarden.
+              </p>
+              <p className="text-stone-400 leading-relaxed mt-4">
+                Ook leverancier voor professionele hoveniers
               </p>
             </div>
 
