@@ -9,7 +9,7 @@ const fallbackProducts: Product[] = [
   {
     id: '1',
     name: 'ECOstyle OpMaat Kalk',
-    description: '100% natuurlijke en CO₂ neutrale kalk voor verbetering van pH-waarde en bodemstructuur.',
+    description: '100% natuurlijke kalk verrijkt met micro-organismen voor verbetering van pH-waarde en bodemstructuur. CO₂ neutraal product.',
     price: 19.50,
     category: 'Kalk & mineralen',
     weight: '20 kg',
@@ -23,7 +23,7 @@ const fallbackProducts: Product[] = [
   {
     id: '2',
     name: 'ECOstyle Myco-Gazon 8-3-6',
-    description: '100% organische gazonmeststof verrijkt met micro-organismen voor een sterk en diepgroen gazon.',
+    description: '100% organische gazonmeststof met micro-organismen voor een sterk en diepgroen gazon. Werkt al vanaf 5°C bodemtemperatuur.',
     price: 59.50,
     category: 'Gazonproducten',
     weight: '25 kg',
@@ -37,7 +37,7 @@ const fallbackProducts: Product[] = [
   {
     id: '3',
     name: 'ECOstyle Terra-Actif',
-    description: 'Hoogwaardige bodemverbeteraar rijk aan kokosvezels voor optimale lucht- en waterhuishouding.',
+    description: 'Hoogwaardige bodemverbeteraar rijk aan kokosvezels. Verbetert bodemstructuur en lucht-/waterhuishouding. >20% organische stof.',
     price: 17.50,
     category: 'Bodemverbeteraars',
     weight: '70 L',
@@ -51,7 +51,7 @@ const fallbackProducts: Product[] = [
   {
     id: '4',
     name: 'ECOstyle Myco-Siertuin 7-3-6',
-    description: '100% organische meststof met fosfaatvrijmakende bacteriën en Mycorrhizae-schimmels.',
+    description: '100% organische meststof voor borders en heesters. Met Mycorrhizae en fosfaatvrijmakende bacteriën. Tot 9x meer wortelbereik.',
     price: 59.50,
     category: 'Organische meststoffen',
     weight: '25 kg',
@@ -65,7 +65,7 @@ const fallbackProducts: Product[] = [
   {
     id: '5',
     name: 'ECOstyle Terra-Fertiel',
-    description: 'Organische bodemverbeteraar op basis van schimmels, bacteriën en gisten voor optimaal bodemleven.',
+    description: 'Organische bodemverbeteraar met schimmels, bacteriën en gisten. Activeert het bodemleven direct en verbetert de bodemstructuur.',
     price: 52.50,
     category: 'Bodemverbeteraars',
     weight: '25 kg',
