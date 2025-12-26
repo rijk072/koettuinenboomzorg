@@ -1,0 +1,169 @@
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Phone, ArrowRight, ShoppingBag, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Product } from './lib/supabase';
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop';
+import StickyMobileCTA from './components/StickyMobileCTA';
+import AnimationObserver from './components/AnimationObserver';
+import ShoppingCart from './components/ShoppingCart';
+import Home from './pages/Home';
+import OverOns from './pages/OverOns';
+import Diensten from './pages/Diensten';
+import ProjectenPage from './pages/Projecten';
+import Shop from './pages/Shop';
+import ProductDetail from './pages/ProductDetail';
+import Checkout from './pages/Checkout';
+import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
+import Contact from './pages/Contact';
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  image: string;
+  volume?: string;
+  weight?: string;
+}
+
+function App() {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const addToCart = (product: Product) => {
+    setCartItems(prev => {
+      const existingItem = prev.find(item => item.id === parseInt(product.id));
+      if (existingItem) {
+        return prev.map(item =>
+          item.id === parseInt(product.id)
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        return [...prev, {
+          id: parseInt(product.id),
+          name: product.name,
+          price: product.price,
+          quantity: 1,
+          image: product.image_url || 'https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+          volume: product.volume,
+          weight: product.weight
+        }];
+      }
+    });
+  };
+
+  const updateCartQuantity = (id: number, quantity: number) => {
+    if (quantity <= 0) {
+      removeFromCart(id);
+    } else {
+      setCartItems(prev =>
+        prev.map(item =>
+          item.id === id ? { ...item, quantity } : item
+        )
+      );
+    }
+  };
+
+  const removeFromCart = (id: number) => {
+    setCartItems(prev => prev.filter(item => item.id !== id));
+  };
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  return (
+    <Router>
+      <div className="min-h-screen bg-neutral-50">
+        <ScrollToTop />
+        <Navigation totalItems={totalItems} onCartClick={() => setIsCartOpen(true)} />
+        
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/over-ons" element={<OverOns />} />
+          <Route path="/diensten" element={<Diensten />} />
+          <Route path="/projecten" element={
+            <>
+              {/* Hero Section */}
+              <section className="relative h-[60vh] flex items-center justify-center overflow-hidden pt-24">
+                <div className="absolute inset-0">
+                  <img
+                    src="/images/hero-garden.jpg"
+                    alt="Premium Tuinprojecten"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
+                </div>
+
+                <div className="relative z-10 container-wide text-left text-white">
+                  <AnimationObserver>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
+                      Premium gerealiseerde
+                      <span className="block text-white mt-2">tuinprojecten</span>
+                    </h1>
+                    <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
+                      Ontdek onze portfolio van vakkundig uitgevoerde tuinprojecten in regio 0251
+                    </p>
+                  </AnimationObserver>
+                  
+                </div>
+              </section>
+
+              <ProjectenPage />
+            </>
+          } />
+          <Route path="/shop" element={<Shop onAddToCart={addToCart} />} />
+          <Route path="/product/:id" element={<ProductDetail onAddToCart={addToCart} />} />
+          <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
+          <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
+          <Route path="/privacy" element={<AlgemeneVoorwaarden />} />
+          <Route path="/contact" element={
+            <>
+              {/* Hero Section */}
+              <section className="relative h-[60vh] flex items-center justify-center overflow-hidden pt-24">
+                <div className="absolute inset-0">
+                  <img
+                    src="/images/hero-garden.jpg"
+                    alt="Contact Koet Tuin & Boomzorg"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60"></div>
+                </div>
+
+                <div className="relative z-10 container-wide text-left text-white">
+                  <AnimationObserver>
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
+                      Premium contact voor uw
+                      <span className="block text-white mt-2">tuindroom</span>
+                    </h1>
+                    <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
+                      Neem contact op voor een vrijblijvend gesprek over uw tuinproject
+                    </p>
+                  </AnimationObserver>
+                </div>
+              </section>
+
+              <Contact />
+            </>
+          } />
+        </Routes>
+
+        <Footer />
+        <StickyMobileCTA />
+        
+        <ShoppingCart
+          isOpen={isCartOpen}
+          onClose={() => setIsCartOpen(false)}
+          items={cartItems}
+          onUpdateQuantity={updateCartQuantity}
+          onRemoveItem={removeFromCart}
+          onAddBestSeller={addToCart}
+        />
+      </div>
+    </Router>
+  );
+}
+
+export default App;
