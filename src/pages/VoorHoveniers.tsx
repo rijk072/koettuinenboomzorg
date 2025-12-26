@@ -211,10 +211,10 @@ const VoorHoveniers = () => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              'Premium Potgrond',
-              'Organische Meststoffen',
-              'Bodemverbeteraars',
-              'Kalkmineralen'
+              'ECOstyle Myco-Gazon',
+              'ECOstyle OpMaat Kalk',
+              'ECOstyle Terra-Actif',
+              'ECOstyle Terra-Fertiel'
             ].map((category, index) => (
               <AnimationObserver key={index} delay={index * 100}>
                 <div className="bg-white rounded-xl p-6 shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2">
