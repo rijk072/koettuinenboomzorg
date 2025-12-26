@@ -130,9 +130,9 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
 
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20 text-center text-white">
           <AnimationObserver>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
               {activeTab === 'particulier' ? 'Eigen Maatwerk' : 'ECOstyle Groothandel'}
-              <span className="block mt-2">
+              <span className="block mt-2 text-white">
                 {activeTab === 'particulier' ? 'voor Uw Tuin' : 'voor Professionals'}
               </span>
             </h1>
