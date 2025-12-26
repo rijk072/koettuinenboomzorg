@@ -21,11 +21,11 @@ const VoorHoveniers = () => {
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20 text-left text-white">
           <AnimationObserver>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
-              Betrouwbare leverancier voor
+              ECOstyle dealer voor
               <span className="block text-white mt-2">professionele hoveniers</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
-              Al 35+ jaar uw partner in tuinproducten - Lokaal, snel, betrouwbaar
+              Volledige ECOstyle productlijn op voorraad - Scherpe handelsprijzen - Levering binnen 48u
             </p>
           </AnimationObserver>
         </div>
