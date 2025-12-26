@@ -174,11 +174,11 @@ const VoorHoveniers = () => {
                   0653747696
                 </a>
                 <a
-                  href="mailto:info@koettuinen.nl"
+                  href="mailto:frans@koet.net"
                   className="flex items-center justify-center bg-white/95 backdrop-blur-sm text-primary-900 px-8 py-5 rounded-xl font-semibold text-lg hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-premium"
                 >
                   <Mail className="w-6 h-6 mr-3" />
-                  info@koettuinen.nl
+                  frans@koet.net
                 </a>
               </div>
 
