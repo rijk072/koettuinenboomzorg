@@ -8,7 +8,7 @@ import { db, Product } from '../lib/supabase';
 const fallbackProducts: Product[] = [
   {
     id: '1',
-    name: 'OpMaat Kalk',
+    name: 'ECOstyle OpMaat Kalk',
     description: '100% natuurlijke en CO₂ neutrale kalk voor verbetering van pH-waarde en bodemstructuur.',
     price: 19.50,
     category: 'Kalk & mineralen',
@@ -22,7 +22,7 @@ const fallbackProducts: Product[] = [
   },
   {
     id: '2',
-    name: 'Myco-Gazon 8-3-6',
+    name: 'ECOstyle Myco-Gazon 8-3-6',
     description: '100% organische gazonmeststof verrijkt met micro-organismen voor een sterk en diepgroen gazon.',
     price: 59.50,
     category: 'Gazonproducten',
@@ -36,7 +36,7 @@ const fallbackProducts: Product[] = [
   },
   {
     id: '3',
-    name: 'Terra-Actif',
+    name: 'ECOstyle Terra-Actif',
     description: 'Hoogwaardige bodemverbeteraar rijk aan kokosvezels voor optimale lucht- en waterhuishouding.',
     price: 17.50,
     category: 'Bodemverbeteraars',
@@ -50,7 +50,7 @@ const fallbackProducts: Product[] = [
   },
   {
     id: '4',
-    name: 'Myco-Siertuin 7-3-6',
+    name: 'ECOstyle Myco-Siertuin 7-3-6',
     description: '100% organische meststof met fosfaatvrijmakende bacteriën en Mycorrhizae-schimmels.',
     price: 59.50,
     category: 'Organische meststoffen',
@@ -64,7 +64,7 @@ const fallbackProducts: Product[] = [
   },
   {
     id: '5',
-    name: 'Terra-Fertiel',
+    name: 'ECOstyle Terra-Fertiel',
     description: 'Organische bodemverbeteraar op basis van schimmels, bacteriën en gisten voor optimaal bodemleven.',
     price: 52.50,
     category: 'Bodemverbeteraars',
