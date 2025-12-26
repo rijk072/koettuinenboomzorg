@@ -114,7 +114,7 @@ const Home: React.FC = () => {
                 ECOstyle dealer voor professionele hoveniers
               </h2>
               <p className="text-lg text-white/90 mb-8 leading-relaxed">
-                Volledige ECOstyle productlijn op voorraad in regio 0251. Scherpe handelsprijzen
+                Volledige ECOstyle productlijn op voorraad in Bakkum en omgeving Noord-Holland. Scherpe handelsprijzen
                 vanaf 10 stuks, levering binnen 48 uur.
               </p>
               <Link

@@ -106,7 +106,7 @@ function App() {
                       <span className="block text-white mt-2">tuinprojecten</span>
                     </h1>
                     <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
-                      Ontdek onze portfolio van vakkundig uitgevoerde tuinprojecten in regio 0251
+                      Ontdek onze portfolio van vakkundig uitgevoerde tuinprojecten in Bakkum, Noord-Holland
                     </p>
                   </AnimationObserver>
                   

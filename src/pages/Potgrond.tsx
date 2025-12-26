@@ -113,7 +113,7 @@ const Potgrond = () => {
                 </div>
                 <h3 className="text-xl font-medium text-stone-900 mb-4">Gratis Bezorging</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  Gratis thuisbezorging in regio 0251 bij bestelling vanaf 5 zakken. 
+                  Gratis thuisbezorging in Bakkum en omgeving Noord-Holland bij bestelling vanaf 5 zakken.
                   Wij leveren direct aan huis.
                 </p>
               </div>
@@ -319,7 +319,7 @@ const Potgrond = () => {
                   {[
                     {
                       title: "Gratis Bezorging",
-                      description: "Gratis thuisbezorging in regio 0251 bij bestelling vanaf 5 zakken"
+                      description: "Gratis thuisbezorging in Bakkum en omgeving Noord-Holland bij bestelling vanaf 5 zakken"
                     },
                     {
                       title: "Snelle Levering",

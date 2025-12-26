@@ -319,7 +319,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                   {[
                     {
                       title: "ECOstyle Dealer",
-                      description: "Officiële dealer van ECOstyle biologische tuinproducten. Volledige productlijn direct leverbaar in regio 0251."
+                      description: "Officiële dealer van ECOstyle biologische tuinproducten. Volledige productlijn direct leverbaar in Bakkum en omgeving Noord-Holland."
                     },
                     {
                       title: "Particulier & Zakelijk",
@@ -327,7 +327,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                     },
                     {
                       title: "Gratis Bezorging",
-                      description: "Gratis thuisbezorging in regio 0251 bij bestelling vanaf 5 zakken."
+                      description: "Gratis thuisbezorging in Bakkum en omgeving Noord-Holland bij bestelling vanaf 5 zakken."
                     }
                   ].map((item, index) => (
                     <div key={index} className="flex items-start space-x-4">

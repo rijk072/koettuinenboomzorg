@@ -41,7 +41,7 @@ const VoorHoveniers = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full mb-8"></div>
               <p className="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
-                Uw betrouwbare partner voor hoogwaardige tuinproducten in regio 0251
+                Uw betrouwbare partner voor hoogwaardige tuinproducten in Bakkum, Noord-Holland
               </p>
             </div>
           </AnimationObserver>
@@ -66,7 +66,7 @@ const VoorHoveniers = () => {
                 </div>
                 <h3 className="text-xl font-heading font-semibold mb-4 text-stone-900 group-hover:text-primary-900 transition-colors duration-300">Snelle Levering</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  Binnen 48 uur in regio 0251 geleverd. Spoedleveringen mogelijk in overleg voor dringende projecten.
+                  Binnen 48 uur in Bakkum en omgeving Noord-Holland geleverd. Spoedleveringen mogelijk in overleg voor dringende projecten.
                 </p>
               </div>
             </AnimationObserver>

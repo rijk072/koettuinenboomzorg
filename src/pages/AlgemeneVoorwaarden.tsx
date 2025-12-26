@@ -104,7 +104,7 @@ const AlgemeneVoorwaarden = () => {
                     <h3 className="text-xl font-semibold text-stone-900 mb-4">2. Bestellingen en Levering</h3>
                     <ul className="space-y-2 text-stone-700">
                       <li>• Bestellingen worden binnen 1-2 werkdagen verwerkt</li>
-                      <li>• Gratis bezorging vanaf €50 in regio 0251 (Bakkum, Alkmaar, Egmond, Heiloo)</li>
+                      <li>• Gratis bezorging vanaf €50 in Bakkum en omgeving Noord-Holland (Alkmaar, Egmond, Heiloo)</li>
                       <li>• Afhalen mogelijk op afspraak in Bakkum</li>
                       <li>• Levertijden zijn indicatief en afhankelijk van voorraad</li>
                     </ul>

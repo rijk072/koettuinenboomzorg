@@ -298,7 +298,7 @@ const Contact = () => {
                       <h3 className="font-heading font-bold text-stone-900 mb-2">Adres</h3>
                       <p className="text-stone-700 font-heading font-bold">Heereweg 38 E</p>
                       <p className="text-stone-700 font-heading font-bold">1901 ME Bakkum</p>
-                      <p className="text-stone-600 text-sm mt-1">Regio 0251</p>
+                      <p className="text-stone-600 text-sm mt-1">Bakkum, Noord-Holland</p>
                     </div>
                   </div>
                 </div>
@@ -402,7 +402,7 @@ const Contact = () => {
                 Bezoek ons in <span className="text-primary-900">Bakkum</span>
               </h2>
               <p className="text-lg text-stone-600 max-w-2xl mx-auto">
-                Centraal gelegen in regio 0251 voor optimale bereikbaarheid
+                Centraal gelegen in Bakkum en omgeving Noord-Holland voor optimale bereikbaarheid
               </p>
             </div>
           </AnimationObserver>

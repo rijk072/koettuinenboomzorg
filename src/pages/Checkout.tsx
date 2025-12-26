@@ -274,7 +274,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                           <Truck className="w-5 h-5 text-primary-900 mr-3" />
                           <div>
                             <div className="font-medium text-stone-900">Thuisbezorgd</div>
-                            <div className="text-sm text-stone-600">Regio 0251 - €4,95 extra</div>
+                            <div className="text-sm text-stone-600">Bakkum, Noord-Holland - €4,95 extra</div>
                           </div>
                         </div>
                       </label>
