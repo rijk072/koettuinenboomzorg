@@ -318,16 +318,16 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                 <div className="space-y-6">
                   {[
                     {
-                      title: "100% Biologisch",
-                      description: "Geen kunstmest of chemische toevoegingen. Puur natuurlijke ingrediënten voor gezonde plantengroei."
+                      title: "ECOstyle Dealer",
+                      description: "Officiële dealer van ECOstyle biologische tuinproducten. Volledige productlijn direct leverbaar in regio 0251."
+                    },
+                    {
+                      title: "Particulier & Zakelijk",
+                      description: "Koop direct online per stuk of vraag om bulkkorting vanaf 10 stuks. Neem contact op voor een offerte."
                     },
                     {
                       title: "Gratis Bezorging",
-                      description: "Gratis thuisbezorging in regio 0251 bij bestelling vanaf 5 zakken potgrond."
-                    },
-                    {
-                      title: "Kwaliteitsgarantie",
-                      description: "30 dagen geld terug garantie. Niet tevreden? Dan krijgt u uw geld terug."
+                      description: "Gratis thuisbezorging in regio 0251 bij bestelling vanaf 5 zakken."
                     }
                   ].map((item, index) => (
                     <div key={index} className="flex items-start space-x-4">
