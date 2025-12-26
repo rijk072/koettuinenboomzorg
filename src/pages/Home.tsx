@@ -105,6 +105,28 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* B2B Section */}
+      <section className="py-16 bg-gradient-to-br from-primary-900 to-primary-800">
+        <div className="container-wide">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              Ook leverancier voor professionele hoveniers
+            </h2>
+            <p className="text-lg text-white/90 mb-8 leading-relaxed">
+              Al 35+ jaar dé betrouwbare partner voor hoveniersbedrijven in regio 0251.
+              Scherpe bulkprijzen, snelle levering, eigen voorraad.
+            </p>
+            <Link
+              to="/voor-hoveniers"
+              className="bg-white text-primary-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-neutral-100 transition-all duration-300 transform hover:scale-105 shadow-premium-lg inline-flex items-center"
+            >
+              Bekijk Groothandelsprijzen
+              <ArrowRight className="w-5 h-5 ml-3" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Vakmanschap Section */}
       <section className="py-20 lg:py-24 bg-stone-50 relative">
         <div className="container-wide">
