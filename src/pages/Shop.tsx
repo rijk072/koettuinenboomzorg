@@ -251,8 +251,8 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                             {product.price === 0 ? 'Prijs op aanvraag' : `€${product.price.toFixed(2)}`}
                           </div>
                           {product.price > 0 && (
-                            <div className="text-xs text-stone-500 mt-1">
-                              Vanaf 10 stuks: vraag offerte aan
+                            <div className="text-xs text-primary-700 mt-1 font-medium bg-primary-50 px-2 py-1 rounded inline-block">
+                              Bulkkorting vanaf 10 stuks
                             </div>
                           )}
                           {product.original_price && product.price !== 0 && (
