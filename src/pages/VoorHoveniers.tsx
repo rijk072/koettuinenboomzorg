@@ -37,7 +37,7 @@ const VoorHoveniers = () => {
           <AnimationObserver>
             <div className="text-center mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-stone-900 mb-6 leading-tight tracking-tight">
-                Waarom professionele hoveniers voor <span className="text-primary-900">ons kiezen</span>
+                Waarom hoveniers voor <span className="text-primary-900">ECOstyle via ons kiezen</span>
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full mb-8"></div>
               <p className="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
