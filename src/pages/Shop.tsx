@@ -231,6 +231,61 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
         </div>
       </section>
 
+      {/* Uitleg Particulier vs Zakelijk */}
+      <section className="py-12 bg-white border-b border-stone-100">
+        <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-8 border border-primary-200">
+              <h3 className="text-2xl font-bold text-primary-900 mb-4">Voor Particulieren</h3>
+              <p className="text-stone-700 mb-4">
+                Koop direct online per stuk. De prijzen die u ziet zijn particuliere prijzen.
+              </p>
+              <ul className="space-y-2 text-stone-600">
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  <span>Bestel 1-9 stuks online</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  <span>Direct toevoegen aan winkelwagen</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-600 mr-2">✓</span>
+                  <span>Gratis bezorging vanaf 5 zakken</span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="bg-gradient-to-br from-stone-50 to-stone-100 rounded-2xl p-8 border border-stone-200">
+              <h3 className="text-2xl font-bold text-stone-900 mb-4">Voor Hoveniers (Zakelijk)</h3>
+              <p className="text-stone-700 mb-4">
+                Handelsprijzen vanaf 10 stuks. Neem contact op voor een offerte.
+              </p>
+              <ul className="space-y-2 text-stone-600">
+                <li className="flex items-start">
+                  <span className="text-accent-600 mr-2">✓</span>
+                  <span>Scherpe handelsprijzen (10+ stuks)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-accent-600 mr-2">✓</span>
+                  <span>Levering binnen 48 uur</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-accent-600 mr-2">✓</span>
+                  <span>Persoonlijke begeleiding</span>
+                </li>
+              </ul>
+              <Link
+                to="/voor-hoveniers"
+                className="inline-flex items-center mt-4 text-primary-900 hover:text-primary-800 font-semibold"
+              >
+                Bekijk groothandel info →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Product Catalog Grid */}
       <section id="producten" className="pt-16 pb-20 lg:pb-24 bg-stone-50">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
