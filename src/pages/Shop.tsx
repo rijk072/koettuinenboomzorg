@@ -3,107 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingCart, ArrowRight, Phone, Mail } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { Product } from '../lib/supabase';
-
-// PARTICULIERE PRODUCTEN (Eigen maatwerk)
-const particulierProducts = [
-  {
-    id: 'p1',
-    name: 'Handgemaakte Tuinbankstellen',
-    description: 'Op maat gemaakte, duurzame tuinbankstellen van kwaliteitshout. Verschillende afmetingen en uitvoeringen beschikbaar.',
-    price: 449.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/795548/white?text=Tuinbankstellen',
-  },
-  {
-    id: 'p2',
-    name: 'Handgemaakte Bloembakken',
-    description: 'Stevige houten bloembakken, handgemaakt op maat. Perfect voor borders en terrassen.',
-    price: 159.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/6D4C41/white?text=Bloembakken',
-  },
-  {
-    id: 'p3',
-    name: 'Tuintafels op Maat',
-    description: 'Stevige houten tuintafels, handgemaakt volgens uw wensen. Duurzaam en weersbestendig.',
-    price: 649.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/8B7355/white?text=Tuintafels',
-  },
-  {
-    id: 'p4',
-    name: 'Plantenbakken',
-    description: 'Duurzame houten plantenbakken op maat gemaakt. Verschillende maten en uitvoeringen mogelijk.',
-    price: 129.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/6D5D4B/white?text=Plantenbakken',
-  },
-  {
-    id: 'p5',
-    name: 'Overkappingen & Pergola\'s',
-    description: 'Op maat gemaakte houten overkappingen en pergola\'s. Compleet geïnstalleerd in uw tuin.',
-    price: 2499.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/8B6F47/white?text=Overkappingen',
-  },
-  {
-    id: 'p6',
-    name: 'Schuttingen op Maat',
-    description: 'Houten schuttingen in elk gewenst model. Van klassiek tot modern, alles is mogelijk.',
-    price: 899.99,
-    category: 'Eigen Maatwerk',
-    image_url: 'https://placehold.co/600x400/7A5C42/white?text=Schuttingen',
-  }
-];
-
-// ZAKELIJKE PRODUCTEN (ECOstyle - voor hoveniers)
-const zakelijkProducts = [
-  {
-    id: 'z1',
-    name: 'ECOstyle OpMaat Kalk',
-    description: '100% natuurlijke kalk verrijkt met micro-organismen voor verbetering van pH-waarde en bodemstructuur.',
-    volume: '20 kg',
-    minOrder: '10 zakken',
-    category: 'ECOstyle',
-    image_url: 'https://placehold.co/600x400/228B22/white?text=OpMaat+Kalk',
-  },
-  {
-    id: 'z2',
-    name: 'ECOstyle Myco-Gazon 8-3-6',
-    description: '100% organische gazonmeststof met micro-organismen voor een sterk en diepgroen gazon.',
-    volume: '25 kg',
-    minOrder: '10 zakken',
-    category: 'ECOstyle',
-    image_url: 'https://placehold.co/600x400/2E7D32/white?text=Myco-Gazon',
-  },
-  {
-    id: 'z3',
-    name: 'ECOstyle Terra-Actif',
-    description: 'Hoogwaardige bodemverbeteraar rijk aan kokosvezels. Verbetert bodemstructuur en lucht-/waterhuishouding.',
-    volume: '70 L',
-    minOrder: '10 zakken',
-    category: 'ECOstyle',
-    image_url: 'https://placehold.co/600x400/795548/white?text=Terra-Actif',
-  },
-  {
-    id: 'z4',
-    name: 'ECOstyle Myco-Siertuin 7-3-6',
-    description: '100% organische meststof voor borders en heesters. Met Mycorrhizae en fosfaatvrijmakende bacteriën.',
-    volume: '25 kg',
-    minOrder: '10 zakken',
-    category: 'ECOstyle',
-    image_url: 'https://placehold.co/600x400/558B2F/white?text=Myco-Siertuin',
-  },
-  {
-    id: 'z5',
-    name: 'ECOstyle Terra-Fertiel',
-    description: 'Organische bodemverbeteraar met schimmels, bacteriën en gisten. Activeert het bodemleven direct.',
-    volume: '25 kg',
-    minOrder: '10 zakken',
-    category: 'ECOstyle',
-    image_url: 'https://placehold.co/600x400/6D4C41/white?text=Terra-Fertiel',
-  }
-];
+import { particulierProducts, zakelijkProducts } from '../data/products';
 
 interface ShopProps {
   onAddToCart: (product: Product) => void;
@@ -208,21 +108,28 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
               <AnimationObserver key={product.id} delay={index * 100}>
                 <div className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2">
 
-                  {/* Product Image */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-stone-50">
+                  {/* Product Image - Clickable */}
+                  <Link to={`/product/${product.id}`} className="block relative aspect-[4/3] overflow-hidden bg-stone-50">
                     <img
                       src={product.image_url}
                       alt={product.name}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  </div>
+                    <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                      <div className="bg-white/95 backdrop-blur-sm text-primary-900 py-2 px-4 rounded-xl font-semibold text-center text-sm">
+                        Bekijk Product Details →
+                      </div>
+                    </div>
+                  </Link>
 
                   {/* Product Info */}
                   <div className="p-6">
-                    <h3 className="text-xl font-bold text-stone-900 mb-2 group-hover:text-primary-900 transition-colors">
-                      {product.name}
-                    </h3>
+                    <Link to={`/product/${product.id}`}>
+                      <h3 className="text-xl font-bold text-stone-900 mb-2 group-hover:text-primary-900 transition-colors cursor-pointer">
+                        {product.name}
+                      </h3>
+                    </Link>
 
                     {'volume' in product && (
                       <p className="text-sm text-stone-500 mb-3">
@@ -255,13 +162,16 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                     {/* CTA Button */}
                     {activeTab === 'particulier' ? (
                       <button
-                        onClick={() => onAddToCart({
-                          ...product,
-                          in_stock: true,
-                          popular: false,
-                          created_at: new Date().toISOString(),
-                          updated_at: new Date().toISOString()
-                        } as Product)}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onAddToCart({
+                            ...product,
+                            in_stock: true,
+                            popular: false,
+                            created_at: new Date().toISOString(),
+                            updated_at: new Date().toISOString()
+                          } as Product);
+                        }}
                         className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
                       >
                         <ShoppingCart className="w-5 h-5 mr-2" />
