@@ -172,11 +172,11 @@ const Contact = () => {
                       className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 outline-none bg-white cursor-pointer"
                     >
                       <option value="">Selecteer een onderwerp</option>
-                      <option value="tuinaanleg">Tuinaanleg</option>
-                      <option value="tuinonderhoud">Tuinonderhoud</option>
-                      <option value="boomverzorging">Boomverzorging</option>
-                      <option value="tuinontwerp">Tuinontwerp</option>
                       <option value="offerte">Offerte aanvragen</option>
+                      <option value="tuinaanleg">Tuinaanleg</option>
+                      <option value="onderhoud">Tuinonderhoud</option>
+                      <option value="boomverzorging">Boomverzorging</option>
+                      <option value="zakelijk">Zakelijke levering (hoveniers)</option>
                       <option value="anders">Anders</option>
                     </select>
                   </div>
