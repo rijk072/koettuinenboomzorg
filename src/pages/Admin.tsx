@@ -469,6 +469,19 @@ const Admin: React.FC = () => {
                                 </>
                               )}
                             </div>
+                            {order.pickup_date && (
+                              <div className="flex items-center gap-2 text-neutral-600">
+                                <Calendar className="w-4 h-4" />
+                                <span className="font-semibold text-primary-900">
+                                  Afhaaldatum: {new Date(order.pickup_date).toLocaleDateString('nl-NL', {
+                                    weekday: 'long',
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric'
+                                  })}
+                                </span>
+                              </div>
+                            )}
                             <div className="flex items-center gap-2 text-neutral-600">
                               {order.payment_method === 'bij_afhalen' ? (
                                 <>

@@ -26,7 +26,8 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
     adres: '',
     postcode: '',
     plaats: '',
-    verzendoptie: 'afhalen'
+    verzendoptie: 'afhalen',
+    afhaaldatum: ''
   });
 
   const [paymentMethod, setPaymentMethod] = useState('bij_afhalen');
@@ -70,6 +71,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
         delivery_postal_code: formData.verzendoptie === 'bezorgen' ? formData.postcode : null,
         delivery_city: formData.verzendoptie === 'bezorgen' ? formData.plaats : null,
         payment_method: formData.verzendoptie === 'afhalen' ? paymentMethod : 'online',
+        pickup_date: formData.verzendoptie === 'afhalen' && formData.afhaaldatum ? formData.afhaaldatum : null,
         subtotal: subtotal,
         shipping_cost: shippingCost,
         total_amount: total,
@@ -379,6 +381,28 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                         </div>
                       </label>
                     </div>
+
+                    {/* Afhaaldatum voor Afhalen */}
+                    {formData.verzendoptie === 'afhalen' && (
+                      <div className="mt-6 pt-6 border-t border-stone-200">
+                        <h3 className="text-lg font-medium text-stone-900 mb-4">Gewenste afhaaldatum (optioneel)</h3>
+                        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mb-4">
+                          <p className="text-sm text-blue-900">
+                            Geef bij voorkeur een afhaaldatum op, dan zorgen we dat uw bestelling klaar staat.
+                            Vooral handig voor grote bestellingen (hoveniers).
+                          </p>
+                        </div>
+                        <input
+                          type="date"
+                          id="afhaaldatum"
+                          name="afhaaldatum"
+                          value={formData.afhaaldatum}
+                          onChange={handleInputChange}
+                          min={new Date().toISOString().split('T')[0]}
+                          className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 outline-none bg-white"
+                        />
+                      </div>
+                    )}
 
                     {/* Betalingsopties voor Afhalen */}
                     {formData.verzendoptie === 'afhalen' && (
