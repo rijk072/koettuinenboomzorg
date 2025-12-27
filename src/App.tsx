@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Phone, ArrowRight, ShoppingBag, ArrowDown } from 'lucide-react';
+import { Phone, ArrowRight, ShoppingBag, ArrowDown, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Product } from './lib/supabase';
 import CookieConsent from 'react-cookie-consent';
@@ -10,17 +10,18 @@ import ScrollToTop from './components/ScrollToTop';
 import StickyMobileCTA from './components/StickyMobileCTA';
 import AnimationObserver from './components/AnimationObserver';
 import ShoppingCart from './components/ShoppingCart';
-import Home from './pages/Home';
-import OverOns from './pages/OverOns';
-import Diensten from './pages/Diensten';
-import ProjectenPage from './pages/Projecten';
-import Shop from './pages/Shop';
-import ProductDetail from './pages/ProductDetail';
-import Checkout from './pages/Checkout';
-import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
-import Contact from './pages/Contact';
-import VoorHoveniers from './pages/VoorHoveniers';
-import NotFound from './pages/NotFound';
+
+const Home = lazy(() => import('./pages/Home'));
+const OverOns = lazy(() => import('./pages/OverOns'));
+const Diensten = lazy(() => import('./pages/Diensten'));
+const ProjectenPage = lazy(() => import('./pages/Projecten'));
+const Shop = lazy(() => import('./pages/Shop'));
+const ProductDetail = lazy(() => import('./pages/ProductDetail'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const AlgemeneVoorwaarden = lazy(() => import('./pages/AlgemeneVoorwaarden'));
+const Contact = lazy(() => import('./pages/Contact'));
+const VoorHoveniers = lazy(() => import('./pages/VoorHoveniers'));
+const NotFound = lazy(() => import('./pages/NotFound'));
 
 interface CartItem {
   id: number;
@@ -31,6 +32,14 @@ interface CartItem {
   volume?: string;
   weight?: string;
 }
+
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-stone-50 to-white">
+    <div className="text-center">
+      <Loader2 className="w-16 h-16 text-primary-900 animate-spin mx-auto" />
+    </div>
+  </div>
+);
 
 function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -82,8 +91,9 @@ function App() {
       <div className="min-h-screen bg-neutral-50">
         <ScrollToTop />
         <Navigation totalItems={totalItems} onCartClick={() => setIsCartOpen(true)} />
-        
-        <Routes>
+
+        <Suspense fallback={<LoadingSpinner />}>
+          <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/over-ons" element={<OverOns />} />
           <Route path="/diensten" element={<Diensten />} />
@@ -153,7 +163,8 @@ function App() {
             </>
           } />
           <Route path="*" element={<NotFound />} />
-        </Routes>
+          </Routes>
+        </Suspense>
 
         <Footer />
         <StickyMobileCTA />
