@@ -260,7 +260,7 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
                         className="flex-1 bg-gradient-to-r from-primary-900 to-primary-800 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
                       >
                         <ShoppingCart className="w-6 h-6 mr-3" />
-                        {product.price === 0 ? 'Bestel nu' : 'In Winkelwagen'}
+                        Toevoegen aan winkelwagen
                       </button>
                       <button className="w-14 h-14 bg-white border-2 border-stone-200 rounded-xl flex items-center justify-center hover:border-primary-900 hover:text-primary-900 transition-all duration-300">
                         <Heart className="w-6 h-6" />
