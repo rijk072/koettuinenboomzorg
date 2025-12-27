@@ -20,6 +20,7 @@ import Checkout from './pages/Checkout';
 import AlgemeneVoorwaarden from './pages/AlgemeneVoorwaarden';
 import Contact from './pages/Contact';
 import VoorHoveniers from './pages/VoorHoveniers';
+import NotFound from './pages/NotFound';
 
 interface CartItem {
   id: number;
@@ -151,6 +152,7 @@ function App() {
               <Contact />
             </>
           } />
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         <Footer />
