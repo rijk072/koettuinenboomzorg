@@ -388,29 +388,22 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                         </div>
                       </label>
 
-                      <label className={`flex items-center p-4 border border-stone-200 rounded-xl transition-colors ${
-                        cartItems.some(item => item.price === 0)
-                          ? 'cursor-not-allowed opacity-60 bg-stone-100'
-                          : 'cursor-pointer hover:bg-stone-50'
-                      }`}>
+                      <label className="flex items-center p-4 border border-stone-200 rounded-xl transition-colors cursor-not-allowed opacity-60 bg-stone-100">
                         <input
                           type="radio"
                           name="verzendoptie"
                           value="bezorgen"
                           checked={formData.verzendoptie === 'bezorgen'}
                           onChange={handleInputChange}
-                          disabled={cartItems.some(item => item.price === 0)}
+                          disabled
                           className="mr-3"
                         />
                         <div className="flex items-center flex-1">
-                          <Truck className={`w-5 h-5 mr-3 ${cartItems.some(item => item.price === 0) ? 'text-stone-400' : 'text-primary-900'}`} />
+                          <Truck className="w-5 h-5 mr-3 text-stone-400" />
                           <div>
                             <div className="font-medium text-stone-900">Leveren op locatie</div>
                             <div className="text-sm text-stone-600">
-                              {cartItems.some(item => item.price === 0)
-                                ? 'Niet beschikbaar voor zakelijke producten'
-                                : 'Bakkum, Noord-Holland - €4,95 extra'
-                              }
+                              Nog niet beschikbaar - Komt binnenkort
                             </div>
                           </div>
                         </div>
