@@ -1,6 +1,7 @@
 import React from 'react';
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import ReactGA from 'react-ga4';
 import CertificateBadge from './CertificateBadge';
 import AnimationObserver from './AnimationObserver';
 
@@ -48,6 +49,7 @@ const Footer = () => {
               <ul className="space-y-2 text-sm text-stone-300">
                 <li><Link to="/over-ons" className="hover:text-white transition-colors">Over Ons</Link></li>
                 <li><Link to="/diensten" className="hover:text-white transition-colors">Diensten</Link></li>
+                <li><Link to="/voor-hoveniers" className="hover:text-white transition-colors">Voor Hoveniers</Link></li>
                 <li><Link to="/projecten" className="hover:text-white transition-colors">Projecten</Link></li>
                 <li><Link to="/shop" className="hover:text-white transition-colors">Shop</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
@@ -69,11 +71,23 @@ const Footer = () => {
               <div className="space-y-3 text-sm text-stone-300">
                 <div className="flex items-center">
                   <Phone className="w-4 h-4 mr-2 text-primary-400" />
-                  <a href="tel:0653747696" className="hover:text-white transition-colors">0653747696</a>
+                  <a
+                    href="tel:0653747696"
+                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Phone Click', label: 'Footer' })}
+                    className="hover:text-white transition-colors"
+                  >
+                    0653747696
+                  </a>
                 </div>
                 <div className="flex items-center">
                   <Mail className="w-4 h-4 mr-2 text-primary-400" />
-                  <a href="mailto:frans@koet.net" className="hover:text-white transition-colors">frans@koet.net</a>
+                  <a
+                    href="mailto:frans@koet.net"
+                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Email Click', label: 'Footer' })}
+                    className="hover:text-white transition-colors"
+                  >
+                    frans@koet.net
+                  </a>
                 </div>
                 <div className="flex items-start">
                   <MapPin className="w-4 h-4 mr-2 text-primary-400 mt-0.5" />
