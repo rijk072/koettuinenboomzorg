@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, CreditCard, MapPin, Truck, CheckCircle, Loader2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, CreditCard, MapPin, Truck, CheckCircle, Loader2, AlertCircle, Wallet } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { db } from '../lib/supabase';
 
@@ -29,6 +29,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
     verzendoptie: 'afhalen'
   });
 
+  const [paymentMethod, setPaymentMethod] = useState('bij_afhalen');
   const [orderComplete, setOrderComplete] = useState(false);
   const [orderNumber, setOrderNumber] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -68,11 +69,12 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
         delivery_address: formData.verzendoptie === 'bezorgen' ? formData.adres : null,
         delivery_postal_code: formData.verzendoptie === 'bezorgen' ? formData.postcode : null,
         delivery_city: formData.verzendoptie === 'bezorgen' ? formData.plaats : null,
+        payment_method: formData.verzendoptie === 'afhalen' ? paymentMethod : 'online',
         subtotal: subtotal,
         shipping_cost: shippingCost,
         total_amount: total,
         status: 'pending' as const,
-        payment_status: 'pending' as const,
+        payment_status: (paymentMethod === 'bij_afhalen' ? 'pending' : 'pending') as const,
         notes: null
       };
 
@@ -116,21 +118,53 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
           <AnimationObserver>
             <div className="max-w-2xl mx-auto text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-primary-900 to-primary-700 rounded-full flex items-center justify-center mx-auto mb-8">
+              <div className="w-20 h-20 bg-gradient-to-br from-green-600 to-green-500 rounded-full flex items-center justify-center mx-auto mb-8 animate-bounce">
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
-              <h1 className="text-3xl lg:text-4xl font-semibold text-stone-900 mb-6">
-                Bestelling Ontvangen!
+              <h1 className="text-3xl lg:text-4xl font-bold text-stone-900 mb-6">
+                Bestelling Geplaatst! 🎉
               </h1>
-              <div className="bg-primary-50 border-2 border-primary-200 rounded-xl p-6 mb-6">
-                <p className="text-sm text-primary-800 font-medium mb-1">Uw bestelnummer:</p>
-                <p className="text-2xl font-bold text-primary-900">{orderNumber}</p>
+              <div className="bg-green-50 border-2 border-green-200 rounded-xl p-6 mb-6">
+                <p className="text-sm text-green-800 font-medium mb-1">Uw bestelnummer:</p>
+                <p className="text-2xl font-bold text-green-900">{orderNumber}</p>
               </div>
-              <p className="text-lg text-stone-700 mb-8 leading-relaxed">
-                Bedankt voor uw bestelling. Wij nemen binnen 24 uur contact met u op
-                om de levering af te stemmen.
-              </p>
-              <Link 
+
+              {paymentMethod === 'bij_afhalen' ? (
+                <div className="bg-white rounded-2xl p-8 shadow-soft mb-8">
+                  <h2 className="text-xl font-bold text-stone-900 mb-4">Afhaalinformatie</h2>
+                  <div className="space-y-3 text-left">
+                    <div className="flex items-start">
+                      <MapPin className="w-5 h-5 text-primary-900 mr-3 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-stone-900">Adres:</p>
+                        <p className="text-stone-700">Heereweg 38 E</p>
+                        <p className="text-stone-700">1901 ME Bakkum</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Wallet className="w-5 h-5 text-primary-900 mr-3 mt-0.5" />
+                      <div>
+                        <p className="font-semibold text-stone-900">Betaling:</p>
+                        <p className="text-stone-700">Contant of Pin bij afhalen</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                    <p className="text-sm text-blue-900">
+                      <strong>Let op:</strong> We nemen binnen 24 uur contact op voor de afhaaltijd.
+                    </p>
+                  </div>
+                </div>
+              ) : (
+                <div className="bg-white rounded-2xl p-8 shadow-soft mb-8">
+                  <h2 className="text-xl font-bold text-stone-900 mb-4">Online betaling</h2>
+                  <p className="text-stone-700">
+                    Controleer uw email voor de betalingslink en orderbevestiging.
+                  </p>
+                </div>
+              )}
+
+              <Link
                 to="/shop"
                 className="bg-gradient-to-r from-primary-900 to-primary-800 text-white px-8 py-4 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center"
               >
@@ -345,6 +379,71 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                         </div>
                       </label>
                     </div>
+
+                    {/* Betalingsopties voor Afhalen */}
+                    {formData.verzendoptie === 'afhalen' && (
+                      <div className="mt-6 space-y-4 pt-6 border-t border-stone-200">
+                        <h3 className="text-lg font-medium text-stone-900">Betaalmethode</h3>
+
+                        <label className={`flex items-start p-4 border-2 rounded-xl cursor-pointer transition-all ${
+                          paymentMethod === 'bij_afhalen' ? 'border-primary-900 bg-primary-50' : 'border-stone-200 hover:border-primary-300'
+                        }`}>
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            value="bij_afhalen"
+                            checked={paymentMethod === 'bij_afhalen'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            className="mt-1 mr-4"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-center">
+                              <Wallet className="w-5 h-5 text-primary-900 mr-2" />
+                              <span className="font-semibold text-stone-900">Betalen bij afhalen</span>
+                            </div>
+                            <p className="text-sm text-stone-600 mt-1">
+                              Contant of Pin - Betaal bij het ophalen van uw bestelling
+                            </p>
+                          </div>
+                        </label>
+
+                        <label className={`flex items-start p-4 border-2 rounded-xl cursor-not-allowed opacity-60 ${
+                          paymentMethod === 'online' ? 'border-primary-900 bg-primary-50' : 'border-stone-200'
+                        }`}>
+                          <input
+                            type="radio"
+                            name="payment_method"
+                            value="online"
+                            checked={paymentMethod === 'online'}
+                            onChange={(e) => setPaymentMethod(e.target.value)}
+                            disabled
+                            className="mt-1 mr-4"
+                          />
+                          <div className="flex-1">
+                            <div className="flex items-center">
+                              <CreditCard className="w-5 h-5 text-stone-400 mr-2" />
+                              <span className="font-semibold text-stone-900">Online betalen</span>
+                            </div>
+                            <p className="text-sm text-stone-600 mt-1">
+                              iDEAL, Creditcard - Betaal nu online
+                            </p>
+                            <span className="inline-block mt-2 px-3 py-1 bg-stone-100 text-stone-600 text-xs rounded-full">
+                              Binnenkort beschikbaar
+                            </span>
+                          </div>
+                        </label>
+                      </div>
+                    )}
+
+                    {/* Melding voor bezorging */}
+                    {formData.verzendoptie === 'bezorgen' && (
+                      <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                        <p className="text-sm text-blue-900">
+                          <strong>Let op:</strong> Voor bezorging is online betaling vereist (komt binnenkort beschikbaar).
+                          Kies nu voor afhalen of neem contact op: <a href="tel:0653747696" className="underline font-semibold">0653747696</a>
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {/* Adresgegevens (alleen bij bezorgen) */}

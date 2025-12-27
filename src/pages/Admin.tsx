@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck } from 'lucide-react';
+import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck, Wallet, CreditCard } from 'lucide-react';
 import { db, ContactSubmission, Order } from '../lib/supabase';
 
 const Admin: React.FC = () => {
@@ -384,6 +384,24 @@ const Admin: React.FC = () => {
                                 <>
                                   <Truck className="w-4 h-4" />
                                   <span>Bezorgen: {order.delivery_address}, {order.delivery_postal_code} {order.delivery_city}</span>
+                                </>
+                              )}
+                            </div>
+                            <div className="flex items-center gap-2 text-neutral-600">
+                              {order.payment_method === 'bij_afhalen' ? (
+                                <>
+                                  <Wallet className="w-4 h-4" />
+                                  <span>Betalen bij afhalen (Contant/Pin)</span>
+                                </>
+                              ) : order.payment_method === 'online' ? (
+                                <>
+                                  <CreditCard className="w-4 h-4" />
+                                  <span>Online betaling (iDEAL/Creditcard)</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Wallet className="w-4 h-4" />
+                                  <span>Betaalmethode niet opgegeven</span>
                                 </>
                               )}
                             </div>

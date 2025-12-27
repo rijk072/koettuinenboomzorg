@@ -57,6 +57,7 @@ export interface Order {
   delivery_address?: string
   delivery_postal_code?: string
   delivery_city?: string
+  payment_method?: 'bij_afhalen' | 'online'
   subtotal: number
   shipping_cost: number
   total_amount: number
