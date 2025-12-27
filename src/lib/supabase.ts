@@ -62,7 +62,7 @@ export interface Order {
   subtotal: number
   shipping_cost: number
   total_amount: number
-  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled'
+  status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'archived'
   payment_status: 'pending' | 'paid' | 'failed' | 'refunded'
   notes?: string
   created_at: string
@@ -285,6 +285,31 @@ export const db = {
 
     if (error) throw error
     return data as ContactSubmission
+  },
+
+  async deleteContactSubmission(id: string) {
+    const { error } = await supabase
+      .from('contact_submissions')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
+  },
+
+  async deleteOrder(id: string) {
+    const { error: itemsError } = await supabase
+      .from('order_items')
+      .delete()
+      .eq('order_id', id)
+
+    if (itemsError) throw itemsError
+
+    const { error } = await supabase
+      .from('orders')
+      .delete()
+      .eq('id', id)
+
+    if (error) throw error
   },
 
   // Reviews

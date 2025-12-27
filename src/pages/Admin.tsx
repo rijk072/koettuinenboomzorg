@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck, Wallet, CreditCard } from 'lucide-react';
+import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck, Wallet, CreditCard, Trash2 } from 'lucide-react';
 import { db, ContactSubmission, Order } from '../lib/supabase';
 
 const Admin: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'contact' | 'orders'>('contact');
+  const [activeTab, setActiveTab] = useState<'contact' | 'orders' | 'archive'>('contact');
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'new' | 'in_progress' | 'completed'>('all');
   const [orderFilter, setOrderFilter] = useState<'all' | 'pending' | 'confirmed' | 'processing' | 'delivered'>('all');
+  const [archiveFilter, setArchiveFilter] = useState<'all' | 'contact' | 'orders'>('all');
 
   useEffect(() => {
     loadData();
@@ -19,18 +20,43 @@ const Admin: React.FC = () => {
     try {
       setLoading(true);
       setError(null);
-      if (activeTab === 'contact') {
-        const data = await db.getContactSubmissions();
-        setSubmissions(data);
-      } else if (activeTab === 'orders') {
-        const data = await db.getOrders();
-        setOrders(data);
-      }
+      const [submissionsData, ordersData] = await Promise.all([
+        db.getContactSubmissions(),
+        db.getOrders()
+      ]);
+      setSubmissions(submissionsData);
+      setOrders(ordersData);
     } catch (err: any) {
       console.error('Error loading data:', err);
       setError(err.message || 'Er is een fout opgetreden bij het laden van de gegevens.');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const deleteContactSubmission = async (id: string) => {
+    if (!confirm('Weet je zeker dat je dit contactformulier permanent wilt verwijderen?')) {
+      return;
+    }
+    try {
+      await db.deleteContactSubmission(id);
+      setSubmissions(prev => prev.filter(sub => sub.id !== id));
+    } catch (err: any) {
+      console.error('Error deleting contact submission:', err);
+      alert('Er is een fout opgetreden bij het verwijderen.');
+    }
+  };
+
+  const deleteOrder = async (id: string) => {
+    if (!confirm('Weet je zeker dat je deze bestelling permanent wilt verwijderen?')) {
+      return;
+    }
+    try {
+      await db.deleteOrder(id);
+      setOrders(prev => prev.filter(order => order.id !== id));
+    } catch (err: any) {
+      console.error('Error deleting order:', err);
+      alert('Er is een fout opgetreden bij het verwijderen.');
     }
   };
 
@@ -86,6 +112,7 @@ const Admin: React.FC = () => {
       case 'shipped': return 'bg-indigo-100 text-indigo-800';
       case 'delivered': return 'bg-green-100 text-green-800';
       case 'cancelled': return 'bg-red-100 text-red-800';
+      case 'archived': return 'bg-gray-100 text-gray-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   };
@@ -98,17 +125,30 @@ const Admin: React.FC = () => {
       case 'shipped': return 'Verzonden';
       case 'delivered': return 'Afgerond';
       case 'cancelled': return 'Geannuleerd';
+      case 'archived': return 'Gearchiveerd';
       default: return status;
     }
   };
 
+  const activeSubmissions = submissions.filter(sub => sub.status !== 'archived');
+  const archivedSubmissions = submissions.filter(sub => sub.status === 'archived');
+
+  const activeOrders = orders.filter(order => order.status !== 'archived');
+  const archivedOrders = orders.filter(order => order.status === 'archived');
+
   const filteredSubmissions = filter === 'all'
-    ? submissions
-    : submissions.filter(sub => sub.status === filter);
+    ? activeSubmissions
+    : activeSubmissions.filter(sub => sub.status === filter);
 
   const filteredOrders = orderFilter === 'all'
-    ? orders
-    : orders.filter(order => order.status === orderFilter);
+    ? activeOrders
+    : activeOrders.filter(order => order.status === orderFilter);
+
+  const filteredArchive = archiveFilter === 'all'
+    ? [...archivedSubmissions, ...archivedOrders]
+    : archiveFilter === 'contact'
+    ? archivedSubmissions
+    : archivedOrders;
 
   if (loading) {
     return (
@@ -164,7 +204,7 @@ const Admin: React.FC = () => {
               <Mail className="w-5 h-5" />
               <span>Contactformulieren</span>
               <span className="px-2 py-0.5 bg-primary-100 text-primary-900 rounded-full text-xs font-semibold">
-                {submissions.length}
+                {activeSubmissions.length}
               </span>
             </div>
           </button>
@@ -180,7 +220,23 @@ const Admin: React.FC = () => {
               <ShoppingCart className="w-5 h-5" />
               <span>Bestellingen</span>
               <span className="px-2 py-0.5 bg-primary-100 text-primary-900 rounded-full text-xs font-semibold">
-                {orders.length}
+                {activeOrders.length}
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab('archive')}
+            className={`px-6 py-3 font-medium transition-colors relative ${
+              activeTab === 'archive'
+                ? 'text-primary-900 border-b-2 border-primary-900'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Archive className="w-5 h-5" />
+              <span>Archief</span>
+              <span className="px-2 py-0.5 bg-primary-100 text-primary-900 rounded-full text-xs font-semibold">
+                {archivedSubmissions.length + archivedOrders.length}
               </span>
             </div>
           </button>
@@ -198,7 +254,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Alle ({submissions.length})
+                Alle ({activeSubmissions.length})
               </button>
               <button
                 onClick={() => setFilter('new')}
@@ -208,7 +264,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Nieuw ({submissions.filter(s => s.status === 'new').length})
+                Nieuw ({activeSubmissions.filter(s => s.status === 'new').length})
               </button>
               <button
                 onClick={() => setFilter('in_progress')}
@@ -218,7 +274,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                In behandeling ({submissions.filter(s => s.status === 'in_progress').length})
+                In behandeling ({activeSubmissions.filter(s => s.status === 'in_progress').length})
               </button>
               <button
                 onClick={() => setFilter('completed')}
@@ -228,7 +284,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Afgerond ({submissions.filter(s => s.status === 'completed').length})
+                Afgerond ({activeSubmissions.filter(s => s.status === 'completed').length})
               </button>
             </div>
 
@@ -360,7 +416,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Alle ({orders.length})
+                Alle ({activeOrders.length})
               </button>
               <button
                 onClick={() => setOrderFilter('pending')}
@@ -370,7 +426,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Nieuw ({orders.filter(o => o.status === 'pending').length})
+                Nieuw ({activeOrders.filter(o => o.status === 'pending').length})
               </button>
               <button
                 onClick={() => setOrderFilter('confirmed')}
@@ -380,7 +436,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Bevestigd ({orders.filter(o => o.status === 'confirmed').length})
+                Bevestigd ({activeOrders.filter(o => o.status === 'confirmed').length})
               </button>
               <button
                 onClick={() => setOrderFilter('processing')}
@@ -390,7 +446,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                In behandeling ({orders.filter(o => o.status === 'processing').length})
+                In behandeling ({activeOrders.filter(o => o.status === 'processing').length})
               </button>
               <button
                 onClick={() => setOrderFilter('delivered')}
@@ -400,7 +456,7 @@ const Admin: React.FC = () => {
                     : 'bg-white text-neutral-700 hover:bg-neutral-100'
                 }`}
               >
-                Afgerond ({orders.filter(o => o.status === 'delivered').length})
+                Afgerond ({activeOrders.filter(o => o.status === 'delivered').length})
               </button>
             </div>
 
@@ -558,6 +614,17 @@ const Admin: React.FC = () => {
                         >
                           Afgerond
                         </button>
+                        <button
+                          onClick={() => updateOrderStatus(order.id, 'archived')}
+                          disabled={order.status === 'archived'}
+                          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                            order.status === 'archived'
+                              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                              : 'bg-neutral-50 text-neutral-700 hover:bg-neutral-100'
+                          }`}
+                        >
+                          Archiveren
+                        </button>
                       </div>
                     </div>
 
@@ -569,6 +636,187 @@ const Admin: React.FC = () => {
                     )}
                   </div>
                 ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {/* Archive Tab */}
+        {activeTab === 'archive' && (
+          <>
+            <div className="mb-6 flex flex-wrap gap-3">
+              <button
+                onClick={() => setArchiveFilter('all')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  archiveFilter === 'all'
+                    ? 'bg-primary-900 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Alle ({archivedSubmissions.length + archivedOrders.length})
+              </button>
+              <button
+                onClick={() => setArchiveFilter('contact')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  archiveFilter === 'contact'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Contactformulieren ({archivedSubmissions.length})
+              </button>
+              <button
+                onClick={() => setArchiveFilter('orders')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  archiveFilter === 'orders'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Bestellingen ({archivedOrders.length})
+              </button>
+            </div>
+
+            {filteredArchive.length === 0 ? (
+              <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+                <Archive className="w-16 h-16 text-neutral-300 mx-auto mb-4" />
+                <p className="text-neutral-600 text-lg">Geen gearchiveerde items</p>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {filteredArchive.map((item) => {
+                  const isOrder = 'order_number' in item;
+
+                  if (isOrder) {
+                    const order = item as Order;
+                    return (
+                      <div
+                        key={order.id}
+                        className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6"
+                      >
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                          <div className="flex-1">
+                            <div className="flex items-start gap-3 mb-3">
+                              <h3 className="text-xl font-semibold text-neutral-900">
+                                {order.order_number}
+                              </h3>
+                              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getOrderStatusColor(order.status)}`}>
+                                {getOrderStatusText(order.status)}
+                              </span>
+                            </div>
+
+                            <div className="grid md:grid-cols-2 gap-4 text-sm">
+                              <div className="space-y-2 text-neutral-600">
+                                <div className="flex items-center gap-2">
+                                  <Mail className="w-4 h-4" />
+                                  <a href={`mailto:${order.customer_email}`} className="hover:text-primary-900">
+                                    {order.customer_email}
+                                  </a>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <Calendar className="w-4 h-4" />
+                                  <span>
+                                    {new Date(order.created_at).toLocaleDateString('nl-NL', {
+                                      year: 'numeric',
+                                      month: 'long',
+                                      day: 'numeric',
+                                      hour: '2-digit',
+                                      minute: '2-digit'
+                                    })}
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                  <Euro className="w-4 h-4 text-neutral-600" />
+                                  <span className="text-lg font-bold text-primary-900">
+                                    €{Number(order.total_amount).toFixed(2)}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => deleteOrder(order.id)}
+                            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-red-50 text-red-700 hover:bg-red-100 flex items-center gap-2"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                            Verwijderen
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  } else {
+                    const submission = item as ContactSubmission;
+                    return (
+                      <div
+                        key={submission.id}
+                        className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6"
+                      >
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-4">
+                          <div className="flex-1">
+                            <div className="flex items-start gap-3 mb-3">
+                              <h3 className="text-xl font-semibold text-neutral-900">
+                                {submission.name}
+                              </h3>
+                              <span className={`px-3 py-1 rounded-full text-xs font-medium ${getStatusColor(submission.status)}`}>
+                                {getStatusText(submission.status)}
+                              </span>
+                            </div>
+
+                            <div className="space-y-2 text-sm text-neutral-600">
+                              <div className="flex items-center gap-2">
+                                <Mail className="w-4 h-4" />
+                                <a href={`mailto:${submission.email}`} className="hover:text-primary-900">
+                                  {submission.email}
+                                </a>
+                              </div>
+                              {submission.phone && (
+                                <div className="flex items-center gap-2">
+                                  <Phone className="w-4 h-4" />
+                                  <a href={`tel:${submission.phone}`} className="hover:text-primary-900">
+                                    {submission.phone}
+                                  </a>
+                                </div>
+                              )}
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-4 h-4" />
+                                <span>
+                                  {new Date(submission.created_at).toLocaleDateString('nl-NL', {
+                                    year: 'numeric',
+                                    month: 'long',
+                                    day: 'numeric',
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                  })}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => deleteContactSubmission(submission.id)}
+                            className="px-4 py-2 rounded-lg text-sm font-medium transition-colors bg-red-50 text-red-700 hover:bg-red-100 flex items-center gap-2"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                            Verwijderen
+                          </button>
+                        </div>
+
+                        <div className="border-t border-neutral-200 pt-4 mt-4">
+                          <p className="text-sm font-semibold text-neutral-700 mb-2">
+                            Onderwerp: {submission.subject}
+                          </p>
+                          <p className="text-neutral-700 whitespace-pre-wrap">
+                            {submission.message}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
               </div>
             )}
           </>
