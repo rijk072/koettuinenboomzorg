@@ -63,13 +63,46 @@ const AlgemeneVoorwaarden = () => {
                       <div>
                         <h3 className="text-xl font-semibold text-stone-900 mb-4">3. Gegevensbescherming</h3>
                         <p className="text-stone-700 leading-relaxed">
-                          Uw gegevens worden veilig opgeslagen en nooit gedeeld met derden zonder uw toestemming. 
+                          Uw gegevens worden veilig opgeslagen en nooit gedeeld met derden zonder uw toestemming.
                           Wij nemen passende technische en organisatorische maatregelen om uw privacy te beschermen.
                         </p>
                       </div>
 
                       <div>
-                        <h3 className="text-xl font-semibold text-stone-900 mb-4">4. Uw Rechten</h3>
+                        <h3 className="text-xl font-semibold text-stone-900 mb-4">4. Cookies & Tracking</h3>
+                        <p className="text-stone-700 leading-relaxed mb-3">
+                          Onze website maakt gebruik van cookies om de gebruikerservaring te verbeteren en om inzicht
+                          te krijgen in het gebruik van onze website.
+                        </p>
+                        <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 mb-3">
+                          <h4 className="font-semibold text-stone-900 mb-2">Google Analytics</h4>
+                          <p className="text-stone-700 text-sm leading-relaxed mb-2">
+                            Wij gebruiken Google Analytics om te analyseren hoe bezoekers onze website gebruiken.
+                            Deze informatie helpt ons om onze website en diensten te verbeteren.
+                          </p>
+                          <ul className="space-y-1 text-stone-700 text-sm">
+                            <li>• Google Analytics verzamelt geanonimiseerde gegevens over uw websitebezoek</li>
+                            <li>• IP-adressen worden geanonimiseerd opgeslagen</li>
+                            <li>• Gegevens worden gebruikt voor statistische doeleinden</li>
+                            <li>• U kunt cookies weigeren via de cookie banner onderaan de website</li>
+                            <li>• Google is gecertificeerd onder het EU-US Data Privacy Framework</li>
+                          </ul>
+                        </div>
+                        <p className="text-stone-700 text-sm leading-relaxed">
+                          Voor meer informatie over hoe Google omgaat met uw gegevens, zie het{' '}
+                          <a
+                            href="https://policies.google.com/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-primary-900 hover:text-primary-800 underline"
+                          >
+                            privacybeleid van Google
+                          </a>.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl font-semibold text-stone-900 mb-4">5. Uw Rechten</h3>
                         <ul className="space-y-2 text-stone-700">
                           <li>• Recht op inzage van uw gegevens</li>
                           <li>• Recht op correctie van onjuiste gegevens</li>
@@ -79,7 +112,7 @@ const AlgemeneVoorwaarden = () => {
                       </div>
 
                       <div>
-                        <h3 className="text-xl font-semibold text-stone-900 mb-4">5. Contact</h3>
+                        <h3 className="text-xl font-semibold text-stone-900 mb-4">6. Contact</h3>
                         <p className="text-stone-700 leading-relaxed">
                           Voor vragen over uw privacy of het uitoefenen van uw rechten kunt u contact opnemen:
                         </p>

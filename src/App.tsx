@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Phone, ArrowRight, ShoppingBag, ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Product } from './lib/supabase';
+import CookieConsent from 'react-cookie-consent';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -163,6 +164,43 @@ function App() {
           onRemoveItem={removeFromCart}
           onAddBestSeller={addToCart}
         />
+
+        <CookieConsent
+          location="bottom"
+          buttonText="Accepteren"
+          declineButtonText="Weigeren"
+          enableDeclineButton
+          cookieName="koet-cookie-consent"
+          style={{
+            background: "#2B373B",
+            padding: "20px",
+            alignItems: "center"
+          }}
+          buttonStyle={{
+            background: "#4E9525",
+            color: "#fff",
+            fontSize: "14px",
+            borderRadius: "8px",
+            padding: "10px 24px",
+            fontWeight: "600"
+          }}
+          declineButtonStyle={{
+            background: "transparent",
+            color: "#fff",
+            fontSize: "14px",
+            borderRadius: "8px",
+            padding: "10px 24px",
+            border: "1px solid #fff"
+          }}
+          expires={365}
+        >
+          <span style={{ fontSize: "14px" }}>
+            Wij gebruiken cookies voor een optimale website ervaring en om ons verkeer te analyseren met Google Analytics.{' '}
+            <Link to="/privacy" style={{ color: "#4E9525", textDecoration: "underline" }}>
+              Meer info
+            </Link>
+          </span>
+        </CookieConsent>
       </div>
     </Router>
   );
