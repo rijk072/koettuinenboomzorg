@@ -158,23 +158,62 @@ export const db = {
   },
 
   // Orders
-  async createOrder(orderData: Omit<Order, 'id' | 'order_number' | 'created_at' | 'updated_at'>) {
+  generateOrderNumber(): string {
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = String(now.getMonth() + 1).padStart(2, '0')
+    const day = String(now.getDate()).padStart(2, '0')
+    const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+    return `ORD-${year}${month}${day}-${random}`
+  },
+
+  async createOrder(orderData: Omit<Order, 'id' | 'created_at' | 'updated_at'>) {
+    console.log('Creating order with data:', orderData)
+
     const { data, error } = await supabase
       .from('orders')
       .insert(orderData)
       .select()
       .single()
-    
+
+    console.log('Order created:', data)
+    console.log('Order error:', error)
+
     if (error) throw error
     return data as Order
   },
 
   async createOrderItems(orderItems: Omit<OrderItem, 'id' | 'created_at'>[]) {
+    console.log('Creating order items:', orderItems)
+
     const { data, error } = await supabase
       .from('order_items')
       .insert(orderItems)
       .select()
-    
+
+    console.log('Order items created:', data)
+    console.log('Order items error:', error)
+
+    if (error) throw error
+    return data as OrderItem[]
+  },
+
+  async getOrders() {
+    const { data, error } = await supabase
+      .from('orders')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data as Order[]
+  },
+
+  async getOrderItems(orderId: string) {
+    const { data, error } = await supabase
+      .from('order_items')
+      .select('*')
+      .eq('order_id', orderId)
+
     if (error) throw error
     return data as OrderItem[]
   },
