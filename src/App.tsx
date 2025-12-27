@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Phone, ArrowRight, ShoppingBag, ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Product } from './lib/supabase';
 import CookieConsent from 'react-cookie-consent';
-import ReactGA from 'react-ga4';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -32,21 +31,11 @@ interface CartItem {
   weight?: string;
 }
 
-function AppContent() {
-  const location = useLocation();
+function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
-  useEffect(() => {
-    ReactGA.send({ hitType: 'pageview', page: location.pathname + location.search });
-  }, [location]);
-
   const addToCart = (product: Product) => {
-    ReactGA.event({
-      category: 'Shop',
-      action: 'Add to Cart',
-      label: product.name
-    });
     setCartItems(prev => {
       const existingItem = prev.find(item => item.id === parseInt(product.id));
       if (existingItem) {
@@ -83,17 +72,13 @@ function AppContent() {
 
   const removeFromCart = (id: number) => {
     setCartItems(prev => prev.filter(item => item.id !== id));
-    ReactGA.event({
-      category: 'Shop',
-      action: 'Remove from Cart',
-      label: `Item ID: ${id}`
-    });
   };
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <Router>
+      <div className="min-h-screen bg-neutral-50">
         <ScrollToTop />
         <Navigation totalItems={totalItems} onCartClick={() => setIsCartOpen(true)} />
         
@@ -217,13 +202,6 @@ function AppContent() {
           </span>
         </CookieConsent>
       </div>
-  );
-}
-
-function App() {
-  return (
-    <Router>
-      <AppContent />
     </Router>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
-import ReactGA from 'react-ga4';
 import AnimationObserver from '../components/AnimationObserver';
 import { db } from '../lib/supabase';
 
@@ -28,7 +27,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
@@ -40,12 +39,6 @@ const Contact = () => {
         phone: formData.telefoon,
         subject: formData.onderwerp,
         message: formData.bericht
-      });
-
-      ReactGA.event({
-        category: 'Contact',
-        action: 'Form Submit',
-        label: formData.onderwerp
       });
 
       setSubmitStatus('success');
@@ -247,7 +240,6 @@ const Contact = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
                     href="tel:0653747696"
-                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Phone Click', label: 'Zakelijke levering' })}
                     className="flex items-center justify-center bg-primary-900 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-800 transition-all"
                   >
                     <Phone className="w-5 h-5 mr-2" />
@@ -255,7 +247,6 @@ const Contact = () => {
                   </a>
                   <a
                     href="mailto:frans@koet.net?subject=Zakelijke levering ECOstyle"
-                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Email Click', label: 'Zakelijke levering' })}
                     className="flex items-center justify-center border-2 border-primary-900 text-primary-900 px-6 py-3 rounded-lg font-semibold hover:bg-primary-50 transition-all"
                   >
                     <Mail className="w-5 h-5 mr-2" />
@@ -279,11 +270,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-heading font-bold text-stone-900 mb-2">Telefoon</h3>
-                      <a
-                        href="tel:0653747696"
-                        onClick={() => ReactGA.event({ category: 'Contact', action: 'Phone Click', label: 'Direct contact' })}
-                        className="text-primary-900 hover:text-primary-800 font-heading font-bold text-lg"
-                      >
+                      <a href="tel:0653747696" className="text-primary-900 hover:text-primary-800 font-heading font-bold text-lg">
                         0653747696
                       </a>
                       <p className="text-stone-600 text-sm mt-1">Ma-Vr 08:00-17:00</p>
@@ -296,11 +283,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="font-heading font-bold text-stone-900 mb-2">E-mail</h3>
-                      <a
-                        href="mailto:frans@koet.net"
-                        onClick={() => ReactGA.event({ category: 'Contact', action: 'Email Click', label: 'Direct contact' })}
-                        className="text-primary-900 hover:text-primary-800 font-heading font-bold text-lg"
-                      >
+                      <a href="mailto:frans@koet.net" className="text-primary-900 hover:text-primary-800 font-heading font-bold text-lg">
                         frans@koet.net
                       </a>
                       <p className="text-stone-600 text-sm mt-1">Reactie binnen 24 uur</p>
@@ -322,17 +305,15 @@ const Contact = () => {
 
                 {/* Quick Contact Buttons */}
                 <div className="space-y-4">
-                  <a
+                  <a 
                     href="tel:0653747696"
-                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Phone Click', label: 'Quick contact button' })}
                     className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-4 rounded-xl font-semibold text-center hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 block"
                   >
                     <Phone className="w-5 h-5 inline mr-2" />
                     Bel direct: 0653747696
                   </a>
-                  <a
+                  <a 
                     href="mailto:frans@koet.net"
-                    onClick={() => ReactGA.event({ category: 'Contact', action: 'Email Click', label: 'Quick contact button' })}
                     className="w-full border-2 border-primary-900 text-primary-900 py-4 rounded-xl font-semibold text-center hover:bg-primary-900 hover:text-white transition-all duration-300 transform hover:scale-105 block"
                   >
                     <Mail className="w-5 h-5 inline mr-2" />
