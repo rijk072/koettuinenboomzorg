@@ -184,7 +184,22 @@
     opacity: 1;
     transform: translateX(0);
   }
-  
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .hover-lift {
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }

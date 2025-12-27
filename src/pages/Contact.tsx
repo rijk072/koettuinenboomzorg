@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Send, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, Clock, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { db } from '../lib/supabase';
 
@@ -202,25 +202,72 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white px-8 py-4 rounded-xl font-heading font-bold text-lg transition-all duration-300 hover:from-primary-800 hover:to-primary-700 transform hover:scale-105 inline-flex items-center justify-center"
+                    className={`w-full px-8 py-4 rounded-xl font-heading font-bold text-lg transition-all duration-300 inline-flex items-center justify-center ${
+                      isSubmitting
+                        ? 'bg-stone-400 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-primary-900 to-primary-800 text-white hover:from-primary-800 hover:to-primary-700 transform hover:scale-105'
+                    }`}
                   >
-                    <Send className="w-6 h-6 mr-3" />
-                    {isSubmitting ? 'Versturen...' : 'Verstuur bericht'}
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-6 h-6 mr-3 animate-spin" />
+                        Verzenden...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-6 h-6 mr-3" />
+                        Verstuur bericht
+                      </>
+                    )}
                   </button>
                   
                   {/* Status Messages */}
                   {submitStatus === 'success' && (
-                    <div className="text-center text-sm text-primary-900 font-heading font-bold bg-primary-50 p-4 rounded-xl">
-                      <p>✓ Bericht succesvol verzonden! We reageren binnen 24 uur.</p>
+                    <div className="animate-fade-in bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 p-6 rounded-xl">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                            <CheckCircle className="w-7 h-7 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-bold text-green-900 mb-1">
+                            Bedankt voor uw bericht!
+                          </h4>
+                          <p className="text-green-700">
+                            Wij nemen binnen 24 uur contact met u op.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   )}
-                  
+
                   {submitStatus === 'error' && (
-                    <div className="text-center text-sm text-red-700 font-heading font-bold bg-red-50 p-4 rounded-xl">
-                      <p>{errorMessage}</p>
+                    <div className="animate-fade-in bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 p-6 rounded-xl">
+                      <div className="flex items-start space-x-4">
+                        <div className="flex-shrink-0">
+                          <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+                            <AlertCircle className="w-7 h-7 text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h4 className="text-lg font-bold text-red-900 mb-1">
+                            Er is iets misgegaan
+                          </h4>
+                          <p className="text-red-700 mb-4">
+                            {errorMessage}
+                          </p>
+                          <button
+                            onClick={() => setSubmitStatus('idle')}
+                            className="bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition-all duration-300 inline-flex items-center"
+                          >
+                            Probeer opnieuw
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   )}
-                  
+
                   {submitStatus === 'idle' && (
                     <div className="text-center text-sm text-stone-600 font-heading font-bold">
                       <p>We reageren binnen 24 uur op uw bericht</p>
