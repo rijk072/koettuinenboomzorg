@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingCart, Plus, Minus, Star, Shield, Truck, Leaf, CheckCircle, Heart, Share2 } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
+import Toast from '../components/Toast';
 import { Product } from '../lib/supabase';
 import { getProductById, ProductData, allProducts } from '../data/products';
 
@@ -16,6 +17,7 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
   const [relatedProducts, setRelatedProducts] = useState<ProductData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showToast, setShowToast] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -69,6 +71,7 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
     for (let i = 0; i < quantity; i++) {
       onAddToCart(product);
     }
+    setShowToast(true);
   };
 
   const totalPrice = product.price * quantity;
@@ -196,9 +199,15 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
                 {/* Quantity & Add to Cart */}
                 {product.in_stock && (
                   <div className="space-y-6">
-                    {product.price !== 0 && (
-                      <div className="flex items-center space-x-4">
-                        <span className="text-stone-700 font-medium">Aantal:</span>
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-stone-700 font-medium">Aantal zakken:</span>
+                        {product.price === 0 && (
+                          <span className="text-sm text-stone-500 italic">Prijs op aanvraag</span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center space-x-3">
                         <div className="flex items-center bg-white rounded-xl border border-stone-200 shadow-soft">
                           <button
                             onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -216,25 +225,42 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
                             <Plus className="w-5 h-5" />
                           </button>
                         </div>
-                        <div className="text-lg font-semibold text-stone-900">
-                          Totaal: €{totalPrice.toFixed(2)}
-                        </div>
+                        {product.price !== 0 && (
+                          <div className="text-lg font-semibold text-stone-900">
+                            Totaal: €{totalPrice.toFixed(2)}
+                          </div>
+                        )}
                       </div>
-                    )}
+
+                      {product.price === 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          <span className="text-sm text-stone-600">Snel kiezen:</span>
+                          {[10, 20, 50, 100].map((num) => (
+                            <button
+                              key={num}
+                              onClick={() => setQuantity(num)}
+                              className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                                quantity === num
+                                  ? 'bg-primary-900 text-white shadow-md'
+                                  : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
+                              }`}
+                            >
+                              {num}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
 
                     <div className="flex space-x-4">
                       <button
                         onClick={() => {
-                          if (product.price === 0) {
-                            window.location.href = '/contact';
-                          } else {
-                            handleAddToCart();
-                          }
+                          handleAddToCart();
                         }}
                         className="flex-1 bg-gradient-to-r from-primary-900 to-primary-800 text-white py-4 px-8 rounded-xl font-semibold text-lg hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
                       >
                         <ShoppingCart className="w-6 h-6 mr-3" />
-                        {product.price === 0 ? 'Offerte aanvragen' : 'In Winkelwagen'}
+                        {product.price === 0 ? 'Bestel nu' : 'In Winkelwagen'}
                       </button>
                       <button className="w-14 h-14 bg-white border-2 border-stone-200 rounded-xl flex items-center justify-center hover:border-primary-900 hover:text-primary-900 transition-all duration-300">
                         <Heart className="w-6 h-6" />
@@ -444,6 +470,13 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
           </div>
         </div>
       </section>
+
+      {showToast && (
+        <Toast
+          message={product.price === 0 ? `${quantity} zakken toegevoegd - U wordt gebeld voor prijzen` : "Product toegevoegd aan winkelwagen"}
+          onClose={() => setShowToast(false)}
+        />
+      )}
     </>
   );
 };

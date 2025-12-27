@@ -200,6 +200,21 @@
     }
   }
 
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+
+  @keyframes slide-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
   .hover-lift {
     transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }

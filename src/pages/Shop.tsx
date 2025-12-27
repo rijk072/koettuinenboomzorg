@@ -162,39 +162,21 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                             Handelsprijs op aanvraag
                           </div>
                           <div className="text-xs text-stone-500 mt-1">
-                            {'minOrder' in product && `Minimaal: ${product.minOrder}`}
+                            U wordt gebeld na bestelling
                           </div>
                         </div>
                       )}
                     </div>
 
                     {/* CTA Button */}
-                    {product.price > 0 ? (
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onAddToCart({
-                            ...product,
-                            in_stock: true,
-                            popular: false,
-                            created_at: new Date().toISOString(),
-                            updated_at: new Date().toISOString()
-                          } as Product);
-                        }}
-                        className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
-                      >
-                        <ShoppingCart className="w-5 h-5 mr-2" />
-                        In Winkelwagen
-                      </button>
-                    ) : (
-                      <Link
-                        to="/contact"
-                        className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
-                      >
-                        Offerte Aanvragen
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Link>
-                    )}
+                    <Link
+                      to={`/product/${product.id}`}
+                      className="w-full bg-gradient-to-r from-primary-900 to-primary-800 text-white py-3 rounded-xl font-semibold hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center justify-center"
+                    >
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      {product.price > 0 ? 'Bekijk Product' : 'Bestel nu'}
+                      <ArrowRight className="w-5 h-5 ml-2" />
+                    </Link>
                   </div>
                 </div>
               </AnimationObserver>
