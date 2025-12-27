@@ -27,19 +27,35 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
+    console.log('=== CONTACT FORM SUBMIT STARTED ===');
+    console.log('Form data:', {
+      naam: formData.naam,
+      email: formData.email,
+      telefoon: formData.telefoon,
+      onderwerp: formData.onderwerp,
+      bericht: formData.bericht
+    });
+
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setErrorMessage('');
 
     try {
-      await db.submitContactForm({
+      const submissionData = {
         name: formData.naam,
         email: formData.email,
         phone: formData.telefoon,
         subject: formData.onderwerp,
         message: formData.bericht
-      });
+      };
+
+      console.log('Sending to database:', submissionData);
+
+      const result = await db.submitContactForm(submissionData);
+
+      console.log('Database response:', result);
+      console.log('=== CONTACT FORM SUBMIT SUCCESS ===');
 
       setSubmitStatus('success');
       setFormData({
@@ -49,12 +65,52 @@ const Contact = () => {
         onderwerp: '',
         bericht: ''
       });
-    } catch (error) {
-      console.error('Error submitting contact form:', error);
+    } catch (error: any) {
+      console.error('=== CONTACT FORM SUBMIT ERROR ===');
+      console.error('Error details:', error);
+      console.error('Error message:', error.message);
+      console.error('Error code:', error.code);
+
       setSubmitStatus('error');
-      setErrorMessage('Er is een fout opgetreden bij het versturen van uw bericht. Probeer het opnieuw.');
+      setErrorMessage(
+        error.message || 'Er is een fout opgetreden bij het versturen van uw bericht. Probeer het opnieuw.'
+      );
     } finally {
       setIsSubmitting(false);
+      console.log('=== CONTACT FORM SUBMIT FINISHED ===');
+    }
+  };
+
+  const handleTestDatabase = async () => {
+    try {
+      console.log('=== DATABASE TEST STARTED ===');
+
+      const testData = {
+        name: 'Test User',
+        email: 'test@example.com',
+        phone: '0612345678',
+        subject: 'test',
+        message: 'Dit is een test bericht'
+      };
+
+      console.log('Test data:', testData);
+      console.log('Attempting to save to database...');
+
+      const result = await db.submitContactForm(testData);
+
+      console.log('✅ Database test SUCCESS!');
+      console.log('Saved data:', result);
+      console.log('=== DATABASE TEST COMPLETED ===');
+
+      alert('✅ Database test succesvol! Check de console voor details.');
+    } catch (err: any) {
+      console.error('=== DATABASE TEST FAILED ===');
+      console.error('Error:', err);
+      console.error('Error message:', err.message);
+      console.error('Error code:', err.code);
+      console.error('Full error object:', JSON.stringify(err, null, 2));
+
+      alert('❌ Database test mislukt: ' + (err.message || 'Onbekende fout'));
     }
   };
 
@@ -220,7 +276,16 @@ const Contact = () => {
                       </>
                     )}
                   </button>
-                  
+
+                  {/* Test Database Button */}
+                  <button
+                    type="button"
+                    onClick={handleTestDatabase}
+                    className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition-all duration-300 inline-flex items-center justify-center"
+                  >
+                    Test Database Connection
+                  </button>
+
                   {/* Status Messages */}
                   {submitStatus === 'success' && (
                     <div className="animate-fade-in bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 p-6 rounded-xl">
