@@ -181,16 +181,34 @@ export const db = {
 
   // Contact
   async submitContactForm(contactData: Omit<ContactSubmission, 'id' | 'status' | 'created_at' | 'updated_at'>) {
+    console.log('submitContactForm called with:', contactData);
+
+    const insertData = {
+      ...contactData,
+      status: 'new' as const
+    };
+
+    console.log('Inserting into Supabase:', insertData);
+
     const { data, error } = await supabase
       .from('contact_submissions')
-      .insert({
-        ...contactData,
-        status: 'new'
-      })
+      .insert(insertData)
       .select()
-      .single()
-    
-    if (error) throw error
+      .maybeSingle()
+
+    console.log('Supabase response - data:', data);
+    console.log('Supabase response - error:', error);
+
+    if (error) {
+      console.error('Supabase error details:', {
+        message: error.message,
+        code: error.code,
+        details: error.details,
+        hint: error.hint
+      });
+      throw error;
+    }
+
     return data as ContactSubmission
   },
 

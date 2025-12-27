@@ -84,6 +84,8 @@ const Contact = () => {
   const handleTestDatabase = async () => {
     try {
       console.log('=== DATABASE TEST STARTED ===');
+      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
+      console.log('Anon Key exists:', !!import.meta.env.VITE_SUPABASE_ANON_KEY);
 
       const testData = {
         name: 'Test User',
@@ -108,6 +110,8 @@ const Contact = () => {
       console.error('Error:', err);
       console.error('Error message:', err.message);
       console.error('Error code:', err.code);
+      console.error('Error hint:', err.hint);
+      console.error('Error details:', err.details);
       console.error('Full error object:', JSON.stringify(err, null, 2));
 
       alert('❌ Database test mislukt: ' + (err.message || 'Onbekende fout'));
