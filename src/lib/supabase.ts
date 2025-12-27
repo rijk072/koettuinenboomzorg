@@ -212,6 +212,28 @@ export const db = {
     return data as ContactSubmission
   },
 
+  async getContactSubmissions() {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .select('*')
+      .order('created_at', { ascending: false })
+
+    if (error) throw error
+    return data as ContactSubmission[]
+  },
+
+  async updateContactSubmissionStatus(id: string, status: ContactSubmission['status']) {
+    const { data, error } = await supabase
+      .from('contact_submissions')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .maybeSingle()
+
+    if (error) throw error
+    return data as ContactSubmission
+  },
+
   // Reviews
   async getReviews(featured?: boolean) {
     let query = supabase

@@ -81,43 +81,6 @@ const Contact = () => {
     }
   };
 
-  const handleTestDatabase = async () => {
-    try {
-      console.log('=== DATABASE TEST STARTED ===');
-      console.log('Supabase URL:', import.meta.env.VITE_SUPABASE_URL);
-      console.log('Anon Key exists:', !!import.meta.env.VITE_SUPABASE_ANON_KEY);
-
-      const testData = {
-        name: 'Test User',
-        email: 'test@example.com',
-        phone: '0612345678',
-        subject: 'test',
-        message: 'Dit is een test bericht'
-      };
-
-      console.log('Test data:', testData);
-      console.log('Attempting to save to database...');
-
-      const result = await db.submitContactForm(testData);
-
-      console.log('✅ Database test SUCCESS!');
-      console.log('Saved data:', result);
-      console.log('=== DATABASE TEST COMPLETED ===');
-
-      alert('✅ Database test succesvol! Check de console voor details.');
-    } catch (err: any) {
-      console.error('=== DATABASE TEST FAILED ===');
-      console.error('Error:', err);
-      console.error('Error message:', err.message);
-      console.error('Error code:', err.code);
-      console.error('Error hint:', err.hint);
-      console.error('Error details:', err.details);
-      console.error('Full error object:', JSON.stringify(err, null, 2));
-
-      alert('❌ Database test mislukt: ' + (err.message || 'Onbekende fout'));
-    }
-  };
-
   // Check if we came here for an offerte
   React.useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -279,15 +242,6 @@ const Contact = () => {
                         Verstuur bericht
                       </>
                     )}
-                  </button>
-
-                  {/* Test Database Button */}
-                  <button
-                    type="button"
-                    onClick={handleTestDatabase}
-                    className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg text-sm hover:bg-blue-600 transition-all duration-300 inline-flex items-center justify-center"
-                  >
-                    Test Database Connection
                   </button>
 
                   {/* Status Messages */}

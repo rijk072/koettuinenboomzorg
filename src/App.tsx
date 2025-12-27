@@ -21,6 +21,7 @@ const Checkout = lazy(() => import('./pages/Checkout'));
 const AlgemeneVoorwaarden = lazy(() => import('./pages/AlgemeneVoorwaarden'));
 const Contact = lazy(() => import('./pages/Contact'));
 const VoorHoveniers = lazy(() => import('./pages/VoorHoveniers'));
+const Admin = lazy(() => import('./pages/Admin'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 interface CartItem {
@@ -162,6 +163,7 @@ function App() {
               <Contact />
             </>
           } />
+          <Route path="/admin" element={<Admin />} />
           <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
