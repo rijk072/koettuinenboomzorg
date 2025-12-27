@@ -16,9 +16,10 @@ interface CartItem {
 
 interface CheckoutProps {
   cartItems: CartItem[];
+  onClearCart: () => void;
 }
 
-const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
+const Checkout: React.FC<CheckoutProps> = ({ cartItems, onClearCart }) => {
   const [formData, setFormData] = useState({
     naam: '',
     email: '',
@@ -103,6 +104,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
       // Success!
       setOrderNumber(generatedOrderNumber);
       setOrderComplete(true);
+      onClearCart();
       console.log('=== ORDER SUBMIT SUCCESS ===');
 
     } catch (err: any) {

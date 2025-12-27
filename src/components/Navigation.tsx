@@ -49,21 +49,21 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
       visible ? 'translate-y-0' : '-translate-y-full'
     } ${
       scrolled
-        ? 'bg-white/95 backdrop-blur-xl shadow-premium border-b border-white/50 text-stone-900' 
+        ? 'bg-white/95 backdrop-blur-xl shadow-premium border-b border-white/50 text-stone-900'
         : 'bg-transparent'
     }`}>
       <div className="container-premium">
-        <div className="flex items-center justify-between h-24">
+        <div className="flex items-center justify-between h-20 md:h-24">
           {/* Logo */}
-          <Link to="/" className="flex items-center group">
+          <Link to="/" className="flex items-center group flex-shrink-0">
             <div className="flex items-center transition-all duration-500">
               <img
                 src="/images/logo.jpeg"
                 alt="Koet Tuin & Boomzorg Logo"
-                className="h-14 w-auto transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
+                className="h-10 md:h-14 w-auto transition-all duration-500 group-hover:scale-105 drop-shadow-lg"
               />
-              <div className="ml-4 hidden sm:block">
-                <span className={`text-xl font-semibold drop-shadow-lg transition-all duration-500 group-hover:opacity-90 ${
+              <div className="ml-3 md:ml-4 hidden sm:block">
+                <span className={`text-base md:text-xl font-semibold drop-shadow-lg transition-all duration-500 group-hover:opacity-90 ${
                   scrolled ? 'text-stone-900' : 'text-white'
                 }`}>
                   Koet Tuin & Boomzorg
@@ -124,19 +124,19 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
           </div>
 
           {/* Mobile Cart and Menu Buttons */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center gap-1 flex-shrink-0">
             {/* Mobile Shopping Cart Icon */}
             <button
               onClick={onCartClick}
-              className={`relative p-3 rounded-xl transition-all duration-500 hover:scale-110 ${
+              className={`relative p-2 rounded-lg transition-all duration-500 ${
                 scrolled
                   ? 'text-stone-900 hover:bg-stone-100/80 backdrop-blur-sm'
                   : 'text-white hover:bg-white/20 backdrop-blur-sm'
               }`}
             >
-              <ShoppingBag className="w-6 h-6" />
+              <ShoppingBag className="w-5 h-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 bg-primary-900 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                <span className="absolute -top-0.5 -right-0.5 bg-primary-900 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center font-semibold">
                   {totalItems}
                 </span>
               )}
@@ -145,16 +145,16 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-3 rounded-xl transition-all duration-500 drop-shadow-lg hover:scale-110 ${
+              className={`p-2 rounded-lg transition-all duration-500 drop-shadow-lg ${
                 scrolled
                   ? 'text-stone-900 hover:bg-stone-100/80 backdrop-blur-sm'
                   : 'text-white hover:bg-white/20 backdrop-blur-sm'
               }`}
             >
               {mobileMenuOpen ? (
-                <X className="w-7 h-7" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="w-7 h-7" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>

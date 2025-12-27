@@ -85,6 +85,10 @@ function App() {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -131,7 +135,7 @@ function App() {
           } />
           <Route path="/shop" element={<Shop onAddToCart={addToCart} />} />
           <Route path="/product/:id" element={<ProductDetail onAddToCart={addToCart} />} />
-          <Route path="/checkout" element={<Checkout cartItems={cartItems} />} />
+          <Route path="/checkout" element={<Checkout cartItems={cartItems} onClearCart={clearCart} />} />
           <Route path="/algemene-voorwaarden" element={<AlgemeneVoorwaarden />} />
           <Route path="/privacy" element={<AlgemeneVoorwaarden />} />
           <Route path="/contact" element={
