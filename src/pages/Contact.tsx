@@ -9,7 +9,7 @@ const Contact = () => {
     naam: '',
     email: '',
     telefoon: '',
-    onderwerp: 'offerte',
+    onderwerp: '',
     bericht: ''
   });
 
@@ -46,7 +46,7 @@ const Contact = () => {
         naam: '',
         email: '',
         telefoon: '',
-        onderwerp: 'offerte',
+        onderwerp: '',
         bericht: ''
       });
     } catch (error) {
@@ -171,7 +171,7 @@ const Contact = () => {
                       required
                       className="w-full px-4 py-3 border border-stone-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all duration-300 outline-none bg-white cursor-pointer"
                     >
-                      <option value="">Selecteer een onderwerp</option>
+                      <option value="" disabled>Selecteer een onderwerp</option>
                       <option value="offerte">Offerte aanvragen</option>
                       <option value="tuinaanleg">Tuinaanleg</option>
                       <option value="onderhoud">Tuinonderhoud</option>
