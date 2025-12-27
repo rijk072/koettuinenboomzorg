@@ -123,30 +123,46 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`md:hidden p-3 rounded-xl transition-all duration-500 drop-shadow-lg hover:scale-110 ${
-              scrolled
-                ? 'text-stone-900 hover:bg-stone-100/80 backdrop-blur-sm' 
-                : 'text-white hover:bg-white/20 backdrop-blur-sm'
-            }`}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-7 h-7" />
-            ) : (
-              <Menu className="w-7 h-7" />
-            )}
-          </button>
+          {/* Mobile Cart and Menu Buttons */}
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Shopping Cart Icon */}
+            <button
+              onClick={onCartClick}
+              className={`relative p-3 rounded-xl transition-all duration-500 hover:scale-110 ${
+                scrolled
+                  ? 'text-stone-900 hover:bg-stone-100/80 backdrop-blur-sm'
+                  : 'text-white hover:bg-white/20 backdrop-blur-sm'
+              }`}
+            >
+              <ShoppingBag className="w-6 h-6" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 bg-primary-900 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-semibold">
+                  {totalItems}
+                </span>
+              )}
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className={`p-3 rounded-xl transition-all duration-500 drop-shadow-lg hover:scale-110 ${
+                scrolled
+                  ? 'text-stone-900 hover:bg-stone-100/80 backdrop-blur-sm'
+                  : 'text-white hover:bg-white/20 backdrop-blur-sm'
+              }`}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-7 h-7" />
+              ) : (
+                <Menu className="w-7 h-7" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className={`md:hidden border-t py-6 transition-all duration-500 backdrop-blur-xl ${
-            scrolled
-              ? 'border-stone-200 bg-white/95' 
-              : 'border-white/20 bg-white/10 backdrop-blur-xl'
-          }`}>
+          <div className="md:hidden border-t border-stone-200 py-6 transition-all duration-500 bg-white/98 backdrop-blur-xl shadow-lg">
             <div className="flex flex-col space-y-6">
               {[
                 { path: '/', label: 'HOME' },
@@ -157,15 +173,13 @@ const Navigation: React.FC<NavigationProps> = ({ totalItems = 0, onCartClick }) 
                 { path: '/shop', label: 'SHOP' },
                 { path: '/contact', label: 'CONTACT' }
               ].map((item) => (
-                <Link 
+                <Link
                   key={item.path}
-                  to={item.path} 
+                  to={item.path}
                   className={`font-bold text-base uppercase tracking-wider px-6 py-3 rounded-xl transition-all duration-500 hover:scale-105 ${
-                    isActive(item.path) 
+                    isActive(item.path)
                       ? 'text-primary-900 bg-primary-50'
-                      : scrolled
-                        ? 'text-stone-900 hover:text-primary-900 hover:bg-stone-50'
-                        : 'text-white/90 hover:text-white drop-shadow-md'
+                      : 'text-stone-900 hover:text-primary-900 hover:bg-stone-50'
                   }`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
