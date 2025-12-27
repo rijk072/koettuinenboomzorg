@@ -219,6 +219,18 @@ export const db = {
     return data as OrderItem[]
   },
 
+  async updateOrderStatus(id: string, status: Order['status']) {
+    const { data, error } = await supabase
+      .from('orders')
+      .update({ status })
+      .eq('id', id)
+      .select()
+      .maybeSingle()
+
+    if (error) throw error
+    return data as Order
+  },
+
   // Contact
   async submitContactForm(contactData: Omit<ContactSubmission, 'id' | 'status' | 'created_at' | 'updated_at'>) {
     console.log('submitContactForm called with:', contactData);

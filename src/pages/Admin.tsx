@@ -9,6 +9,7 @@ const Admin: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [filter, setFilter] = useState<'all' | 'new' | 'in_progress' | 'completed'>('all');
+  const [orderFilter, setOrderFilter] = useState<'all' | 'pending' | 'confirmed' | 'processing' | 'delivered'>('all');
 
   useEffect(() => {
     loadData();
@@ -45,6 +46,18 @@ const Admin: React.FC = () => {
     }
   };
 
+  const updateOrderStatus = async (id: string, newStatus: Order['status']) => {
+    try {
+      await db.updateOrderStatus(id, newStatus);
+      setOrders(prev =>
+        prev.map(order => order.id === id ? { ...order, status: newStatus } : order)
+      );
+    } catch (err: any) {
+      console.error('Error updating order status:', err);
+      alert('Er is een fout opgetreden bij het updaten van de status.');
+    }
+  };
+
   const getStatusColor = (status: ContactSubmission['status']) => {
     switch (status) {
       case 'new': return 'bg-blue-100 text-blue-800';
@@ -77,9 +90,25 @@ const Admin: React.FC = () => {
     }
   };
 
+  const getOrderStatusText = (status: Order['status']) => {
+    switch (status) {
+      case 'pending': return 'Nieuw';
+      case 'confirmed': return 'Bevestigd';
+      case 'processing': return 'In behandeling';
+      case 'shipped': return 'Verzonden';
+      case 'delivered': return 'Afgerond';
+      case 'cancelled': return 'Geannuleerd';
+      default: return status;
+    }
+  };
+
   const filteredSubmissions = filter === 'all'
     ? submissions
     : submissions.filter(sub => sub.status === filter);
+
+  const filteredOrders = orderFilter === 'all'
+    ? orders
+    : orders.filter(order => order.status === orderFilter);
 
   if (loading) {
     return (
@@ -322,14 +351,67 @@ const Admin: React.FC = () => {
         {/* Orders Tab */}
         {activeTab === 'orders' && (
           <>
-            {orders.length === 0 ? (
+            <div className="mb-6 flex flex-wrap gap-3">
+              <button
+                onClick={() => setOrderFilter('all')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  orderFilter === 'all'
+                    ? 'bg-primary-900 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Alle ({orders.length})
+              </button>
+              <button
+                onClick={() => setOrderFilter('pending')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  orderFilter === 'pending'
+                    ? 'bg-yellow-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Nieuw ({orders.filter(o => o.status === 'pending').length})
+              </button>
+              <button
+                onClick={() => setOrderFilter('confirmed')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  orderFilter === 'confirmed'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Bevestigd ({orders.filter(o => o.status === 'confirmed').length})
+              </button>
+              <button
+                onClick={() => setOrderFilter('processing')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  orderFilter === 'processing'
+                    ? 'bg-purple-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                In behandeling ({orders.filter(o => o.status === 'processing').length})
+              </button>
+              <button
+                onClick={() => setOrderFilter('delivered')}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  orderFilter === 'delivered'
+                    ? 'bg-green-600 text-white'
+                    : 'bg-white text-neutral-700 hover:bg-neutral-100'
+                }`}
+              >
+                Afgerond ({orders.filter(o => o.status === 'delivered').length})
+              </button>
+            </div>
+
+            {filteredOrders.length === 0 ? (
               <div className="bg-white rounded-lg shadow-sm p-12 text-center">
                 <Package className="w-16 h-16 text-neutral-300 mx-auto mb-4" />
                 <p className="text-neutral-600 text-lg">Geen bestellingen gevonden</p>
               </div>
             ) : (
               <div className="space-y-4">
-                {orders.map((order) => (
+                {filteredOrders.map((order) => (
                   <div
                     key={order.id}
                     className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow p-6"
@@ -341,7 +423,7 @@ const Admin: React.FC = () => {
                             {order.order_number}
                           </h3>
                           <span className={`px-3 py-1 rounded-full text-xs font-medium ${getOrderStatusColor(order.status)}`}>
-                            {order.status}
+                            {getOrderStatusText(order.status)}
                           </span>
                         </div>
 
@@ -416,6 +498,53 @@ const Admin: React.FC = () => {
                             </div>
                           </div>
                         </div>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          onClick={() => updateOrderStatus(order.id, 'pending')}
+                          disabled={order.status === 'pending'}
+                          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                            order.status === 'pending'
+                              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                              : 'bg-yellow-50 text-yellow-700 hover:bg-yellow-100'
+                          }`}
+                        >
+                          Nieuw
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(order.id, 'confirmed')}
+                          disabled={order.status === 'confirmed'}
+                          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                            order.status === 'confirmed'
+                              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                              : 'bg-blue-50 text-blue-700 hover:bg-blue-100'
+                          }`}
+                        >
+                          Bevestigd
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(order.id, 'processing')}
+                          disabled={order.status === 'processing'}
+                          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                            order.status === 'processing'
+                              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                              : 'bg-purple-50 text-purple-700 hover:bg-purple-100'
+                          }`}
+                        >
+                          In behandeling
+                        </button>
+                        <button
+                          onClick={() => updateOrderStatus(order.id, 'delivered')}
+                          disabled={order.status === 'delivered'}
+                          className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                            order.status === 'delivered'
+                              ? 'bg-neutral-100 text-neutral-400 cursor-not-allowed'
+                              : 'bg-green-50 text-green-700 hover:bg-green-100'
+                          }`}
+                        >
+                          Afgerond
+                        </button>
                       </div>
                     </div>
 
