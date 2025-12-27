@@ -30,7 +30,9 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
 
       setProduct(productData);
 
-      const related = products.filter(p => p.id !== id).slice(0, 3);
+      const related = products
+        .filter(p => p.id !== id && p.category === productData.category)
+        .slice(0, 3);
       setRelatedProducts(related);
     } catch (err) {
       console.error('Error fetching product:', err);

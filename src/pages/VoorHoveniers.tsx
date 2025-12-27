@@ -165,6 +165,20 @@ const VoorHoveniers = () => {
                 Bespreek uw behoeften met onze specialisten en ontdek hoe wij uw bedrijf kunnen ondersteunen
               </p>
 
+              <div className="mb-8">
+                <Link
+                  to="/shop?tab=zakelijk"
+                  className="inline-flex items-center bg-accent-600 text-white px-12 py-6 rounded-xl font-bold text-xl hover:bg-accent-500 transition-all duration-300 transform hover:scale-105 shadow-premium"
+                >
+                  <Package className="w-7 h-7 mr-3" />
+                  Bekijk Zakelijke Shop
+                  <ArrowRight className="w-6 h-6 ml-3" />
+                </Link>
+                <p className="mt-4 text-white/80 text-sm">
+                  Bestel direct online - Bulk prijzen - Kies afhaaldatum
+                </p>
+              </div>
+
               <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto mb-10">
                 <a
                   href="tel:0653747696"
@@ -184,9 +198,9 @@ const VoorHoveniers = () => {
 
               <Link
                 to="/contact"
-                className="inline-flex items-center bg-accent-600 text-white px-10 py-5 rounded-xl font-semibold text-lg hover:bg-accent-500 transition-all duration-300 transform hover:scale-105 shadow-premium"
+                className="inline-flex items-center bg-white/10 border-2 border-white/30 text-white px-10 py-5 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 transform hover:scale-105"
               >
-                Stuur een bericht
+                Of stuur een bericht
                 <ArrowRight className="w-5 h-5 ml-3" />
               </Link>
             </div>

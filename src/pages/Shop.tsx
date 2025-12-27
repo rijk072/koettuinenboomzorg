@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingCart, ArrowRight, Phone, Mail } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { Product } from '../lib/supabase';
@@ -10,8 +10,17 @@ interface ShopProps {
 }
 
 const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState<'particulier' | 'zakelijk'>('particulier');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get('tab');
+    if (tab === 'zakelijk') {
+      setActiveTab('zakelijk');
+    }
+  }, [location]);
 
   const products = activeTab === 'particulier' ? particulierProducts : zakelijkProducts;
 
@@ -143,7 +152,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
 
                     {/* Price/Order Info */}
                     <div className="mb-4">
-                      {activeTab === 'particulier' ? (
+                      {product.price > 0 ? (
                         <div className="text-2xl font-bold text-primary-900">
                           €{product.price.toFixed(2)}
                         </div>
@@ -160,7 +169,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                     </div>
 
                     {/* CTA Button */}
-                    {activeTab === 'particulier' ? (
+                    {product.price > 0 ? (
                       <button
                         onClick={(e) => {
                           e.preventDefault();
