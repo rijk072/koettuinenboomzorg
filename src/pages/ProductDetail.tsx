@@ -473,7 +473,7 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
 
       {showToast && (
         <Toast
-          message={product.price === 0 ? `${quantity} zakken toegevoegd - U wordt gebeld voor prijzen` : "Product toegevoegd aan winkelwagen"}
+          message={`${quantity} ${quantity === 1 ? 'product' : 'producten'} toegevoegd aan winkelwagen`}
           onClose={() => setShowToast(false)}
         />
       )}

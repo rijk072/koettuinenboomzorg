@@ -153,7 +153,7 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                   </div>
                   <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
                     <p className="text-sm text-blue-900">
-                      <strong>Let op:</strong> We nemen binnen 24 uur contact op voor de afhaaltijd.
+                      <strong>Let op:</strong> We nemen binnen 24 uur contact op {cartItems.some(item => item.price === 0) ? 'om de handelsprijzen door te geven en de afhaaltijd te bevestigen' : 'voor de afhaaltijd'}.
                     </p>
                   </div>
                 </div>
@@ -253,11 +253,36 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems }) => {
                         <p className="text-stone-600 text-sm">Aantal: {item.quantity}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-primary-900">€{(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="font-semibold text-primary-900">
+                          {item.price === 0 ? (
+                            <span className="text-sm text-stone-600 italic">Prijs op aanvraag</span>
+                          ) : (
+                            `€${(item.price * item.quantity).toFixed(2)}`
+                          )}
+                        </p>
                       </div>
                     </div>
                   ))}
                 </div>
+
+                {/* Price on request notice */}
+                {cartItems.some(item => item.price === 0) && (
+                  <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                    <div className="flex items-start gap-3">
+                      <div className="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <span className="text-white text-xs font-bold">!</span>
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-amber-900 mb-1">
+                          Prijzen op aanvraag
+                        </p>
+                        <p className="text-sm text-amber-800">
+                          Na het plaatsen van uw bestelling nemen wij telefonisch contact met u op om de actuele handelsprijzen door te geven en uw bestelling te bevestigen.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Order Totals */}
                 <div className="border-t border-stone-200 pt-4 space-y-2">
