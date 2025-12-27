@@ -26,6 +26,20 @@ const Footer = () => {
               <p className="text-stone-400 leading-relaxed mt-4">
                 Ook officiële ECOstyle dealer voor professionele hoveniers
               </p>
+
+              {/* Bedrijfsgegevens */}
+              <div className="border-t border-stone-700 pt-6 mt-6">
+                <div className="space-y-1 text-xs">
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-400">KvK nummer:</span>
+                    <span className="text-stone-300">[JOUW_KVK_NUMMER]</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-stone-400">BTW nummer:</span>
+                    <span className="text-stone-300">[JOUW_BTW_NUMMER]</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Diensten */}

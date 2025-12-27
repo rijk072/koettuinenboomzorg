@@ -116,11 +116,26 @@ const AlgemeneVoorwaarden = () => {
                         <p className="text-stone-700 leading-relaxed">
                           Voor vragen over uw privacy of het uitoefenen van uw rechten kunt u contact opnemen:
                         </p>
-                        <ul className="space-y-1 text-stone-700 mt-2">
-                          <li>• E-mail: frans@koet.net</li>
-                          <li>• Telefoon: 0653747696</li>
-                          <li>• Adres: Heereweg 38 E, 1901 ME Bakkum</li>
-                        </ul>
+                        <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 mt-3">
+                          <h4 className="font-semibold text-stone-900 mb-3">Koet Tuin & Boomzorg</h4>
+                          <ul className="space-y-1 text-stone-700 text-sm">
+                            <li>• E-mail: frans@koet.net</li>
+                            <li>• Telefoon: 0653747696</li>
+                            <li>• Adres: Heereweg 38 E, 1901 ME Bakkum</li>
+                          </ul>
+                          <div className="border-t border-stone-300 pt-3 mt-3">
+                            <div className="space-y-1 text-xs text-stone-600">
+                              <div className="flex items-center justify-between">
+                                <span className="text-stone-400">KvK nummer:</span>
+                                <span className="text-stone-600">[JOUW_KVK_NUMMER]</span>
+                              </div>
+                              <div className="flex items-center justify-between">
+                                <span className="text-stone-400">BTW nummer:</span>
+                                <span className="text-stone-600">[JOUW_BTW_NUMMER]</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </>
                   ) : (
@@ -172,11 +187,26 @@ const AlgemeneVoorwaarden = () => {
                     <p className="text-stone-700 leading-relaxed">
                       Voor vragen over uw bestelling of deze voorwaarden kunt u contact opnemen via:
                     </p>
-                    <ul className="space-y-1 text-stone-700 mt-2">
-                      <li>• E-mail: frans@koet.net</li>
-                      <li>• Telefoon: 0653747696</li>
-                      <li>• Adres: Heereweg 38 E, 1901 ME Bakkum</li>
-                    </ul>
+                    <div className="bg-stone-50 border border-stone-200 rounded-lg p-4 mt-3">
+                      <h4 className="font-semibold text-stone-900 mb-3">Koet Tuin & Boomzorg</h4>
+                      <ul className="space-y-1 text-stone-700 text-sm">
+                        <li>• E-mail: frans@koet.net</li>
+                        <li>• Telefoon: 0653747696</li>
+                        <li>• Adres: Heereweg 38 E, 1901 ME Bakkum</li>
+                      </ul>
+                      <div className="border-t border-stone-300 pt-3 mt-3">
+                        <div className="space-y-1 text-xs text-stone-600">
+                          <div className="flex items-center justify-between">
+                            <span className="text-stone-400">KvK nummer:</span>
+                            <span className="text-stone-600">[JOUW_KVK_NUMMER]</span>
+                          </div>
+                          <div className="flex items-center justify-between">
+                            <span className="text-stone-400">BTW nummer:</span>
+                            <span className="text-stone-600">[JOUW_BTW_NUMMER]</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                     </>
                   )}
