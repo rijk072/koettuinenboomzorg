@@ -54,6 +54,15 @@ const projects: Project[] = [
   },
   {
     id: 5,
+    title: "Prachtige Villa Tuin - Totaaloverzicht",
+    location: "Limmen",
+    size: "280m²",
+    category: "250-500",
+    image: "/images/limmen-villa-1.jpeg",
+    description: "Exclusieve villatuin met luxe bestrating, sierlijke borders en verfijnde tuinarchitectuur. Een perfect harmonieus geheel van hardscape en softscape"
+  },
+  {
+    id: 6,
     title: "Prachtige Villa Tuin - Achtertuin Detail",
     location: "Limmen",
     size: "280m²",
@@ -62,7 +71,7 @@ const projects: Project[] = [
     description: "Stijlvolle achtertuin met moderne bestrating, groene borders en doordacht ontwerp. Elke hoek is met aandacht tot in detail vormgegeven"
   },
   {
-    id: 6,
+    id: 7,
     title: "Prachtige Villa Tuin - Voortuin Elegantie",
     location: "Limmen",
     size: "280m²",
@@ -71,7 +80,7 @@ const projects: Project[] = [
     description: "Elegante voortuin met luxueuze bestrating, sierlijke planten en verfijnde grindpaden. Een weelderige entree die de toon zet"
   },
   {
-    id: 7,
+    id: 8,
     title: "Avontuurlijke Wandeltrap op Heuvel",
     location: "Castricum",
     size: "120m²",
@@ -80,7 +89,7 @@ const projects: Project[] = [
     description: "Unieke hangende trap volledig op maat gemaakt voor kindervermaak. Een prachtige speeltoestel op een natuurlijke heuvel, vakkundig aangelegd met robuust hout en veilige constructie"
   },
   {
-    id: 8,
+    id: 9,
     title: "Speelse Schooltuin",
     location: "Alkmaar",
     size: "90m²",
@@ -89,7 +98,7 @@ const projects: Project[] = [
     description: "Kleurrijke en leerzame schooltuin met speelse elementen en groene zones. Volledig op maat gemaakt om kinderen te laten genieten van de natuur en buitenspelen"
   },
   {
-    id: 9,
+    id: 10,
     title: "Schoolplein Renovatie",
     location: "Castricum",
     size: "85m²",
