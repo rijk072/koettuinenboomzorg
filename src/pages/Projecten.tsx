@@ -175,7 +175,7 @@ const ProjectenPage = () => {
           <AnimationObserver>
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-stone-900">
-                Alle Projecten
+                Onze Gerealiseerde Projecten
               </h2>
             </div>
           </AnimationObserver>
