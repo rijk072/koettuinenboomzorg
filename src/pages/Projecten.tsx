@@ -99,6 +99,42 @@ const projects: Project[] = [
   },
   {
     id: 10,
+    title: "Balkontuin op 6 Hoog - Voorbereiding",
+    location: "Alkmaar",
+    size: "25m²",
+    category: "0-100",
+    image: "/images/balkon-alkmaar-voorbereiding.jpeg",
+    description: "Zorgvuldige voorbereiding voor een balkontuin op grote hoogte. Alle materialen en producten klaargelegd voor de aanleg, inclusief planken voor de vloerafwerking"
+  },
+  {
+    id: 11,
+    title: "Balkontuin op 6 Hoog - Aanleg",
+    location: "Alkmaar",
+    size: "25m²",
+    category: "0-100",
+    image: "/images/balkon-alkmaar-aanleg.jpeg",
+    description: "De aanlegfase op dit unieke balkonproject. Vakkundig uitgevoerd op 6 verdiepingen hoogte, waarbij elke stap met precisie wordt uitgevoerd voor een perfect resultaat"
+  },
+  {
+    id: 12,
+    title: "Balkontuin op 6 Hoog - Eindresultaat",
+    location: "Alkmaar",
+    size: "25m²",
+    category: "0-100",
+    image: "/images/balkon-alkmaar-resultaat.jpeg",
+    description: "Het eindresultaat van deze prachtige balkontuin met smart irrigatiesysteem. Een groene oase op grote hoogte met in de plantenbakken een volledig geautomatiseerd irrigatiesysteem dat via een app te bedienen is. Vakkundig aangelegd door Frans Koet samen met zijn zoon Rijk Koet, die regelmatig meehelpt met de hovenierswerkzaamheden"
+  },
+  {
+    id: 13,
+    title: "Sfeervolle Tuin met Afdak",
+    location: "Noord-Holland",
+    size: "120m²",
+    category: "100-250",
+    image: "/images/tuin-afdak-project.jpeg",
+    description: "Een complete tuintransformatie met een elegant afdak als blikvanger. Het project omvat een mooi betegeld terras, een gestraat pad dat uitnodigt tot wandelen, en zorgvuldig aangelegde borders met voldoende ruimte voor diverse planten. Een perfecte combinatie van functionaliteit en esthetiek"
+  },
+  {
+    id: 14,
     title: "Schoolplein Renovatie",
     location: "Castricum",
     size: "85m²",
@@ -109,42 +145,6 @@ const projects: Project[] = [
       before: "/images/playground-before.jpeg",
       after: "/images/playground-after.jpeg"
     }
-  },
-  {
-    id: 11,
-    title: "Balkontuin op 6 Hoog - Voorbereiding",
-    location: "Alkmaar",
-    size: "25m²",
-    category: "0-100",
-    image: "/images/balkon-alkmaar-voorbereiding.jpeg",
-    description: "Zorgvuldige voorbereiding voor een balkontuin op grote hoogte. Alle materialen en producten klaargelegd voor de aanleg, inclusief planken voor de vloerafwerking"
-  },
-  {
-    id: 12,
-    title: "Balkontuin op 6 Hoog - Aanleg",
-    location: "Alkmaar",
-    size: "25m²",
-    category: "0-100",
-    image: "/images/balkon-alkmaar-aanleg.jpeg",
-    description: "De aanlegfase op dit unieke balkonproject. Vakkundig uitgevoerd op 6 verdiepingen hoogte, waarbij elke stap met precisie wordt uitgevoerd voor een perfect resultaat"
-  },
-  {
-    id: 13,
-    title: "Balkontuin op 6 Hoog - Resultaat",
-    location: "Alkmaar",
-    size: "25m²",
-    category: "0-100",
-    image: "/images/balkon-alkmaar-resultaat.jpeg",
-    description: "Het eindresultaat van deze prachtige balkontuin. Een groene oase op grote hoogte, vakkundig aangelegd door Frans Koet samen met zijn zoon Rijk Koet, die regelmatig meehelpt met de hovenierswerkzaamheden"
-  },
-  {
-    id: 14,
-    title: "Sfeervolle Tuin met Afdak",
-    location: "Noord-Holland",
-    size: "120m²",
-    category: "100-250",
-    image: "/images/tuin-afdak-project.jpeg",
-    description: "Een complete tuintransformatie met een elegant afdak als blikvanger. Het project omvat een mooi betegeld terras, een gestraat pad dat uitnodigt tot wandelen, en zorgvuldig aangelegde borders met voldoende ruimte voor diverse planten. Een perfecte combinatie van functionaliteit en esthetiek"
   }
 ];
 

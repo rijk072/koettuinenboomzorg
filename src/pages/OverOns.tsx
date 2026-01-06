@@ -71,13 +71,13 @@ const OverOns = () => {
             <AnimationObserver animationType="slide-right">
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
-                  <img 
-                    src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  <img
+                    src="/images/ervaring-35-jaar.jpeg"
                     alt="Koet Tuin & Boomzorg vakmanschap"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary-900 mb-2">35+</div>
@@ -209,13 +209,13 @@ const OverOns = () => {
             <AnimationObserver animationType="slide-right">
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
-                  <img 
-                    src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  <img
+                    src="/images/duurzaam-waarden.jpeg"
                     alt="Duurzame tuinprojecten"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 <div className="absolute -bottom-6 -left-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="flex items-center">
                     <Leaf className="w-8 h-8 text-primary-900 mr-3" />

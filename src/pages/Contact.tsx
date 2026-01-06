@@ -444,13 +444,13 @@ const Contact = () => {
             <AnimationObserver animationType="slide-right">
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
-                  <img 
-                    src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                  <img
+                    src="/images/persoonlijk-contact.jpeg"
                     alt="Contact opnemen"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                
+
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
                     <div className="text-3xl font-bold text-primary-900 mb-2">24u</div>
