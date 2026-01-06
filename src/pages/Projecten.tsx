@@ -28,12 +28,11 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Zen Balkon",
-    location: "Utrecht",
-    size: "25m²",
+    title: "Maatwerk Tuinpoort",
+    location: "Heiloo",
     category: "0-100",
-    image: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Minimalistische balkon met bamboe en waterfeature"
+    image: "/images/custom-gate.jpeg",
+    description: "Op maat gemaakte moderne tuinpoort met strak design in zwart. Volledig handgemaakt met oog voor detail en duurzaamheid"
   },
   {
     id: 3,
@@ -101,30 +100,19 @@ const projects: Project[] = [
       before: "/images/playground-before.jpeg",
       after: "/images/playground-after.jpeg"
     }
-  },
-  {
-    id: 10,
-    title: "Maatwerk Tuinpoort",
-    location: "Amsterdam",
-    category: "0-100",
-    image: "/images/custom-gate.jpeg",
-    description: "Op maat gemaakte moderne tuinpoort met strak design in zwart. Volledig handgemaakt met oog voor detail en duurzaamheid"
   }
 ];
 
 const ProjectenPage = () => {
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
-  const [lightboxTitle, setLightboxTitle] = useState<string>('');
+  const [lightboxProject, setLightboxProject] = useState<Project | null>(null);
 
-  const openLightbox = (image: string, title: string) => {
-    setLightboxImage(image);
-    setLightboxTitle(title);
+  const openLightbox = (project: Project) => {
+    setLightboxProject(project);
     document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
-    setLightboxImage(null);
-    setLightboxTitle('');
+    setLightboxProject(null);
     document.body.style.overflow = 'unset';
   };
 
@@ -240,7 +228,7 @@ const ProjectenPage = () => {
                       {/* Bekijk Project Button */}
                       <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                         <button
-                          onClick={() => openLightbox(project.image, project.title)}
+                          onClick={() => openLightbox(project)}
                           className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
                         >
                           <Eye className="w-5 h-5 mr-2" />
@@ -253,7 +241,11 @@ const ProjectenPage = () => {
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                        className={`w-full h-full transition-all duration-700 group-hover:scale-110 ${
+                          project.title === "Maatwerk Tuinpoort"
+                            ? "object-contain p-4"
+                            : "object-cover"
+                        }`}
                       />
                       {/* Size Badge */}
                       {project.size && (
@@ -266,7 +258,7 @@ const ProjectenPage = () => {
                       {/* Bekijk Project Button */}
                       <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                         <button
-                          onClick={() => openLightbox(project.image, project.title)}
+                          onClick={() => openLightbox(project)}
                           className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
                         >
                           <Eye className="w-5 h-5 mr-2" />
@@ -296,29 +288,69 @@ const ProjectenPage = () => {
       </section>
 
       {/* Lightbox Modal */}
-      {lightboxImage && (
+      {lightboxProject && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4 overflow-y-auto"
           onClick={closeLightbox}
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white hover:text-stone-300 transition-colors z-10"
+            className="fixed top-6 right-6 text-white hover:text-stone-300 transition-colors z-10"
             aria-label="Sluit lightbox"
           >
             <X className="w-10 h-10" />
           </button>
 
-          <div className="relative max-w-7xl max-h-[90vh] w-full">
-            <img
-              src={lightboxImage}
-              alt={lightboxTitle}
-              className="w-full h-full object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
-              <h3 className="text-2xl font-bold text-white">{lightboxTitle}</h3>
-            </div>
+          <div className="relative max-w-7xl w-full py-8" onClick={(e) => e.stopPropagation()}>
+            {lightboxProject.beforeAfter ? (
+              <div className="space-y-8">
+                {/* Na foto eerst */}
+                <div className="relative">
+                  <img
+                    src={lightboxProject.beforeAfter.after}
+                    alt={`${lightboxProject.title} - Na`}
+                    className="w-full h-auto object-contain max-h-[80vh]"
+                  />
+                  <div className="absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-6 py-3 rounded-xl text-lg font-bold text-white shadow-lg">
+                    NA
+                  </div>
+                </div>
+
+                {/* Voor foto daarna */}
+                <div className="relative">
+                  <img
+                    src={lightboxProject.beforeAfter.before}
+                    alt={`${lightboxProject.title} - Voor`}
+                    className="w-full h-auto object-contain max-h-[80vh]"
+                  />
+                  <div className="absolute top-4 right-4 bg-stone-900/90 backdrop-blur-sm px-6 py-3 rounded-xl text-lg font-bold text-white shadow-lg">
+                    VOOR
+                  </div>
+                </div>
+
+                {/* Project titel onderaan */}
+                <div className="bg-gradient-to-t from-black/80 to-transparent p-6 rounded-lg">
+                  <h3 className="text-3xl font-bold text-white">{lightboxProject.title}</h3>
+                  <p className="text-white/80 text-lg mt-2">{lightboxProject.location}</p>
+                </div>
+              </div>
+            ) : (
+              <div className="relative">
+                <img
+                  src={lightboxProject.image}
+                  alt={lightboxProject.title}
+                  className={`w-full h-auto ${
+                    lightboxProject.title === "Maatwerk Tuinpoort"
+                      ? "object-contain max-h-[85vh]"
+                      : "object-cover max-h-[80vh]"
+                  }`}
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                  <h3 className="text-3xl font-bold text-white">{lightboxProject.title}</h3>
+                  <p className="text-white/80 text-lg mt-2">{lightboxProject.location}</p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
