@@ -185,8 +185,64 @@ const ProjectenPage = () => {
       {/* Projects Portfolio Grid */}
       <section className="pb-20 lg:pb-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
+          {/* Villa Tuin Project - Speciale Rij */}
+          <div className="mb-12">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+              {projects.filter(p => p.title.includes("Prachtige Villa Tuin")).map((project, index) => (
+                <AnimationObserver
+                  key={project.id}
+                  delay={index * 100}
+                >
+                  <div className="group bg-white overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2 first:rounded-l-2xl last:rounded-r-2xl">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      />
+                      {/* Size Badge - alleen op eerste */}
+                      {index === 0 && project.size && (
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
+                          {project.size}
+                        </div>
+                      )}
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      {/* Bekijk Project Button */}
+                      <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <button
+                          onClick={() => openLightbox(project)}
+                          className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
+                        >
+                          <Eye className="w-5 h-5 mr-2" />
+                          Bekijk Project
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Project Info */}
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-bold text-stone-900">{project.title}</h3>
+                      </div>
+                      <p className="text-stone-600 leading-relaxed mb-4">{project.description}</p>
+                      <div className="flex items-center text-stone-500 text-sm">
+                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {project.location}
+                      </div>
+                    </div>
+                  </div>
+                </AnimationObserver>
+              ))}
+            </div>
+          </div>
+
+          {/* Rest van de projecten */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-            {projects.map((project, index) => (
+            {projects.filter(p => !p.title.includes("Prachtige Villa Tuin")).map((project, index) => (
               <AnimationObserver
                 key={project.id}
                 delay={index * 100}
