@@ -187,18 +187,18 @@ const ProjectenPage = () => {
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
           {/* Villa Tuin Project - Speciale Rij */}
           <div className="mb-12">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0">
               {projects.filter(p => p.title.includes("Prachtige Villa Tuin")).map((project, index) => (
                 <AnimationObserver
                   key={project.id}
                   delay={index * 100}
                 >
-                  <div className="group bg-white overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2 first:rounded-l-2xl last:rounded-r-2xl">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-stone-100">
+                  <div className="group bg-white overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2 rounded-2xl lg:first:rounded-l-2xl lg:first:rounded-r-none lg:last:rounded-r-2xl lg:last:rounded-l-none lg:rounded-none">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-stone-50 to-stone-100">
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                        className="w-full h-full object-contain p-4 transition-all duration-700 group-hover:scale-105"
                       />
                       {/* Size Badge - alleen op eerste */}
                       {index === 0 && project.size && (
@@ -222,10 +222,8 @@ const ProjectenPage = () => {
 
                     {/* Project Info */}
                     <div className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <h3 className="text-xl font-bold text-stone-900">{project.title}</h3>
-                      </div>
-                      <p className="text-stone-600 leading-relaxed mb-4">{project.description}</p>
+                      <h3 className="text-lg lg:text-xl font-bold text-stone-900 mb-3 line-clamp-2">{project.title}</h3>
+                      <p className="text-stone-600 leading-relaxed mb-4 text-sm lg:text-base">{project.description}</p>
                       <div className="flex items-center text-stone-500 text-sm">
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -294,19 +292,17 @@ const ProjectenPage = () => {
                     </div>
                   ) : (
                     <div className={`relative aspect-[4/3] overflow-hidden ${
-                      project.title === "Maatwerk Tuinpoort" || project.title.includes("Prachtige Villa Tuin")
+                      project.title === "Maatwerk Tuinpoort"
                         ? "bg-stone-100"
-                        : "bg-stone-50"
+                        : "bg-gradient-to-br from-stone-50 to-stone-100"
                     }`}>
                       <img
                         src={project.image}
                         alt={project.title}
-                        className={`w-full h-full transition-all duration-700 group-hover:scale-110 ${
+                        className={`w-full h-full transition-all duration-700 ${
                           project.title === "Maatwerk Tuinpoort"
-                            ? "object-contain p-4"
-                            : project.title.includes("Prachtige Villa Tuin")
-                            ? "object-cover"
-                            : "object-cover"
+                            ? "object-contain p-4 group-hover:scale-105"
+                            : "object-cover group-hover:scale-110"
                         }`}
                       />
                       {/* Size Badge */}
