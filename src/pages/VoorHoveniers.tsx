@@ -242,7 +242,7 @@ const VoorHoveniers = () => {
           <AnimationObserver>
             <div className="text-center mt-12">
               <Link
-                to="/shop"
+                to="/shop?tab=zakelijk"
                 className="inline-flex items-center text-primary-900 hover:text-primary-800 transition-colors font-semibold text-lg"
               >
                 Bekijk ons volledige assortiment
