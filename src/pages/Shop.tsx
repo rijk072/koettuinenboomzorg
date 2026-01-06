@@ -40,14 +40,14 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
         <div className="relative z-10 max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20 text-center text-white">
           <AnimationObserver>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight tracking-tight text-white">
-              {activeTab === 'particulier' ? 'Eigen Maatwerk' : 'ECOstyle Groothandel'}
+              {activeTab === 'particulier' ? 'Maatwerk & Tuinproducten' : 'ECOstyle Groothandel'}
               <span className="block mt-2 text-white">
                 {activeTab === 'particulier' ? 'voor Uw Tuin' : 'voor Professionals'}
               </span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-3xl mx-auto">
               {activeTab === 'particulier'
-                ? 'Handgemaakt tuinmeubilair op maat - Direct online bestellen'
+                ? 'Handgemaakt tuinmeubilair, zakken hout, potgrond en meer - Direct online bestellen'
                 : 'Volledige ECOstyle productlijn - Handelsprijzen vanaf 10 stuks'
               }
             </p>
@@ -97,13 +97,13 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
               <div className="text-center">
                 <h2 className="text-2xl font-bold text-stone-900 mb-2">
                   {activeTab === 'particulier'
-                    ? '🛠️ Op Maat Gemaakt Tuinmeubilair'
+                    ? '🌿 Maatwerk Tuinmeubilair & Tuinproducten'
                     : '📦 ECOstyle Groothandel'
                   }
                 </h2>
                 <p className="text-stone-700">
                   {activeTab === 'particulier'
-                    ? 'Bestel direct online en wij maken elk product speciaal voor u op maat.'
+                    ? 'Van handgemaakt tuinmeubilair tot potgrond en zakken hout - Bestel direct online.'
                     : 'Handelsprijzen vanaf 10 stuks per product. Neem contact op voor prijzen en levering.'
                   }
                 </p>
@@ -194,7 +194,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
               </h3>
               <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
                 {activeTab === 'particulier'
-                  ? 'Neem contact op voor advies over uw maatwerk tuinmeubelen.'
+                  ? 'Neem contact op voor advies over uw maatwerk producten en tuinartikelen.'
                   : 'Bel of mail direct voor handelsprijzen en leveringsvoorwaarden.'
                 }
               </p>
