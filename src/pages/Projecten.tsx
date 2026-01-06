@@ -45,12 +45,12 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Prachtige Villa Tuin - Totaaloverzicht",
-    location: "Limmen",
-    size: "280m²",
-    category: "250-500",
-    image: "/images/limmen-villa-1.jpeg",
-    description: "Exclusieve villatuin met luxe bestrating, sierlijke borders en verfijnde tuinarchitectuur. Een perfect harmonieus geheel van hardscape en softscape"
+    title: "Groene Oase Achtertuin",
+    location: "Heiloo",
+    size: "145m²",
+    category: "100-250",
+    image: "/images/heiloo-tuin.jpeg",
+    description: "Sfeervolle achtertuin met weelderig groen gazon, strakke bestrating en verfijnde borders. Complete transformatie met moderne tuinafsluiting, zorgvuldig aangelegde borders en een harmonieuze balans tussen groen en verharding"
   },
   {
     id: 5,
