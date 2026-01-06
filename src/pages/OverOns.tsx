@@ -269,8 +269,8 @@ const OverOns = () => {
                       description: "Voorliefde voor strakke lijnen en moderne tuinconcepten."
                     }
                   ].map((member, index) => (
-                    <div key={index} className="flex items-start space-x-5">
-                      <div className="w-24 h-24 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+                    <div key={index} className="flex items-start space-x-4">
+                      <div className="w-32 h-32 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden">
                         {member.image ? (
                           <img
                             src={member.image}
@@ -283,10 +283,10 @@ const OverOns = () => {
                           </div>
                         )}
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-stone-900">{member.name}</h3>
-                        <p className="text-primary-900 font-medium text-sm uppercase tracking-wider mb-2">{member.role}</p>
-                        <p className="text-stone-600 leading-relaxed">{member.description}</p>
+                      <div className="flex-1">
+                        <h3 className="text-base font-semibold text-stone-900">{member.name}</h3>
+                        <p className="text-primary-900 font-medium text-xs uppercase tracking-wider mb-1.5">{member.role}</p>
+                        <p className="text-stone-600 leading-relaxed text-sm">{member.description}</p>
                       </div>
                     </div>
                   ))}
