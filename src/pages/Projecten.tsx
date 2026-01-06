@@ -1,5 +1,5 @@
-import React from 'react';
-import { CheckCircle, Eye } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle, Eye, X } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 
 interface Project {
@@ -92,7 +92,7 @@ const projects: Project[] = [
   {
     id: 9,
     title: "Schoolplein Renovatie",
-    location: "Amsterdam",
+    location: "Castricum",
     size: "85m²",
     category: "0-100",
     image: "/images/playground-after.jpeg",
@@ -105,6 +105,20 @@ const projects: Project[] = [
 ];
 
 const ProjectenPage = () => {
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [lightboxTitle, setLightboxTitle] = useState<string>('');
+
+  const openLightbox = (image: string, title: string) => {
+    setLightboxImage(image);
+    setLightboxTitle(title);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+    setLightboxTitle('');
+    document.body.style.overflow = 'unset';
+  };
 
   return (
     <>
@@ -215,9 +229,12 @@ const ProjectenPage = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       {/* Bekijk Project Button */}
                       <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                        <button className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center">
+                        <button
+                          onClick={() => openLightbox(project.image, project.title)}
+                          className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
+                        >
                           <Eye className="w-5 h-5 mr-2" />
-                          Bekijk Transformatie
+                          Bekijk Project
                         </button>
                       </div>
                     </div>
@@ -236,7 +253,10 @@ const ProjectenPage = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       {/* Bekijk Project Button */}
                       <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                        <button className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center">
+                        <button
+                          onClick={() => openLightbox(project.image, project.title)}
+                          className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
+                        >
                           <Eye className="w-5 h-5 mr-2" />
                           Bekijk Project
                         </button>
@@ -262,6 +282,34 @@ const ProjectenPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Lightbox Modal */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4"
+          onClick={closeLightbox}
+        >
+          <button
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 text-white hover:text-stone-300 transition-colors z-10"
+            aria-label="Sluit lightbox"
+          >
+            <X className="w-10 h-10" />
+          </button>
+
+          <div className="relative max-w-7xl max-h-[90vh] w-full">
+            <img
+              src={lightboxImage}
+              alt={lightboxTitle}
+              className="w-full h-full object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+              <h3 className="text-2xl font-bold text-white">{lightboxTitle}</h3>
+            </div>
+          </div>
+        </div>
+      )}
 
     </>
   );
