@@ -251,14 +251,14 @@ const OverOns = () => {
                       name: "Frans Koet",
                       role: "Oprichter & Eigenaar",
                       initials: "FK",
-                      image: null,
+                      image: "/images/frans-koet-team.jpeg",
                       description: "Meer dan 35 jaar ervaring in de tuinbranche met een scherp oog voor detail."
                     },
                     {
                       name: "Tristan Paap",
                       role: "Co-leider Aanleg & Onderhoud",
                       initials: "TP",
-                      image: null,
+                      image: "/images/tristan-paap-team.jpeg",
                       description: "Combineert technische precisie met creatieve visie voor perfecte uitvoering."
                     },
                     {
