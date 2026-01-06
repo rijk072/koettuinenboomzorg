@@ -19,6 +19,15 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "Strakke Moderne Voortuin",
+    location: "Alkmaar",
+    size: "65m²",
+    category: "0-100",
+    image: "/images/voortuin-alkmaar.jpeg",
+    description: "Elegante voortuin met strakke lijnen en moderne uitstraling. Vakkundig aangelegde bestrating gecombineerd met groene accenten voor een tijdloze entree"
+  },
+  {
+    id: 2,
     title: "Johannashof Restaurant",
     location: "Castricum",
     size: "75m²",
@@ -27,7 +36,7 @@ const projects: Project[] = [
     description: "Zelfgemaakt bankje, bestrating, schutting en plantenbak voor restaurant Johannashof"
   },
   {
-    id: 2,
+    id: 3,
     title: "Maatwerk Tuinpoort",
     location: "Heiloo",
     category: "0-100",
@@ -35,7 +44,7 @@ const projects: Project[] = [
     description: "Op maat gemaakte moderne tuinpoort met strak design in zwart. Volledig handgemaakt met oog voor detail en duurzaamheid"
   },
   {
-    id: 3,
+    id: 4,
     title: "Prachtige Villa Tuin - Totaaloverzicht",
     location: "Limmen",
     size: "280m²",
@@ -44,7 +53,7 @@ const projects: Project[] = [
     description: "Exclusieve villatuin met luxe bestrating, sierlijke borders en verfijnde tuinarchitectuur. Een perfect harmonieus geheel van hardscape en softscape"
   },
   {
-    id: 4,
+    id: 5,
     title: "Prachtige Villa Tuin - Achtertuin Detail",
     location: "Limmen",
     size: "280m²",
@@ -53,7 +62,7 @@ const projects: Project[] = [
     description: "Stijlvolle achtertuin met moderne bestrating, groene borders en doordacht ontwerp. Elke hoek is met aandacht tot in detail vormgegeven"
   },
   {
-    id: 5,
+    id: 6,
     title: "Prachtige Villa Tuin - Voortuin Elegantie",
     location: "Limmen",
     size: "280m²",
@@ -62,31 +71,22 @@ const projects: Project[] = [
     description: "Elegante voortuin met luxueuze bestrating, sierlijke planten en verfijnde grindpaden. Een weelderige entree die de toon zet"
   },
   {
-    id: 6,
-    title: "Moderne Villa Tuin",
-    location: "Wassenaar",
-    size: "450m²",
-    category: "250-500",
-    image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Luxe tuin met zwembad, buitenkeuken en designverlichting"
-  },
-  {
     id: 7,
-    title: "Daktuin",
-    location: "Den Haag",
-    size: "80m²",
-    category: "0-100",
-    image: "/images/project-daktuin.jpg",
-    description: "Groene oase op het dak met windbestendige beplanting"
+    title: "Avontuurlijke Wandeltrap op Heuvel",
+    location: "Castricum",
+    size: "120m²",
+    category: "100-250",
+    image: "/images/wandeltrap-castricum.jpeg",
+    description: "Unieke hangende trap volledig op maat gemaakt voor kindervermaak. Een prachtige speeltoestel op een natuurlijke heuvel, vakkundig aangelegd met robuust hout en veilige constructie"
   },
   {
     id: 8,
-    title: "Cottage Garden",
-    location: "Leiden",
-    size: "200m²",
-    category: "100-250",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Romantische cottage tuin met rozen en boerenplanten"
+    title: "Speelse Schooltuin",
+    location: "Alkmaar",
+    size: "90m²",
+    category: "0-100",
+    image: "/images/schooltuin-alkmaar.jpeg",
+    description: "Kleurrijke en leerzame schooltuin met speelse elementen en groene zones. Volledig op maat gemaakt om kinderen te laten genieten van de natuur en buitenspelen"
   },
   {
     id: 9,
@@ -366,7 +366,7 @@ const ProjectenPage = () => {
                 <img
                   src={lightboxProject.beforeAfter.after}
                   alt={`${lightboxProject.title} - Na`}
-                  className="w-full h-auto max-h-screen object-contain"
+                  className="w-full h-auto max-h-screen object-contain p-4 md:p-8"
                 />
                 <div className="absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm md:text-lg font-bold text-white shadow-lg">
                   NA
@@ -374,6 +374,10 @@ const ProjectenPage = () => {
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-8">
                   <h3 className="text-2xl md:text-3xl font-bold text-white">{lightboxProject.title}</h3>
                   <p className="text-white/90 text-base md:text-lg mt-2">{lightboxProject.location}</p>
+                  {lightboxProject.size && (
+                    <p className="text-white/80 text-sm md:text-base mt-1">{lightboxProject.size}</p>
+                  )}
+                  <p className="text-white/70 text-sm md:text-base mt-3 max-w-3xl">{lightboxProject.description}</p>
                   <p className="text-white/70 text-sm md:text-base mt-3 flex items-center">
                     <span className="mr-2">Scroll omlaag voor de 'voor' foto</span>
                     <span className="animate-bounce">↓</span>
@@ -386,7 +390,7 @@ const ProjectenPage = () => {
                 <img
                   src={lightboxProject.beforeAfter.before}
                   alt={`${lightboxProject.title} - Voor`}
-                  className="w-full h-auto max-h-screen object-contain"
+                  className="w-full h-auto max-h-screen object-contain p-4 md:p-8"
                 />
                 <div className="absolute top-4 right-4 bg-stone-900/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm md:text-lg font-bold text-white shadow-lg">
                   VOOR
@@ -394,6 +398,9 @@ const ProjectenPage = () => {
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-8">
                   <h3 className="text-2xl md:text-3xl font-bold text-white">{lightboxProject.title}</h3>
                   <p className="text-white/90 text-base md:text-lg mt-2">{lightboxProject.location}</p>
+                  {lightboxProject.size && (
+                    <p className="text-white/80 text-sm md:text-base mt-1">{lightboxProject.size}</p>
+                  )}
                 </div>
               </div>
             </div>
@@ -403,11 +410,15 @@ const ProjectenPage = () => {
                 <img
                   src={lightboxProject.image}
                   alt={lightboxProject.title}
-                  className="w-full h-full object-contain bg-black"
+                  className="w-full h-full object-contain bg-black p-4 md:p-8"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-8">
                   <h3 className="text-2xl md:text-3xl font-bold text-white">{lightboxProject.title}</h3>
                   <p className="text-white/90 text-base md:text-lg mt-2">{lightboxProject.location}</p>
+                  {lightboxProject.size && (
+                    <p className="text-white/80 text-sm md:text-base mt-1">{lightboxProject.size}</p>
+                  )}
+                  <p className="text-white/70 text-sm md:text-base mt-3 max-w-3xl">{lightboxProject.description}</p>
                 </div>
               </div>
             </div>
