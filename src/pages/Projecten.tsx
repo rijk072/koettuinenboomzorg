@@ -6,7 +6,7 @@ interface Project {
   id: number;
   title: string;
   location: string;
-  size: string;
+  size?: string;
   category: '0-100' | '100-250' | '250-500';
   image: string;
   description: string;
@@ -96,11 +96,19 @@ const projects: Project[] = [
     size: "85m²",
     category: "0-100",
     image: "/images/playground-after.jpeg",
-    description: "Transformatie van een kale speelplaats naar een moderne, duurzame bestrating met hoogwaardige tegels",
+    description: "Volledig opgeknapte speelplaats met vernieuwde bestrating en modernisering van het schoolplein",
     beforeAfter: {
       before: "/images/playground-before.jpeg",
       after: "/images/playground-after.jpeg"
     }
+  },
+  {
+    id: 10,
+    title: "Maatwerk Tuinpoort",
+    location: "Amsterdam",
+    category: "0-100",
+    image: "/images/custom-gate.jpeg",
+    description: "Op maat gemaakte moderne tuinpoort met strak design in zwart. Volledig handgemaakt met oog voor detail en duurzaamheid"
   }
 ];
 
@@ -222,9 +230,11 @@ const ProjectenPage = () => {
                         </div>
                       </div>
                       {/* Size Badge */}
-                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
-                        {project.size}
-                      </div>
+                      {project.size && (
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
+                          {project.size}
+                        </div>
+                      )}
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       {/* Bekijk Project Button */}
@@ -246,9 +256,11 @@ const ProjectenPage = () => {
                         className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                       />
                       {/* Size Badge */}
-                      <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
-                        {project.size}
-                      </div>
+                      {project.size && (
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
+                          {project.size}
+                        </div>
+                      )}
                       {/* Hover Overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       {/* Bekijk Project Button */}
