@@ -78,9 +78,9 @@ const Diensten = () => {
       </section>
 
       {/* Intro Section - Two Column */}
-      <section className="pt-16 py-20 lg:py-32 bg-white">
+      <section className="pt-16 py-20 lg:py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
-          <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 xl:gap-20 items-center">
             <AnimationObserver animationType="slide-left">
               <div className="space-y-8">
                 <h2 className="text-3xl lg:text-4xl font-bold text-stone-900 leading-tight tracking-tight">
@@ -118,8 +118,8 @@ const Diensten = () => {
             </AnimationObserver>
 
             <AnimationObserver animationType="slide-right">
-              <div className="relative h-full">
-                <div className="h-[600px] lg:h-[700px] xl:h-[750px] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-stone-900/5">
+              <div className="relative">
+                <div className="aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-stone-900/5">
                   <img
                     src="/images/diensten-vakkundig.jpeg"
                     alt="Professionele tuindiensten Koet Tuin & Boomzorg"
@@ -128,9 +128,9 @@ const Diensten = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
 
-                <div className="absolute -bottom-8 -right-8 bg-white/95 backdrop-blur-sm rounded-2xl p-10 shadow-2xl border border-white/50 ring-1 ring-stone-900/5">
+                <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/50 ring-1 ring-stone-900/5">
                   <div className="text-center">
-                    <div className="text-5xl font-bold text-primary-900 mb-2">6</div>
+                    <div className="text-4xl font-bold text-primary-900 mb-2">6</div>
                     <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Diensten</div>
                   </div>
                 </div>
