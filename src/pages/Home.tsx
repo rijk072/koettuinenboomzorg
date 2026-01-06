@@ -222,39 +222,47 @@ const Home: React.FC = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12 mb-16">
             {[
               {
-                image: "https://images.pexels.com/photos/1105019/pexels-photo-1105019.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-                title: "Luxe Villatuin",
+                image: "/images/voortuin-alkmaar.jpeg",
+                title: "Strakke Moderne Voortuin",
                 location: "Alkmaar",
-                size: "350 m²",
-                description: "Complete herinrichting van een villa tuin met zwembad en buitenkeuken"
+                size: "65m²",
+                description: "Elegante voortuin met strakke lijnen en moderne uitstraling. Vakkundig aangelegde bestrating gecombineerd met groene accenten voor een tijdloze entree"
               },
               {
-                image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-                title: "Moderne Gezinstuin",
-                location: "Egmond",
-                size: "180 m²", 
-                description: "Kindvriendelijke tuin met speelgebied en moestuin"
+                image: "/images/johanneshof-restaurant.jpeg",
+                title: "Johannashof Restaurant",
+                location: "Castricum",
+                size: "75m²",
+                description: "Zelfgemaakt bankje, bestrating, schutting en plantenbak voor restaurant Johannashof"
               },
               {
-                image: "https://images.pexels.com/photos/1080696/pexels-photo-1080696.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-                title: "Compacte Stadstuin",
+                image: "/images/custom-gate.jpeg",
+                title: "Maatwerk Tuinpoort",
                 location: "Heiloo",
-                size: "75 m²",
-                description: "Maximaal gebruik van beperkte ruimte in stedelijke omgeving"
+                size: "",
+                description: "Op maat gemaakte moderne tuinpoort met strak design in zwart. Volledig handgemaakt met oog voor detail en duurzaamheid"
               }
             ].map((project, index) => (
               <AnimationObserver key={index} delay={index * 100}>
                 <div className="card-premium overflow-hidden hover-lift group">
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-t-3xl">
-                    <img 
+                  <div className={`relative aspect-[4/3] overflow-hidden rounded-t-3xl ${
+                    project.title === "Maatwerk Tuinpoort" ? "bg-stone-100" : ""
+                  }`}>
+                    <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className={`w-full h-full transition-transform duration-700 ${
+                        project.title === "Maatwerk Tuinpoort"
+                          ? "object-contain p-4 group-hover:scale-105"
+                          : "object-cover group-hover:scale-110"
+                      }`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-heading font-semibold text-stone-800 shadow-premium border border-white/50">
-                      {project.size}
-                    </div>
+                    {project.size && (
+                      <div className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-heading font-semibold text-stone-800 shadow-premium border border-white/50">
+                        {project.size}
+                      </div>
+                    )}
                   </div>
                   <div className="p-8">
                     <h3 className="text-xl font-heading font-semibold mb-3 font-semibold group-hover:text-primary-900 transition-colors duration-300">{project.title}</h3>
