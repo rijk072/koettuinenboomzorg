@@ -19,12 +19,12 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Compacte Stadstuin",
-    location: "Amsterdam Centrum",
-    size: "45m²",
+    title: "Johanneshof Restaurant",
+    location: "Bakkum",
+    size: "75m²",
     category: "0-100",
-    image: "/images/project-daktuin.jpg",
-    description: "Moderne stadstuin met verticale beplanting en slim ruimtegebruik"
+    image: "/images/johanneshof-restaurant.jpeg",
+    description: "Zelfgemaakt bankje, bestrating, schutting en plantenbak voor restaurant Johanneshof"
   },
   {
     id: 2,
@@ -237,11 +237,17 @@ const ProjectenPage = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="relative aspect-[4/3] overflow-hidden bg-stone-50">
+                    <div className={`relative aspect-[4/3] overflow-hidden ${
+                      project.title === "Maatwerk Tuinpoort" ? "bg-stone-100" : "bg-stone-50"
+                    }`}>
                       <img
                         src={project.image}
                         alt={project.title}
-                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                        className={`w-full h-full transition-all duration-700 group-hover:scale-110 ${
+                          project.title === "Maatwerk Tuinpoort"
+                            ? "object-contain p-4"
+                            : "object-cover"
+                        }`}
                       />
                       {/* Size Badge */}
                       {project.size && (
@@ -336,16 +342,12 @@ const ProjectenPage = () => {
               </div>
             </div>
           ) : (
-            <div className="relative min-h-screen flex items-center justify-center p-4" onClick={(e) => e.stopPropagation()}>
-              <div className="relative w-full max-w-7xl">
+            <div className="min-h-screen" onClick={(e) => e.stopPropagation()}>
+              <div className="relative w-full h-screen">
                 <img
                   src={lightboxProject.image}
                   alt={lightboxProject.title}
-                  className={`w-full ${
-                    lightboxProject.title === "Maatwerk Tuinpoort"
-                      ? "object-contain max-h-[90vh]"
-                      : "object-cover max-h-[90vh]"
-                  }`}
+                  className="w-full h-full object-contain bg-black"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent p-4 md:p-8">
                   <h3 className="text-2xl md:text-3xl font-bold text-white">{lightboxProject.title}</h3>
