@@ -276,11 +276,11 @@ const Home: React.FC = () => {
 
           <AnimationObserver>
             <div className="text-center">
-              <Link 
+              <Link
                 to="/projecten"
                 className="btn-primary inline-flex items-center"
               >
-                BEKIJK ALLE PROJECTEN
+                BEKIJK EEN SELECTIE VAN ONZE PROJECTEN
                 <ArrowRight className="ml-3 w-5 h-5" />
               </Link>
             </div>
