@@ -119,17 +119,18 @@ const Diensten = () => {
 
             <AnimationObserver animationType="slide-right">
               <div className="relative">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
-                  <img 
-                    src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                    alt="Professionele tuindiensten"
-                    className="w-full h-full object-cover"
+                <div className="aspect-[5/4] rounded-3xl overflow-hidden shadow-2xl ring-1 ring-stone-900/5">
+                  <img
+                    src="/images/diensten-vakkundig.jpeg"
+                    alt="Professionele tuindiensten Koet Tuin & Boomzorg"
+                    className="w-full h-full object-cover transform transition-transform duration-700 hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
-                
-                <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
+
+                <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-8 shadow-2xl border border-white/50 ring-1 ring-stone-900/5">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-900 mb-2">6</div>
+                    <div className="text-4xl font-bold text-primary-900 mb-2">6</div>
                     <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Diensten</div>
                   </div>
                 </div>
