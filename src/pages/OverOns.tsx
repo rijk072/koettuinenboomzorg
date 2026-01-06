@@ -251,24 +251,37 @@ const OverOns = () => {
                       name: "Frans Koet",
                       role: "Oprichter & Eigenaar",
                       initials: "FK",
+                      image: null,
                       description: "Meer dan 35 jaar ervaring in de tuinbranche met een scherp oog voor detail."
                     },
                     {
-                      name: "Tristan Paap", 
+                      name: "Tristan Paap",
                       role: "Co-leider Aanleg & Onderhoud",
                       initials: "TP",
+                      image: null,
                       description: "Combineert technische precisie met creatieve visie voor perfecte uitvoering."
                     },
                     {
-                      name: "Di an Tan",
-                      role: "Allround Aanleg & Onderhoud", 
+                      name: "Dian Tan",
+                      role: "Allround Aanleg & Onderhoud",
                       initials: "DT",
+                      image: "/images/dian-tan.jpeg",
                       description: "Voorliefde voor strakke lijnen en moderne tuinconcepten."
                     }
                   ].map((member, index) => (
                     <div key={index} className="flex items-start space-x-4">
-                      <div className="w-16 h-16 bg-gradient-to-br from-primary-900 to-primary-700 rounded-2xl flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
-                        {member.initials}
+                      <div className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 overflow-hidden">
+                        {member.image ? (
+                          <img
+                            src={member.image}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary-900 to-primary-700 flex items-center justify-center text-white font-bold text-lg">
+                            {member.initials}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <h3 className="text-lg font-semibold text-stone-900">{member.name}</h3>
