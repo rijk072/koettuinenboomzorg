@@ -19,12 +19,12 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Johanneshof Restaurant",
-    location: "Bakkum",
+    title: "Johannashof Restaurant",
+    location: "Castricum",
     size: "75m²",
     category: "0-100",
     image: "/images/johanneshof-restaurant.jpeg",
-    description: "Zelfgemaakt bankje, bestrating, schutting en plantenbak voor restaurant Johanneshof"
+    description: "Zelfgemaakt bankje, bestrating, schutting en plantenbak voor restaurant Johannashof"
   },
   {
     id: 2,
@@ -36,30 +36,30 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Familietuin",
-    location: "Haarlem",
-    size: "150m²",
-    category: "100-250",
-    image: "https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Kindvriendelijke tuin met speelruimte en groentemoestuin"
+    title: "Prachtige Villa Tuin - Totaaloverzicht",
+    location: "Limmen",
+    size: "280m²",
+    category: "250-500",
+    image: "/images/limmen-villa-1.jpeg",
+    description: "Exclusieve villatuin met luxe bestrating, sierlijke borders en verfijnde tuinarchitectuur. Een perfect harmonieus geheel van hardscape en softscape"
   },
   {
     id: 4,
-    title: "Mediterrane Tuin",
-    location: "Rotterdam",
-    size: "180m²",
-    category: "100-250",
-    image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Zonnige tuin met olijfbomen, lavendel en natuursteen"
+    title: "Prachtige Villa Tuin - Achtertuin Detail",
+    location: "Limmen",
+    size: "280m²",
+    category: "250-500",
+    image: "/images/limmen-villa-2.jpeg",
+    description: "Stijlvolle achtertuin met moderne bestrating, groene borders en doordacht ontwerp. Elke hoek is met aandacht tot in detail vormgegeven"
   },
   {
     id: 5,
-    title: "Landelijke Tuin",
-    location: "Amersfoort",
-    size: "320m²",
+    title: "Prachtige Villa Tuin - Voortuin Elegantie",
+    location: "Limmen",
+    size: "280m²",
     category: "250-500",
-    image: "https://images.pexels.com/photos/1105019/pexels-photo-1105019.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
-    description: "Uitgestrekte tuin met wilde bloemenweide en fruitbomen"
+    image: "/images/limmen-villa-3.jpeg",
+    description: "Elegante voortuin met luxueuze bestrating, sierlijke planten en verfijnde grindpaden. Een weelderige entree die de toon zet"
   },
   {
     id: 6,
@@ -238,7 +238,9 @@ const ProjectenPage = () => {
                     </div>
                   ) : (
                     <div className={`relative aspect-[4/3] overflow-hidden ${
-                      project.title === "Maatwerk Tuinpoort" ? "bg-stone-100" : "bg-stone-50"
+                      project.title === "Maatwerk Tuinpoort" || project.title.includes("Prachtige Villa Tuin")
+                        ? "bg-stone-100"
+                        : "bg-stone-50"
                     }`}>
                       <img
                         src={project.image}
@@ -246,6 +248,8 @@ const ProjectenPage = () => {
                         className={`w-full h-full transition-all duration-700 group-hover:scale-110 ${
                           project.title === "Maatwerk Tuinpoort"
                             ? "object-contain p-4"
+                            : project.title.includes("Prachtige Villa Tuin")
+                            ? "object-cover"
                             : "object-cover"
                         }`}
                       />
@@ -304,13 +308,13 @@ const ProjectenPage = () => {
           </button>
 
           {lightboxProject.beforeAfter ? (
-            <div className="min-h-screen" onClick={(e) => e.stopPropagation()}>
+            <div className="pb-20" onClick={(e) => e.stopPropagation()}>
               {/* Na foto eerst - schermvullend */}
-              <div className="relative w-full h-screen">
+              <div className="relative w-full min-h-screen flex items-center justify-center bg-black">
                 <img
                   src={lightboxProject.beforeAfter.after}
                   alt={`${lightboxProject.title} - Na`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto max-h-screen object-contain"
                 />
                 <div className="absolute top-4 right-4 bg-primary-900/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm md:text-lg font-bold text-white shadow-lg">
                   NA
@@ -326,11 +330,11 @@ const ProjectenPage = () => {
               </div>
 
               {/* Voor foto daarna - schermvullend */}
-              <div className="relative w-full h-screen">
+              <div className="relative w-full min-h-screen flex items-center justify-center bg-black mt-4">
                 <img
                   src={lightboxProject.beforeAfter.before}
                   alt={`${lightboxProject.title} - Voor`}
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto max-h-screen object-contain"
                 />
                 <div className="absolute top-4 right-4 bg-stone-900/90 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 rounded-xl text-sm md:text-lg font-bold text-white shadow-lg">
                   VOOR
