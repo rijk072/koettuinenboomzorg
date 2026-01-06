@@ -194,9 +194,9 @@ const ProjectenPage = () => {
       {/* Projects Portfolio Grid */}
       <section className="pb-20 lg:pb-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
-          {/* Rest van de projecten - Nu eerste rij */}
+          {/* Eerste rij - Eerste 3 niet-villa projecten */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 mb-12">
-            {projects.filter(p => !p.title.includes("Prachtige Villa Tuin")).map((project, index) => (
+            {projects.filter(p => !p.title.includes("Prachtige Villa Tuin")).slice(0, 3).map((project, index) => (
               <AnimationObserver
                 key={project.id}
                 delay={index * 100}
@@ -299,7 +299,7 @@ const ProjectenPage = () => {
             ))}
           </div>
 
-          {/* Villa Tuin Project - Nu tweede rij */}
+          {/* Villa Tuin Project - Tweede rij */}
           <div className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-0">
               {projects.filter(p => p.title.includes("Prachtige Villa Tuin")).map((project, index) => (
@@ -350,6 +350,111 @@ const ProjectenPage = () => {
                 </AnimationObserver>
               ))}
             </div>
+          </div>
+
+          {/* Rest van de projecten */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+            {projects.filter(p => !p.title.includes("Prachtige Villa Tuin")).slice(3).map((project, index) => (
+              <AnimationObserver
+                key={project.id}
+                delay={index * 100}
+              >
+                <div className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2">
+                  {/* Project Image - Before/After or Single */}
+                  {project.beforeAfter ? (
+                    <div className="relative aspect-[4/3] overflow-hidden bg-stone-50">
+                      <div className="grid grid-cols-2 h-full">
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={project.beforeAfter.before}
+                            alt={`${project.title} - Voor`}
+                            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute bottom-2 left-2 bg-stone-900/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-white">
+                            VOOR
+                          </div>
+                        </div>
+                        <div className="relative overflow-hidden">
+                          <img
+                            src={project.beforeAfter.after}
+                            alt={`${project.title} - Na`}
+                            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                          />
+                          <div className="absolute bottom-2 right-2 bg-primary-900/90 backdrop-blur-sm px-3 py-1 rounded-lg text-xs font-bold text-white">
+                            NA
+                          </div>
+                        </div>
+                      </div>
+                      {/* Size Badge */}
+                      {project.size && (
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
+                          {project.size}
+                        </div>
+                      )}
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      {/* Bekijk Project Button */}
+                      <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <button
+                          onClick={() => openLightbox(project)}
+                          className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
+                        >
+                          <Eye className="w-5 h-5 mr-2" />
+                          Bekijk Project
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className={`relative aspect-[4/3] overflow-hidden ${
+                      project.title === "Maatwerk Tuinpoort"
+                        ? "bg-stone-100"
+                        : "bg-gradient-to-br from-stone-50 to-stone-100"
+                    }`}>
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={`w-full h-full transition-all duration-700 ${
+                          project.title === "Maatwerk Tuinpoort"
+                            ? "object-contain p-4 group-hover:scale-105"
+                            : "object-cover group-hover:scale-110"
+                        }`}
+                      />
+                      {/* Size Badge */}
+                      {project.size && (
+                        <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-xl text-sm font-bold text-stone-900 shadow-soft border border-white/50">
+                          {project.size}
+                        </div>
+                      )}
+                      {/* Hover Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      {/* Bekijk Project Button */}
+                      <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                        <button
+                          onClick={() => openLightbox(project)}
+                          className="w-full bg-white/95 backdrop-blur-sm text-primary-900 py-3 px-4 rounded-xl font-semibold hover:bg-white transition-all duration-300 inline-flex items-center justify-center"
+                        >
+                          <Eye className="w-5 h-5 mr-2" />
+                          Bekijk Project
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Project Info */}
+                  <div className="p-6">
+                    <h3 className="text-xl font-bold text-stone-900 mb-2 group-hover:text-primary-900 transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                    <p className="text-primary-900 font-semibold mb-3 text-sm uppercase tracking-wider">
+                      {project.location}
+                    </p>
+                    <p className="text-stone-600 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+                </div>
+              </AnimationObserver>
+            ))}
           </div>
         </div>
       </section>
