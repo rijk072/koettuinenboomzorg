@@ -104,7 +104,7 @@ const projects: Project[] = [
     size: "25m²",
     category: "0-100",
     image: "/images/balkon-alkmaar-voorbereiding.jpeg",
-    description: "Zorgvuldige voorbereiding voor een balkontuin op grote hoogte. Alle materialen en producten klaargelegd voor de aanleg, inclusief planken voor de vloerafwerking"
+    description: "Zorgvuldige voorbereiding voor een balkontuin op grote hoogte met smart irrigatiesysteem. Alle materialen en producten klaargelegd voor de aanleg, inclusief planken voor de vloerafwerking"
   },
   {
     id: 11,
@@ -113,7 +113,7 @@ const projects: Project[] = [
     size: "25m²",
     category: "0-100",
     image: "/images/balkon-alkmaar-aanleg.jpeg",
-    description: "De aanlegfase op dit unieke balkonproject. Vakkundig uitgevoerd op 6 verdiepingen hoogte, waarbij elke stap met precisie wordt uitgevoerd voor een perfect resultaat"
+    description: "De aanlegfase op dit unieke balkonproject. Vakkundig uitgevoerd op 6 verdiepingen hoogte met geautomatiseerd irrigatiesysteem in de plantenbakken, waarbij elke stap met precisie wordt uitgevoerd"
   },
   {
     id: 12,
@@ -122,7 +122,7 @@ const projects: Project[] = [
     size: "25m²",
     category: "0-100",
     image: "/images/balkon-alkmaar-resultaat.jpeg",
-    description: "Het eindresultaat van deze prachtige balkontuin met smart irrigatiesysteem. Een groene oase op grote hoogte met in de plantenbakken een volledig geautomatiseerd irrigatiesysteem dat via een app te bedienen is. Vakkundig aangelegd door Frans Koet samen met zijn zoon Rijk Koet, die regelmatig meehelpt met de hovenierswerkzaamheden"
+    description: "Een groene oase op grote hoogte met volledig geautomatiseerd irrigatiesysteem dat via een app te bedienen is. Vakkundig aangelegd door Frans Koet samen met zijn zoon Rijk Koet"
   },
   {
     id: 13,

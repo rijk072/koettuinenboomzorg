@@ -480,7 +480,7 @@ const Contact = () => {
           <div className="bg-stone-50 rounded-3xl p-6 shadow-premium">
             <div className="aspect-video rounded-2xl overflow-hidden">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.7!2d4.7833!3d52.5167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c5f7a1b1b1b1b1%3A0x1b1b1b1b1b1b1b1b!2sHeereweg%2038E%2C%201901%20ME%20Bakkum!5e0!3m2!1snl!2snl!4v1640995200000"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2435.6789!2d4.781!3d52.5167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47cf4ff5e5e5e5e5%3A0xabcdef1234567890!2sHeereweg%2038E%2C%201901%20ME%20Bakkum%2C%20Nederland!5e0!3m2!1snl!2snl!4v1704636000000!5m2!1snl!2snl"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

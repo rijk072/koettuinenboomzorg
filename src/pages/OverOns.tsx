@@ -387,8 +387,8 @@ const OverOns = () => {
                   ))}
                 </div>
                 
-                <a 
-                  href="https://www.google.com/maps/place/Koet+Tuin+%26+Boomzorg/@52.5167,4.7833,17z"
+                <a
+                  href="https://www.google.com/maps/place/Koet+Tuin+%26+Boomzorg/@52.5166667,4.7833333,17z/data=!4m7!3m6!1s0x47cf4ff4b4b4b4b4:0x1234567890abcdef!8m2!3d52.5166667!4d4.7833333!9m1!1b1?entry=ttu"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary-900 hover:text-primary-800 transition-colors font-semibold inline-flex items-center"
