@@ -22,11 +22,9 @@ interface ShoppingCartProps {
   onAddBestSeller?: (product: any) => void;
 }
 
-// Best Sellers data - Smaller impulse buy products
-const bestSellers = particulierProducts
-  .filter(p => p.price > 0 && p.price < 20) // Only affordable quick-add products
-  .sort((a, b) => a.price - b.price) // Sort by price ascending
-  .slice(0, 3)
+// Recommended products from particulier shop
+const recommendedProducts = particulierProducts
+  .filter(p => p.price > 0) // Only products with prices
   .map(product => ({
     id: parseInt(product.id),
     name: product.name,
@@ -47,6 +45,12 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
 }) => {
   const totalPrice = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const totalItems = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Get 2 products that are not in the cart
+  const cartProductIds = items.map(item => item.id);
+  const suggestedProducts = recommendedProducts
+    .filter(p => !cartProductIds.includes(p.id))
+    .slice(0, 2);
 
   const handleAddBestSeller = (product: any) => {
     if (onAddBestSeller) {
@@ -153,16 +157,17 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
           )}
           </div>
 
-          {/* Best Sellers Section */}
+          {/* Suggested Products Section */}
+          {suggestedProducts.length > 0 && (
           <div className="p-6">
             <div className="flex items-center mb-4">
               <Star className="w-5 h-5 text-accent-500 mr-2" />
               <h3 className="text-lg font-semibold text-stone-900">Snel erbij</h3>
             </div>
             <p className="text-sm text-stone-600 mb-4">Handige producten voor in je tuin</p>
-            
+
             <div className="space-y-3">
-              {bestSellers.map((product) => (
+              {suggestedProducts.map((product) => (
                 <div key={product.id} className="flex items-center bg-stone-50 rounded-xl p-3 hover:bg-stone-100 transition-colors">
                   <img
                     src={product.image}
@@ -191,6 +196,7 @@ const ShoppingCart: React.FC<ShoppingCartProps> = ({
               ))}
             </div>
           </div>
+          )}
         </div>
 
         {/* Footer - Fixed at bottom */}

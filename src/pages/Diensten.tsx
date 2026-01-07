@@ -15,8 +15,8 @@ const Diensten = () => {
     {
       icon: <TreePine className="w-8 h-8" />,
       title: "Tuinaanleg",
-      description: "Professionele aanleg van uw droomtuin met hoogwaardige materialen en vakkundige uitvoering.",
-      features: ["Grondvoorbereiding", "Beplanting & gazon", "Verharding & paden", "Tuinverlichting"],
+      description: "Professionele aanleg van uw droomtuin met hoogwaardige materialen en vakkundige uitvoering, inclusief vijveraanleg.",
+      features: ["Grondvoorbereiding", "Beplanting & gazon", "Verharding & paden", "Vijvers & waterelementen"],
       gradient: "from-primary-600 to-primary-500"
     },
     {
@@ -42,9 +42,9 @@ const Diensten = () => {
     },
     {
       icon: <Flower className="w-8 h-8" />,
-      title: "Plantadvies",
-      description: "Deskundig advies over plantkeuze, verzorging en seizoensplanning voor een bloeiende tuin.",
-      features: ["Bodemanalyse", "Plantselectie", "Verzorgingsschema", "Ziektepreventie"],
+      title: "Plantadvies & Beplanting",
+      description: "Deskundig advies en levering van sierplanten, heesters en kwalitatieve tuinaarde voor optimale plantengroei.",
+      features: ["Bodemanalyse & tuinaarde", "Plantselectie & sierplanten", "Verzorgingsschema", "Tuindecoratie"],
       gradient: "from-primary-600 to-primary-500"
     }
   ];
