@@ -9,7 +9,7 @@ const Diensten = () => {
       icon: <Palette className="w-8 h-8" />,
       title: "Tuinontwerp",
       description: "Unieke ontwerpen die perfect aansluiten bij uw wensen, budget en de natuurlijke omgeving van uw tuin.",
-      features: ["3D visualisaties", "Plantenschema's", "Materiaaladvies", "Seizoensplanning"],
+      features: ["3D visualisaties (tegen meerkosten via offerte)", "Plantenschema's", "Materiaaladvies", "Seizoensplanning"],
       gradient: "from-primary-700 to-primary-600"
     },
     {
@@ -96,9 +96,9 @@ const Diensten = () => {
                 <div className="space-y-4">
                   {[
                     "Van ontwerp tot realisatie",
-                    "Vakkundige uitvoering", 
+                    "Vakkundige uitvoering",
                     "Persoonlijke begeleiding",
-                    "35+ jaar ervaring"
+                    "30+ jaar ervaring"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-primary-600 mr-3 flex-shrink-0" />
@@ -194,9 +194,9 @@ const Diensten = () => {
                       description: "Vrijblijvend gesprek over uw wensen, budget en mogelijkheden."
                     },
                     {
-                      step: "2", 
+                      step: "2",
                       title: "Ontwerp",
-                      description: "Uitgewerkt tuinontwerp met 3D visualisaties en plantenschema's."
+                      description: "Uitgewerkt tuinontwerp met plantenschema's. 3D visualisaties mogelijk tegen meerkosten."
                     },
                     {
                       step: "3",

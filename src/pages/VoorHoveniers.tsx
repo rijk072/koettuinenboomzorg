@@ -143,7 +143,7 @@ const VoorHoveniers = () => {
 
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-900 mb-2">35+</div>
+                    <div className="text-3xl font-bold text-primary-900 mb-2">30+</div>
                     <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Jaar Ervaring</div>
                   </div>
                 </div>

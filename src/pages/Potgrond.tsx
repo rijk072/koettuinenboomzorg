@@ -126,7 +126,7 @@ const Potgrond = () => {
                 </div>
                 <h3 className="text-xl font-medium text-stone-900 mb-4">Kwaliteitsgarantie</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  35+ jaar ervaring in tuinproducten. Niet tevreden? 
+                  30+ jaar ervaring in tuinproducten. Niet tevreden?
                   Geld terug garantie binnen 30 dagen.
                 </p>
               </div>
@@ -262,7 +262,7 @@ const Potgrond = () => {
               </h2>
               <div className="w-16 h-px bg-primary-900 mx-auto mb-6"></div>
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed max-w-2xl mx-auto">
-                Met 35+ jaar ervaring weten wij precies wat planten nodig hebben
+                Met 30+ jaar ervaring weten wij precies wat planten nodig hebben
               </p>
             </div>
           </AnimationObserver>
@@ -277,7 +277,7 @@ const Potgrond = () => {
               {
                 icon: <Award className="w-8 h-8" />,
                 title: "Vakkundig Samengesteld",
-                description: "35+ jaar ervaring in het samenstellen van de perfecte potgrond mix"
+                description: "30+ jaar ervaring in het samenstellen van de perfecte potgrond mix"
               },
               {
                 icon: <Heart className="w-8 h-8" />,

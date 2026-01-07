@@ -47,8 +47,8 @@ const OverOns = () => {
                   <p className="text-xl text-stone-600 leading-relaxed">
                   </p>
                   <p className="text-lg text-stone-600 leading-relaxed">
-                    Koet Tuin & Boomzorg is een familiebedrijf met meer dan 35 jaar ervaring 
-                    in het creëren van prachtige buitenruimtes. Onze passie voor tuinen en 
+                    Koet Tuin & Boomzorg is een familiebedrijf met meer dan 30 jaar ervaring
+                    in het creëren van prachtige buitenruimtes. Onze passie voor tuinen en
                     vakmanschap vormt de basis van alles wat we doen.
                   </p>
                   
@@ -80,7 +80,7 @@ const OverOns = () => {
 
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-900 mb-2">35+</div>
+                    <div className="text-3xl font-bold text-primary-900 mb-2">30+</div>
                     <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Jaar Ervaring</div>
                   </div>
                 </div>
@@ -134,19 +134,19 @@ const OverOns = () => {
                   <div className="w-20 h-20 bg-gradient-to-br from-primary-900 to-primary-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <Award className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-semibold text-stone-900 mb-4">European Tree Worker</h3>
+                  <h3 className="text-2xl font-semibold text-stone-900 mb-4">30 Jaar Ervaring</h3>
                   <p className="text-stone-600 leading-relaxed">
-                    Gecertificeerd volgens de hoogste Europese standaarden voor 
+                    Meer dan drie decennia ervaring in
                     boomverzorging en tuinonderhoud.
                   </p>
                 </div>
-                
+
                 <div className="space-y-4">
                   {[
                     "Vakkundige boomverzorging",
-                    "Professionele tuinaanleg", 
+                    "Professionele tuinaanleg",
                     "Duurzaam onderhoud",
-                    "35+ jaar ervaring"
+                    "30+ jaar ervaring"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-primary-600 mr-3 flex-shrink-0" />
@@ -171,7 +171,7 @@ const OverOns = () => {
                 </h2>
                 
                 <p className="text-xl text-stone-600 leading-relaxed">
-                  De principes die ons werk en onze relaties met klanten vormgeven sinds 1989.
+                  De principes die ons werk en onze relaties met klanten vormgeven sinds 1997.
                 </p>
                 
                 <div className="space-y-6">
@@ -221,7 +221,7 @@ const OverOns = () => {
                     <Leaf className="w-8 h-8 text-primary-900 mr-3" />
                     <div>
                       <div className="text-lg font-bold text-stone-900">Duurzaam</div>
-                      <div className="text-sm text-stone-600">Sinds 1989</div>
+                      <div className="text-sm text-stone-600">Sinds 1997</div>
                     </div>
                   </div>
                 </div>
@@ -252,7 +252,7 @@ const OverOns = () => {
                       role: "Oprichter & Eigenaar",
                       initials: "FK",
                       image: "/images/frans-koet-team.jpeg",
-                      description: "Meer dan 35 jaar ervaring in de tuinbranche met een scherp oog voor detail."
+                      description: "Meer dan 30 jaar ervaring in de tuinbranche met een scherp oog voor detail."
                     },
                     {
                       name: "Tristan Paap",
@@ -309,8 +309,8 @@ const OverOns = () => {
                 
                 <div className="space-y-4">
                   {[
-                    "European Tree Worker gecertificeerd",
-                    "35+ jaar gecombineerde ervaring",
+                    "Meer dan 30 jaar ervaring",
+                    "30+ jaar gecombineerde ervaring",
                     "Persoonlijke begeleiding elk project",
                     "Vakmanschap van de hoogste kwaliteit"
                   ].map((item, index) => (
@@ -420,9 +420,9 @@ const OverOns = () => {
                 <div className="space-y-4 mb-8">
                   {[
                     "100% tevreden klanten",
-                    "Gemiddeld 5 sterren beoordeling", 
+                    "Gemiddeld 4.5 sterren beoordeling",
                     "Meer dan 500 gerealiseerde projecten",
-                    "35+ jaar ervaring"
+                    "30+ jaar ervaring"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-accent-400 mr-3 flex-shrink-0" />

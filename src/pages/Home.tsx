@@ -25,8 +25,8 @@ const Home: React.FC = () => {
               <span className="block text-white mt-2">voor de veeleisende klant</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
-              Meer dan 35 jaar ervaring in vakkundige tuinaanleg, onderhoud en boomverzorging. 
-              European Tree Worker gecertificeerd voor de hoogste kwaliteitsstandaarden.
+              Meer dan 30 jaar ervaring in vakkundige tuinaanleg, onderhoud en boomverzorging.
+              Vakmanschap voor de hoogste kwaliteitsstandaarden.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link 
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full mb-8"></div>
               <p className="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
-                Ontdek waarom klanten al meer dan 35 jaar voor ons kiezen
+                Ontdek waarom klanten al meer dan 30 jaar voor ons kiezen
               </p>
             </div>
           </AnimationObserver>
@@ -70,8 +70,8 @@ const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-heading font-semibold mb-4 text-stone-900 group-hover:text-primary-900 transition-colors duration-300">Premium Vakmanschap</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  Meer dan 35 jaar ervaring in tuinontwerp en -realisatie. 
-                  European Tree Worker gecertificeerd voor de hoogste kwaliteitsstandaarden.
+                  Meer dan 30 jaar ervaring in tuinontwerp en -realisatie.
+                  Vakmanschap voor de hoogste kwaliteitsstandaarden.
                 </p>
               </div>
             </AnimationObserver>
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
                 </h2>
                 
                 <p className="text-lg text-stone-600 leading-relaxed">
-                  Met meer dan 35 jaar ervaring realiseren wij tuinen die perfect aansluiten 
+                  Met meer dan 30 jaar ervaring realiseren wij tuinen die perfect aansluiten
                   bij uw wensen en levensstijl. Van ontwerp tot onderhoud.
                 </p>
                 
@@ -149,7 +149,7 @@ const Home: React.FC = () => {
                   {[
                     {
                       title: "Vakkundige Uitvoering",
-                      description: "European Tree Worker gecertificeerd voor de hoogste kwaliteitsstandaarden in tuinrealisatie."
+                      description: "Meer dan 30 jaar ervaring voor de hoogste kwaliteitsstandaarden in tuinrealisatie."
                     },
                     {
                       title: "Complete Ontzorging",
@@ -194,7 +194,7 @@ const Home: React.FC = () => {
                 
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-900 mb-2">35+</div>
+                    <div className="text-3xl font-bold text-primary-900 mb-2">30+</div>
                     <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Jaar Ervaring</div>
                   </div>
                 </div>
