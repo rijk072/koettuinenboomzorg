@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ShoppingCart, ArrowRight, Phone, Mail } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { Product } from '../lib/supabase';
-import { particulierProducts, zakelijkProducts } from '../data/products';
+import { particulierProducts, zakelijkProducts, quickAddProducts } from '../data/products';
 
 interface ShopProps {
   onAddToCart: (product: Product) => void;
@@ -159,7 +159,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                       ) : (
                         <div>
                           <div className="text-lg font-bold text-primary-900">
-                            Handelsprijs op aanvraag
+                            {activeTab === 'particulier' ? 'Prijs op aanvraag' : 'Handelsprijs op aanvraag'}
                           </div>
                           <div className="text-xs text-stone-500 mt-1">
                             U wordt gebeld na bestelling
@@ -182,6 +182,58 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
               </AnimationObserver>
             ))}
           </div>
+
+          {/* Quick Add Section - Only for Particulier */}
+          {activeTab === 'particulier' && (
+            <AnimationObserver>
+              <div className="mt-20">
+                <div className="text-center mb-10">
+                  <h2 className="text-3xl font-bold text-stone-900 mb-3">
+                    Handige Producten voor in je Tuin
+                  </h2>
+                  <p className="text-lg text-stone-600">
+                    Snel toevoegen aan je winkelmandje
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {quickAddProducts.map((product, index) => (
+                    <AnimationObserver key={product.id} delay={index * 80}>
+                      <div className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                        <Link to={`/product/${product.id}`} className="block relative aspect-square overflow-hidden bg-stone-50">
+                          <img
+                            src={product.image_url}
+                            alt={product.name}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </Link>
+
+                        <div className="p-4">
+                          <Link to={`/product/${product.id}`}>
+                            <h3 className="font-bold text-stone-900 mb-2 group-hover:text-primary-900 transition-colors text-sm">
+                              {product.name}
+                            </h3>
+                          </Link>
+
+                          <p className="text-xs text-stone-600 mb-3 line-clamp-2">
+                            {product.description}
+                          </p>
+
+                          <Link
+                            to={`/product/${product.id}`}
+                            className="w-full bg-primary-900 text-white py-2 px-3 rounded-lg font-semibold hover:bg-primary-800 transition-all duration-300 inline-flex items-center justify-center text-sm"
+                          >
+                            <ShoppingCart className="w-4 h-4 mr-1" />
+                            Bekijk Product
+                          </Link>
+                        </div>
+                      </div>
+                    </AnimationObserver>
+                  ))}
+                </div>
+              </div>
+            </AnimationObserver>
+          )}
 
           {/* Contact CTA */}
           <AnimationObserver>
