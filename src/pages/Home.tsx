@@ -194,8 +194,8 @@ const Home: React.FC = () => {
                 
                 <div className="absolute -bottom-6 -right-6 bg-white/95 backdrop-blur-sm rounded-xl p-6 shadow-soft-lg border border-white/50">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-900 mb-2">30+</div>
-                    <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Jaar Ervaring</div>
+                    <div className="text-3xl font-bold text-primary-900 mb-2">500+</div>
+                    <div className="text-sm font-semibold text-stone-600 uppercase tracking-wider">Projecten Gerealiseerd</div>
                   </div>
                 </div>
               </div>
@@ -298,21 +298,24 @@ const Home: React.FC = () => {
                 location: "Alkmaar",
                 review: "Frans en zijn team hebben onze tuin volledig getransformeerd. Vakmanschap en betrouwbaarheid op het hoogste niveau.",
                 initials: "FJ",
-                delay: 0
+                delay: 0,
+                stars: 5
               },
               {
-                name: "M. van der Berg", 
+                name: "M. van der Berg",
                 location: "Egmond",
                 review: "Al jaren klant van het onderhoud. Altijd netjes op tijd en de tuin ziet er het hele jaar door prachtig uit.",
                 initials: "MB",
-                delay: 100
+                delay: 100,
+                stars: 4.5
               },
               {
                 name: "J. de Wit",
                 location: "Heiloo",
                 review: "Perfecte service en prachtig resultaat. Kunnen het iedereen aanraden!",
                 initials: "JW",
-                delay: 200
+                delay: 200,
+                stars: 4
               }
             ].map((review, index) => (
               <AnimationObserver key={index} delay={review.delay}>
@@ -327,20 +330,28 @@ const Home: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`w-5 h-5 text-yellow-400 ${i === 4 ? 'fill-[url(#half)]' : 'fill-current'}`}
-                      />
-                    ))}
-                    <svg width="0" height="0">
-                      <defs>
-                        <linearGradient id="half">
-                          <stop offset="50%" stopColor="currentColor" className="text-yellow-400" />
-                          <stop offset="50%" stopColor="transparent" />
-                        </linearGradient>
-                      </defs>
-                    </svg>
+                    {[...Array(5)].map((_, i) => {
+                      const shouldFill = i < Math.floor(review.stars);
+                      const shouldHalfFill = i === Math.floor(review.stars) && review.stars % 1 !== 0;
+                      return (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 text-yellow-400 ${
+                            shouldFill ? 'fill-current' : shouldHalfFill ? 'fill-[url(#half-' + index + ')]' : 'fill-transparent stroke-current'
+                          }`}
+                        />
+                      );
+                    })}
+                    {review.stars % 1 !== 0 && (
+                      <svg width="0" height="0">
+                        <defs>
+                          <linearGradient id={`half-${index}`}>
+                            <stop offset="50%" stopColor="currentColor" className="text-yellow-400" />
+                            <stop offset="50%" stopColor="transparent" />
+                          </linearGradient>
+                        </defs>
+                      </svg>
+                    )}
                   </div>
                   <p className="text-stone-600 leading-relaxed italic">"{review.review}"</p>
                 </div>
