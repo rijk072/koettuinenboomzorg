@@ -126,7 +126,7 @@ const Potgrond = () => {
                 </div>
                 <h3 className="text-xl font-medium text-stone-900 mb-4">Kwaliteitsgarantie</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  30+ jaar ervaring in tuinproducten. Niet tevreden?
+                  Jarenlange expertise in tuinproducten. Niet tevreden?
                   Geld terug garantie binnen 30 dagen.
                 </p>
               </div>
@@ -262,7 +262,7 @@ const Potgrond = () => {
               </h2>
               <div className="w-16 h-px bg-primary-900 mx-auto mb-6"></div>
               <p className="text-lg md:text-xl text-stone-700 leading-relaxed max-w-2xl mx-auto">
-                Met 30+ jaar ervaring weten wij precies wat planten nodig hebben
+                Als tuinspecialisten weten wij precies wat planten nodig hebben
               </p>
             </div>
           </AnimationObserver>
@@ -277,7 +277,7 @@ const Potgrond = () => {
               {
                 icon: <Award className="w-8 h-8" />,
                 title: "Vakkundig Samengesteld",
-                description: "30+ jaar ervaring in het samenstellen van de perfecte potgrond mix"
+                description: "Jarenlange expertise in het samenstellen van de perfecte potgrond mix"
               },
               {
                 icon: <Heart className="w-8 h-8" />,
@@ -439,15 +439,15 @@ const Potgrond = () => {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full mb-8"></div>
             <p className="text-lg md:text-xl text-stone-700 mb-8 leading-relaxed max-w-2xl mx-auto">
-              Neem contact op voor uw bestelling of voor advies over de juiste potgrond voor uw project.
+              Bespreek uw potgrondbehoeften of vraag advies over de juiste keuze voor uw project.
             </p>
-            
+
             <div className="flex justify-center">
-              <Link 
+              <Link
                 to="/contact"
                 className="bg-gradient-to-r from-primary-900 to-primary-800 text-white px-12 py-5 rounded-2xl font-bold text-lg hover:from-primary-800 hover:to-primary-700 transition-all duration-700 shadow-premium-lg hover:shadow-premium-xl transform hover:scale-105 hover:-translate-y-2 inline-flex items-center justify-center"
               >
-                NEEM CONTACT OP
+                VRAAG POTGRONDADVIES
                 <ArrowRight className="ml-3 w-5 h-5" />
               </Link>
             </div>

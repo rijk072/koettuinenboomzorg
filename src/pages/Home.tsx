@@ -25,15 +25,15 @@ const Home: React.FC = () => {
               <span className="block text-white mt-2">voor de veeleisende klant</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl">
-              Meer dan 30 jaar ervaring in vakkundige tuinaanleg, onderhoud en boomverzorging.
-              Vakmanschap voor de hoogste kwaliteitsstandaarden.
+              Gecertificeerd vakmanschap in tuinaanleg, onderhoud en boomverzorging.
+              Premium hovenierswerk voor de hoogste kwaliteitsstandaarden.
             </p>
             <div className="flex flex-col sm:flex-row gap-6">
-              <Link 
+              <Link
                 to="/contact"
                 className="bg-white text-primary-900 px-10 py-5 rounded-xl font-semibold text-lg hover:bg-neutral-100 transition-all duration-300 transform hover:scale-105 shadow-premium-lg inline-flex items-center justify-center uppercase tracking-wider"
               >
-                GRATIS OFFERTE
+                VRAAG VRIJBLIJVEND ADVIES
                 <ArrowRight className="w-5 h-5 ml-3" />
               </Link>
               <a 
@@ -57,7 +57,7 @@ const Home: React.FC = () => {
               </h2>
               <div className="w-24 h-1 bg-gradient-to-r from-primary-600 to-primary-400 mx-auto rounded-full mb-8"></div>
               <p className="text-xl text-stone-600 max-w-4xl mx-auto leading-relaxed">
-                Ontdek waarom klanten al meer dan 30 jaar voor ons kiezen
+                Ontdek waarom klanten sinds 1997 voor ons kiezen
               </p>
             </div>
           </AnimationObserver>
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
                 </div>
                 <h3 className="text-xl font-heading font-semibold mb-4 text-stone-900 group-hover:text-primary-900 transition-colors duration-300">Premium Vakmanschap</h3>
                 <p className="text-stone-600 leading-relaxed">
-                  Meer dan 30 jaar ervaring in tuinontwerp en -realisatie.
+                  Bewezen tuinexpertise in ontwerp en realisatie.
                   Vakmanschap voor de hoogste kwaliteitsstandaarden.
                 </p>
               </div>
@@ -141,7 +141,7 @@ const Home: React.FC = () => {
                 </h2>
                 
                 <p className="text-lg text-stone-600 leading-relaxed">
-                  Met meer dan 30 jaar ervaring realiseren wij tuinen die perfect aansluiten
+                  Als tuinspecialisten realiseren wij tuinen die perfect aansluiten
                   bij uw wensen en levensstijl. Van ontwerp tot onderhoud.
                 </p>
                 
@@ -149,7 +149,7 @@ const Home: React.FC = () => {
                   {[
                     {
                       title: "Vakkundige Uitvoering",
-                      description: "Meer dan 30 jaar ervaring voor de hoogste kwaliteitsstandaarden in tuinrealisatie."
+                      description: "Jarenlange tuinervaring voor de hoogste kwaliteitsstandaarden in tuinrealisatie."
                     },
                     {
                       title: "Complete Ontzorging",
@@ -328,8 +328,19 @@ const Home: React.FC = () => {
                   </div>
                   <div className="flex mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                      <Star
+                        key={i}
+                        className={`w-5 h-5 text-yellow-400 ${i === 4 ? 'fill-[url(#half)]' : 'fill-current'}`}
+                      />
                     ))}
+                    <svg width="0" height="0">
+                      <defs>
+                        <linearGradient id="half">
+                          <stop offset="50%" stopColor="currentColor" className="text-yellow-400" />
+                          <stop offset="50%" stopColor="transparent" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
                   <p className="text-stone-600 leading-relaxed italic">"{review.review}"</p>
                 </div>

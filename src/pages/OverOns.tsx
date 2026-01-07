@@ -47,8 +47,8 @@ const OverOns = () => {
                   <p className="text-xl text-stone-600 leading-relaxed">
                   </p>
                   <p className="text-lg text-stone-600 leading-relaxed">
-                    Koet Tuin & Boomzorg is een familiebedrijf met meer dan 30 jaar ervaring
-                    in het creëren van prachtige buitenruimtes. Onze passie voor tuinen en
+                    Koet Tuin & Boomzorg is een familiebedrijf opgericht in 1997,
+                    gespecialiseerd in het creëren van prachtige buitenruimtes. Onze passie voor tuinen en
                     vakmanschap vormt de basis van alles wat we doen.
                   </p>
                   
@@ -58,11 +58,11 @@ const OverOns = () => {
                   </p>
                 </div>
                 
-                <Link 
+                <Link
                   to="/contact"
                   className="bg-gradient-to-r from-primary-900 to-primary-800 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center"
                 >
-                  GRATIS OFFERTE
+                  PLAN EEN TUINGESPREK
                   <ArrowRight className="ml-3 w-5 h-5" />
                 </Link>
               </div>
@@ -134,9 +134,9 @@ const OverOns = () => {
                   <div className="w-20 h-20 bg-gradient-to-br from-primary-900 to-primary-700 rounded-2xl flex items-center justify-center mx-auto mb-6">
                     <Award className="w-10 h-10 text-white" />
                   </div>
-                  <h3 className="text-2xl font-semibold text-stone-900 mb-4">30 Jaar Ervaring</h3>
+                  <h3 className="text-2xl font-semibold text-stone-900 mb-4">Vakkundig Tuinadvies</h3>
                   <p className="text-stone-600 leading-relaxed">
-                    Meer dan drie decennia ervaring in
+                    Deskundige begeleiding voor
                     boomverzorging en tuinonderhoud.
                   </p>
                 </div>
@@ -146,7 +146,7 @@ const OverOns = () => {
                     "Vakkundige boomverzorging",
                     "Professionele tuinaanleg",
                     "Duurzaam onderhoud",
-                    "30+ jaar ervaring"
+                    "Bewezen tuinexpertise"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-primary-600 mr-3 flex-shrink-0" />
@@ -179,7 +179,7 @@ const OverOns = () => {
                     {
                       icon: <Award className="w-6 h-6" />,
                       title: "Vakmanschap",
-                      description: "Meer dan drie decennia ervaring in tuinrealisatie. Kwaliteit en precisie in elk detail."
+                      description: "Gecertificeerde tuinprofessionals met jarenlange ervaring. Kwaliteit en precisie in elk detail."
                     },
                     {
                       icon: <Users className="w-6 h-6" />,
@@ -252,7 +252,7 @@ const OverOns = () => {
                       role: "Oprichter & Eigenaar",
                       initials: "FK",
                       image: "/images/frans-koet-team.jpeg",
-                      description: "Meer dan 30 jaar ervaring in de tuinbranche met een scherp oog voor detail."
+                      description: "Oprichter en tuinspecialist met een scherp oog voor detail en passie voor vakmanschap."
                     },
                     {
                       name: "Tristan Paap",
@@ -309,8 +309,8 @@ const OverOns = () => {
                 
                 <div className="space-y-4">
                   {[
-                    "Meer dan 30 jaar ervaring",
-                    "30+ jaar gecombineerde ervaring",
+                    "Tuinspecialisten met passie",
+                    "Gecombineerde tuinexpertise",
                     "Persoonlijke begeleiding elk project",
                     "Vakmanschap van de hoogste kwaliteit"
                   ].map((item, index) => (
@@ -368,8 +368,19 @@ const OverOns = () => {
                     <div key={index} className="bg-stone-50 rounded-2xl p-6">
                       <div className="flex mb-4">
                         {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="w-5 h-5 text-accent-500 fill-current" />
+                          <Star
+                            key={i}
+                            className={`w-5 h-5 text-accent-500 ${i === 4 ? 'fill-[url(#half-over)]' : 'fill-current'}`}
+                          />
                         ))}
+                        <svg width="0" height="0">
+                          <defs>
+                            <linearGradient id="half-over">
+                              <stop offset="50%" stopColor="currentColor" className="text-accent-500" />
+                              <stop offset="50%" stopColor="transparent" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
                       </div>
                       <p className="text-stone-700 italic leading-relaxed mb-4">
                         "{review.review}"
@@ -408,8 +419,19 @@ const OverOns = () => {
                   <h3 className="text-2xl font-semibold mb-4">Uitstekende Reviews</h3>
                   <div className="flex justify-center mb-4">
                     {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-6 h-6 text-accent-400 fill-current" />
+                      <Star
+                        key={i}
+                        className={`w-6 h-6 text-accent-400 ${i === 4 ? 'fill-[url(#half-review)]' : 'fill-current'}`}
+                      />
                     ))}
+                    <svg width="0" height="0">
+                      <defs>
+                        <linearGradient id="half-review">
+                          <stop offset="50%" stopColor="currentColor" className="text-accent-400" />
+                          <stop offset="50%" stopColor="transparent" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                   </div>
                   <p className="text-white/90 leading-relaxed mb-6">
                     Onze klanten waarderen onze vakmanschap, betrouwbaarheid 
@@ -422,7 +444,7 @@ const OverOns = () => {
                     "100% tevreden klanten",
                     "Gemiddeld 4.5 sterren beoordeling",
                     "Meer dan 500 gerealiseerde projecten",
-                    "30+ jaar ervaring"
+                    "Bewezen tuinexpertise"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-accent-400 mr-3 flex-shrink-0" />
@@ -431,11 +453,11 @@ const OverOns = () => {
                   ))}
                 </div>
                 
-                <Link 
+                <Link
                   to="/contact"
                   className="w-full bg-white text-primary-900 py-4 rounded-xl font-semibold text-center hover:bg-neutral-50 transition-all duration-300 transform hover:scale-105 block"
                 >
-                  Word ook een tevreden klant
+                  Bespreek uw tuinwensen
                 </Link>
               </div>
             </AnimationObserver>

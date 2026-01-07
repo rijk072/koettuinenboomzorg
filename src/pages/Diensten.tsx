@@ -98,7 +98,7 @@ const Diensten = () => {
                     "Van ontwerp tot realisatie",
                     "Vakkundige uitvoering",
                     "Persoonlijke begeleiding",
-                    "30+ jaar ervaring"
+                    "Bewezen tuinexpertise"
                   ].map((item, index) => (
                     <div key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 text-primary-600 mr-3 flex-shrink-0" />
@@ -107,11 +107,11 @@ const Diensten = () => {
                   ))}
                 </div>
                 
-                <Link 
+                <Link
                   to="/contact"
                   className="bg-gradient-to-r from-primary-900 to-primary-800 text-white px-10 py-4 rounded-xl font-semibold text-lg hover:from-primary-800 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 inline-flex items-center"
                 >
-                  GRATIS OFFERTE
+                  START UW TUINPROJECT
                   <ArrowRight className="ml-3 w-5 h-5" />
                 </Link>
               </div>
