@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, CreditCard, MapPin, Truck, CheckCircle, Loader2, AlertCircle, Wallet } from 'lucide-react';
+import { ArrowLeft, CreditCard, MapPin, Truck, CheckCircle, Loader2, AlertCircle, Wallet, ShoppingCart, User } from 'lucide-react';
 import AnimationObserver from '../components/AnimationObserver';
 import { db } from '../lib/supabase';
 
@@ -20,6 +20,8 @@ interface CheckoutProps {
 }
 
 const Checkout: React.FC<CheckoutProps> = ({ cartItems, onClearCart }) => {
+  const [isGuestCheckout, setIsGuestCheckout] = useState(true);
+  const [existingCustomerEmail, setExistingCustomerEmail] = useState('');
   const [formData, setFormData] = useState({
     naam: '',
     email: '',
@@ -312,6 +314,128 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, onClearCart }) => {
                 <h2 className="text-2xl font-semibold text-stone-900 mb-6">Bezorggegevens</h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Klant Type Keuze */}
+                  <div className="bg-stone-50 border border-stone-200 rounded-2xl p-6 mb-6">
+                    <h3 className="text-lg font-semibold text-stone-900 mb-4">
+                      Hoe wilt u bestellen?
+                    </h3>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <button
+                        type="button"
+                        onClick={() => setIsGuestCheckout(true)}
+                        className={`p-6 rounded-xl border-2 transition-all text-left ${
+                          isGuestCheckout
+                            ? 'border-primary-900 bg-primary-50'
+                            : 'border-stone-200 bg-white hover:border-stone-300'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                            isGuestCheckout ? 'bg-primary-900' : 'bg-stone-200'
+                          }`}>
+                            <ShoppingCart className={`w-6 h-6 ${
+                              isGuestCheckout ? 'text-white' : 'text-stone-600'
+                            }`} />
+                          </div>
+                          {isGuestCheckout && (
+                            <CheckCircle className="w-6 h-6 text-primary-900" />
+                          )}
+                        </div>
+                        <h4 className="font-semibold text-stone-900 mb-2">
+                          Als gast bestellen
+                        </h4>
+                        <p className="text-sm text-stone-600">
+                          Snel afrekenen zonder account. Uw gegevens worden opgeslagen voor deze bestelling.
+                        </p>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setIsGuestCheckout(false)}
+                        className={`p-6 rounded-xl border-2 transition-all text-left ${
+                          !isGuestCheckout
+                            ? 'border-primary-900 bg-primary-50'
+                            : 'border-stone-200 bg-white hover:border-stone-300'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+                            !isGuestCheckout ? 'bg-primary-900' : 'bg-stone-200'
+                          }`}>
+                            <User className={`w-6 h-6 ${
+                              !isGuestCheckout ? 'text-white' : 'text-stone-600'
+                            }`} />
+                          </div>
+                          {!isGuestCheckout && (
+                            <CheckCircle className="w-6 h-6 text-primary-900" />
+                          )}
+                        </div>
+                        <h4 className="font-semibold text-stone-900 mb-2">
+                          Terugkerende klant
+                        </h4>
+                        <p className="text-sm text-stone-600">
+                          Vul uw email in om uw eerdere gegevens op te halen en sneller af te rekenen.
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Terugkerende Klant Email Check */}
+                  {!isGuestCheckout && (
+                    <div className="bg-white border border-stone-200 rounded-2xl p-6 mb-6">
+                      <label className="block text-sm font-medium text-stone-700 mb-2">
+                        Email adres *
+                      </label>
+                      <div className="flex gap-3">
+                        <input
+                          type="email"
+                          value={existingCustomerEmail}
+                          onChange={(e) => setExistingCustomerEmail(e.target.value)}
+                          placeholder="uw@email.nl"
+                          className="flex-1 px-4 py-3 border border-stone-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            try {
+                              const orders = await db.getOrders();
+                              const lastOrder = orders.find(o =>
+                                o.customer_email.toLowerCase() === existingCustomerEmail.toLowerCase()
+                              );
+
+                              if (lastOrder) {
+                                setFormData({
+                                  naam: lastOrder.customer_name,
+                                  email: lastOrder.customer_email,
+                                  telefoon: lastOrder.customer_phone || '',
+                                  adres: lastOrder.delivery_address || '',
+                                  postcode: lastOrder.delivery_postal_code || '',
+                                  plaats: lastOrder.delivery_city || '',
+                                  verzendoptie: lastOrder.delivery_method,
+                                  afhaaldatum: ''
+                                });
+                                alert('Gegevens gevonden en ingevuld! ✓');
+                              } else {
+                                alert('Geen eerdere bestellingen gevonden met dit email adres. U kunt als gast bestellen.');
+                              }
+                            } catch (error) {
+                              console.error('Error finding customer:', error);
+                              alert('Er is een fout opgetreden. Probeer als gast te bestellen.');
+                            }
+                          }}
+                          className="px-6 py-3 bg-primary-900 text-white rounded-xl font-semibold hover:bg-primary-800 transition-colors whitespace-nowrap"
+                        >
+                          Gegevens Ophalen
+                        </button>
+                      </div>
+                      <p className="text-xs text-stone-500 mt-2">
+                        We zoeken naar uw eerdere bestellingen om uw gegevens automatisch in te vullen.
+                      </p>
+                    </div>
+                  )}
+
                   {/* Persoonlijke gegevens */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-medium text-stone-900">Persoonlijke gegevens</h3>

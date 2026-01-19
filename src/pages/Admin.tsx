@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck, Wallet, CreditCard, Trash2 } from 'lucide-react';
+import { Mail, Phone, Calendar, CheckCircle2, Clock, Archive, Package, ShoppingCart, Euro, MapPin, Truck, Wallet, CreditCard, Trash2, Lock, Users, Star, User } from 'lucide-react';
 import { db, ContactSubmission, Order } from '../lib/supabase';
+import AdminLogin from '../components/AdminLogin';
 
 const Admin: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'contact' | 'orders' | 'archive'>('contact');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [activeTab, setActiveTab] = useState<'contact' | 'orders' | 'customers' | 'archive'>('contact');
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
@@ -13,8 +16,33 @@ const Admin: React.FC = () => {
   const [archiveFilter, setArchiveFilter] = useState<'all' | 'contact' | 'orders'>('all');
 
   useEffect(() => {
-    loadData();
-  }, [activeTab]);
+    const checkAuth = () => {
+      const authStatus = sessionStorage.getItem('admin_authenticated');
+      const loginTime = sessionStorage.getItem('admin_login_time');
+
+      if (authStatus === 'true' && loginTime) {
+        const loginDate = new Date(loginTime);
+        const now = new Date();
+        const hoursDiff = (now.getTime() - loginDate.getTime()) / (1000 * 60 * 60);
+
+        if (hoursDiff < 24) {
+          setIsAuthenticated(true);
+        } else {
+          sessionStorage.removeItem('admin_authenticated');
+          sessionStorage.removeItem('admin_login_time');
+        }
+      }
+      setIsCheckingAuth(false);
+    };
+
+    checkAuth();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadData();
+    }
+  }, [activeTab, isAuthenticated]);
 
   const loadData = async () => {
     try {
@@ -130,6 +158,12 @@ const Admin: React.FC = () => {
     }
   };
 
+  const handleLogout = () => {
+    sessionStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_login_time');
+    setIsAuthenticated(false);
+  };
+
   const activeSubmissions = submissions.filter(sub => sub.status !== 'archived');
   const archivedSubmissions = submissions.filter(sub => sub.status === 'archived');
 
@@ -149,6 +183,21 @@ const Admin: React.FC = () => {
     : archiveFilter === 'contact'
     ? archivedSubmissions
     : archivedOrders;
+
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-stone-50">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-primary-900 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-stone-600">Laden...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <AdminLogin onLoginSuccess={() => setIsAuthenticated(true)} />;
+  }
 
   if (loading) {
     return (
@@ -183,11 +232,33 @@ const Admin: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50 pt-32 pb-24">
-      <div className="container-wide">
+    <div className="min-h-screen bg-stone-50">
+      <div className="bg-white border-b border-stone-200 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 bg-primary-900 rounded-xl flex items-center justify-center">
+                <Lock className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-stone-900">Admin Panel</h1>
+                <p className="text-xs text-stone-600">Koet Tuin & Boomzorg</p>
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 text-sm bg-red-100 text-red-700 rounded-xl hover:bg-red-200 transition-colors font-semibold"
+            >
+              Uitloggen
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-neutral-900 mb-4">Admin Dashboard</h1>
-          <p className="text-neutral-600">Beheer contactaanvragen en bestellingen</p>
+          <p className="text-neutral-600">Beheer contactaanvragen, bestellingen en klanten</p>
         </div>
 
         {/* Tabs */}
@@ -221,6 +292,22 @@ const Admin: React.FC = () => {
               <span>Bestellingen</span>
               <span className="px-2 py-0.5 bg-primary-100 text-primary-900 rounded-full text-xs font-semibold">
                 {activeOrders.length}
+              </span>
+            </div>
+          </button>
+          <button
+            onClick={() => setActiveTab('customers')}
+            className={`px-6 py-3 font-medium transition-colors relative ${
+              activeTab === 'customers'
+                ? 'text-primary-900 border-b-2 border-primary-900'
+                : 'text-neutral-600 hover:text-neutral-900'
+            }`}
+          >
+            <div className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              <span>Klanten</span>
+              <span className="px-2 py-0.5 bg-primary-100 text-primary-900 rounded-full text-xs font-semibold">
+                {[...new Set(orders.map(o => o.customer_email.toLowerCase()))].length}
               </span>
             </div>
           </button>
@@ -653,6 +740,123 @@ const Admin: React.FC = () => {
               </div>
             )}
           </>
+        )}
+
+        {/* Customers Tab */}
+        {activeTab === 'customers' && (
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-3 gap-6 mb-8">
+              <div className="bg-white rounded-2xl p-6 shadow-soft">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-medium text-stone-600">Totaal Klanten</h3>
+                  <Users className="w-8 h-8 text-primary-900" />
+                </div>
+                <p className="text-3xl font-bold text-stone-900">
+                  {[...new Set(orders.map(o => o.customer_email.toLowerCase()))].length}
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 shadow-soft">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-medium text-stone-600">Terugkerende Klanten</h3>
+                  <Star className="w-8 h-8 text-accent-600" />
+                </div>
+                <p className="text-3xl font-bold text-stone-900">
+                  {(() => {
+                    const emailCounts = orders.reduce((acc, order) => {
+                      const email = order.customer_email.toLowerCase();
+                      acc[email] = (acc[email] || 0) + 1;
+                      return acc;
+                    }, {} as Record<string, number>);
+                    return Object.values(emailCounts).filter(count => count > 1).length;
+                  })()}
+                </p>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 shadow-soft">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-medium text-stone-600">Gem. Bestelwaarde</h3>
+                  <Euro className="w-8 h-8 text-primary-900" />
+                </div>
+                <p className="text-3xl font-bold text-stone-900">
+                  €{orders.length > 0
+                    ? (orders.reduce((sum, o) => sum + o.total_amount, 0) / orders.length).toFixed(2)
+                    : '0.00'
+                  }
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl p-6 shadow-soft">
+              <h3 className="text-lg font-semibold text-stone-900 mb-4">Alle Klanten</h3>
+
+              <div className="space-y-3">
+                {(() => {
+                  const customerData = orders.reduce((acc, order) => {
+                    const email = order.customer_email.toLowerCase();
+                    if (!acc[email]) {
+                      acc[email] = {
+                        name: order.customer_name,
+                        email: order.customer_email,
+                        phone: order.customer_phone,
+                        orders: [],
+                        totalSpent: 0
+                      };
+                    }
+                    acc[email].orders.push(order);
+                    acc[email].totalSpent += order.total_amount;
+                    return acc;
+                  }, {} as Record<string, any>);
+
+                  const customers = Object.values(customerData).sort(
+                    (a: any, b: any) => b.orders.length - a.orders.length
+                  );
+
+                  return customers.map((customer: any) => (
+                    <div
+                      key={customer.email}
+                      className="flex items-center justify-between p-4 border border-stone-200 rounded-xl hover:bg-stone-50 transition-colors"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center">
+                          <User className="w-6 h-6 text-primary-900" />
+                        </div>
+                        <div>
+                          <p className="font-semibold text-stone-900">{customer.name}</p>
+                          <p className="text-sm text-stone-600">{customer.email}</p>
+                          {customer.phone && (
+                            <p className="text-sm text-stone-500">{customer.phone}</p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <div className="flex items-center gap-4">
+                          <div>
+                            <p className="text-sm text-stone-600">Bestellingen</p>
+                            <p className="text-lg font-bold text-stone-900">
+                              {customer.orders.length}x
+                            </p>
+                          </div>
+                          <div>
+                            <p className="text-sm text-stone-600">Totaal</p>
+                            <p className="text-lg font-bold text-primary-900">
+                              €{customer.totalSpent.toFixed(2)}
+                            </p>
+                          </div>
+                          {customer.orders.length > 1 && (
+                            <div className="w-8 h-8 bg-accent-100 rounded-lg flex items-center justify-center">
+                              <Star className="w-5 h-5 text-accent-600" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  ));
+                })()}
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Archive Tab */}
