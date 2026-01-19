@@ -135,8 +135,8 @@ const VoorHoveniers = () => {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
                   <img
-                    src="https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
-                    alt="Professionele hoveniersdiensten"
+                    src="/images/24-7-bereikbaar.jpeg"
+                    alt="24/7 bereikbaar voor professionele hoveniers"
                     className="w-full h-full object-cover"
                   />
                 </div>
