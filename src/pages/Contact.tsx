@@ -445,7 +445,7 @@ const Contact = () => {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
                   <img
-                    src="/images/24-7-bereikbaar.jpeg"
+                    src="/img/whatsapp_image_2026-01-30_at_15.43.13_(1).jpeg"
                     alt="Contact opnemen"
                     className="w-full h-full object-cover"
                   />
