@@ -445,7 +445,7 @@ const Contact = () => {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
                   <img
-                    src="/images/persoonlijk-contact.jpeg"
+                    src="/images/24-7-bereikbaar.jpeg"
                     alt="Contact opnemen"
                     className="w-full h-full object-cover"
                   />

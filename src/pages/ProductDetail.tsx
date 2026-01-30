@@ -75,7 +75,10 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
   };
 
   const totalPrice = product.price * quantity;
-  const productImages = [product.image_url || 'https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop'];
+  const productImages = [
+    product.image_url || 'https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop',
+    ...(product.extra_images || [])
+  ];
 
   return (
     <>

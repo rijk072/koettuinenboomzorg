@@ -6,6 +6,7 @@ export interface ProductData {
   price: number;
   category: string;
   image_url: string;
+  extra_images?: string[];
   in_stock: boolean;
   popular: boolean;
   weight?: string;
@@ -27,6 +28,7 @@ export const particulierProducts: ProductData[] = [
     price: 0,
     category: 'Tuinproducten',
     image_url: '/images/zakken-hout.jpeg',
+    extra_images: ['/images/zakken-hout-extra-1.jpeg', '/images/zakken-hout-extra-2.jpeg'],
     in_stock: true,
     popular: true,
     weight: 'Verkocht per kuub (m³)',
