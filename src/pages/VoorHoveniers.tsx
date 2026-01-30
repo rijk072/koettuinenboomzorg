@@ -158,7 +158,7 @@ const VoorHoveniers = () => {
         <div className="max-w-[1400px] mx-auto px-6 sm:px-8 lg:px-12 xl:px-20">
           <AnimationObserver>
             <div className="bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 lg:p-16 text-white text-center shadow-premium-xl">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
                 Plan een kennismakingsgesprek
               </h2>
               <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">

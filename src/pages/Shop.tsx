@@ -186,7 +186,7 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
           {/* Contact CTA */}
           <AnimationObserver>
             <div className="mt-16 text-center bg-gradient-to-br from-primary-900 to-primary-800 rounded-3xl p-12 text-white">
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-3xl font-bold mb-4 text-white">
                 {activeTab === 'particulier'
                   ? 'Vragen over Uw Bestelling?'
                   : 'Interesse in Groothandel Prijzen?'

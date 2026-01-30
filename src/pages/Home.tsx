@@ -110,7 +110,7 @@ const Home: React.FC = () => {
         <div className="container-wide">
           <AnimationObserver>
             <div className="max-w-4xl mx-auto text-center text-white">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
                 ECOstyle dealer voor professionele hoveniers
               </h2>
               <p className="text-lg text-white/90 mb-8 leading-relaxed">
