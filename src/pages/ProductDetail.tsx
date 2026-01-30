@@ -101,29 +101,29 @@ const ProductDetail: React.FC<{ onAddToCart: (product: any) => void }> = ({ onAd
               <div className="space-y-6">
                 {/* Main Image */}
                 <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-soft">
-                  <img 
+                  <img
                     src={productImages[selectedImage]}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain p-4"
                   />
                 </div>
-                
+
                 {/* Thumbnail Images */}
                 <div className="grid grid-cols-4 gap-4">
                   {productImages.map((image, index) => (
                     <button
                       key={index}
                       onClick={() => setSelectedImage(index)}
-                      className={`aspect-square rounded-xl overflow-hidden transition-all duration-300 ${
-                        selectedImage === index 
-                          ? 'ring-2 ring-primary-900 shadow-soft-lg' 
+                      className={`aspect-square rounded-xl overflow-hidden transition-all duration-300 bg-white ${
+                        selectedImage === index
+                          ? 'ring-2 ring-primary-900 shadow-soft-lg'
                           : 'hover:shadow-soft'
                       }`}
                     >
-                      <img 
+                      <img
                         src={image}
                         alt={`${product.name} ${index + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain p-2"
                       />
                     </button>
                   ))}

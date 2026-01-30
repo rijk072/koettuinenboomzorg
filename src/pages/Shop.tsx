@@ -118,11 +118,11 @@ const Shop: React.FC<ShopProps> = ({ onAddToCart }) => {
                 <div className="group bg-white rounded-2xl overflow-hidden shadow-soft hover:shadow-soft-lg transition-all duration-500 hover:-translate-y-2">
 
                   {/* Product Image - Clickable */}
-                  <Link to={`/product/${product.id}`} className="block relative aspect-[4/3] overflow-hidden bg-stone-50">
+                  <Link to={`/product/${product.id}`} className="block relative aspect-[4/3] overflow-hidden bg-white">
                     <img
                       src={product.image_url}
                       alt={product.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                     <div className="absolute bottom-4 left-4 right-4 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
