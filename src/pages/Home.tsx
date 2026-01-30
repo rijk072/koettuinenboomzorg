@@ -186,7 +186,7 @@ const Home: React.FC = () => {
               <div className="relative">
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-soft-lg">
                   <img
-                    src="/images/500-projecten.jpeg"
+                    src="/img/whatsapp_image_2026-01-30_at_15.52.54.jpeg"
                     alt="Premium vakmanschap"
                     className="w-full h-full object-cover"
                   />
